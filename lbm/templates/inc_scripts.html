@@ -1,0 +1,124 @@
+<?php 
+
+// function getCurrentURL(){
+//     $currentURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+//     $currentURL .= $_SERVER["SERVER_NAME"];
+//     if($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443"){
+//         $currentURL .= ":".$_SERVER["SERVER_PORT"];
+//     }
+//     $currentURL .= $_SERVER["REQUEST_URI"];
+//     return $currentURL;
+// }
+// echo "<p>Hallooo URL: ".getCurrentURL()."</p>";
+
+$link = $_SERVER['PHP_SELF'];
+$link_array = explode('/',$link);
+$page = end($link_array);
+$pagename = basename($page,".php");
+//echo "<p style='text-align:center;'>Page: ".$page." /page name: ".$pagename."</p>";
+
+?>
+
+        <!-- Javascripts -->
+        <!-- Load pace first -->
+        <script src="assets/plugins/core/pace/pace.min.js"></script>
+        <!-- Important javascript libs(put in all pages) -->
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-2.1.1.min.js">\x3C/script>')
+        </script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script>
+        window.jQuery || document.write('<script src="assets/js/libs/jquery-ui-1.10.4.min.js">\x3C/script>')
+        </script>
+        <!--[if lt IE 9]>
+          <script type="text/javascript" src="assets/js/libs/excanvas.min.js"></script>
+          <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <script type="text/javascript" src="assets/js/libs/respond.min.js"></script>
+        <![endif]-->
+        <!-- Bootstrap plugins -->
+        <script src="assets/js/bootstrap/bootstrap.js"></script>
+        <!-- Core plugins ( not remove ) -->
+        <script src="assets/js/libs/modernizr.custom.js"></script>
+        <!-- Handle responsive view functions -->
+        <script src="assets/js/jRespond.min.js"></script>
+        <!-- Custom scroll for sidebars,tables and etc. -->
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+        <!-- Remove click delay in touch -->
+        <script src="assets/plugins/core/fastclick/fastclick.js"></script>
+        <!-- Increase jquery animation speed -->
+        <script src="assets/plugins/core/velocity/jquery.velocity.min.js"></script>
+        <!-- Quick search plugin (fast search for many widgets) -->
+        <script src="assets/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+        <!-- Bootbox fast bootstrap modals -->
+        <script src="assets/plugins/ui/bootbox/bootbox.js"></script>
+
+        <!-- Forms plugins -->
+        <script src="assets/plugins/forms/fancyselect/fancySelect.js"></script>
+        <script src="assets/plugins/forms/select2/select2.js"></script>
+        <!-- Format input fields: https://igorescobar.github.io/jQuery-Mask-Plugin/ -->
+        <!-- script src="assets/plugins/forms/maskedinput/jquery.maskedinput.js"></script -->
+        <!-- Dual list box: http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
+        <!-- script src="assets/plugins/forms/dual-list-box/jquery.bootstrap-duallistbox.js"></script -->
+        <!-- Spinner: http://www.virtuosoft.eu/code/bootstrap-touchspin/ -->
+        <!-- script src="assets/plugins/forms/spinner/jquery.bootstrap-touchspin.js"></script -->
+        <script src="assets/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+        <!-- Time picker -->
+        <!-- script src="assets/plugins/forms/bootstrap-timepicker/bootstrap-timepicker.js"></script -->
+        <!-- Color picker -->
+        <!-- script src="assets/plugins/forms/bootstrap-colorpicker/bootstrap-colorpicker.js"></script -->
+        <script src="assets/plugins/forms/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+        <script src="assets/js/libs/typeahead.bundle.js"></script>
+        <!-- Script for WYSIWYG editor: http://summernote.org/ -->
+        <!-- script src="assets/plugins/forms/summernote/summernote.js"></script -->
+        <!-- Script for markdown editor: http://www.codingdrama.com/bootstrap-markdown/ -->
+        <!-- script src="assets/plugins/forms/bootstrap-markdown/bootstrap-markdown.js"></script -->
+        <!-- Dropping files for upload -->
+        <!-- script src="assets/plugins/forms/dropzone/dropzone.js"></script -->
+        <!-- Small inline charts: http://omnipotent.net/jquery.sparkline/#s-about -->
+        <!-- script src="assets/plugins/charts/sparklines/jquery.sparkline.js"></script -->
+
+<?php
+    switch ($pagename) {
+        case "CO-lbm-jobs":
+        case "CO-lbm-jobs-edit":
+        case "CO-depot-jobs":
+        case "CO-contacts": ?>
+            <!-- Table scripts (433kb / 85kb / 5kx / 22kb) -->
+            <script src="assets/plugins/tables/datatables/jquery.dataTables.js"></script> 
+            <script src="assets/plugins/tables/datatables/dataTables.tableTools.js"></script>
+            <script src="assets/plugins/tables/datatables/dataTables.bootstrap.js"></script>
+            <script src="assets/plugins/tables/datatables/dataTables.responsive.js"></script>
+            <!-- Coural custom data.. -->
+            <script src="CO-assets/js/pages/tables-data.js"></script>
+            <script src="CO-assets/js/pages/forms.js"></script>
+            <?php break;
+        case "CO-lbm-job-booking": ?>
+            <!-- Form wizard scripts -->
+            <script src="assets/plugins/forms/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+            <script src="assets/plugins/forms/validation/jquery.validate.js"></script>
+            <script src="assets/plugins/forms/validation/additional-methods.min.js"></script>
+            <!-- Coural custom page data.. -->
+            <script src="CO-assets/js/pages/forms-wizard.js"></script>
+            <script src="CO-assets/js/pages/forms.js"></script>
+            <script src="CO-assets/js/pages/lbm-job-booking.js"></script>
+            <?php break;
+        case "CO-lbm-tickets-bcti":
+        case "CO-ticket-invoicing": 
+        case "CO-ticket-redempt-inv": ?>
+            <!-- Coural custom data.. -->
+            <script src="CO-assets/js/pages/forms.js"></script>
+            <?php break;
+        default: ?>
+            <!-- All other scripts -->
+            <?php break;
+    }
+?>
+        
+        <!-- Coural custom data.. -->
+        <script src="CO-assets/js/main.js"></script>
+
+        <!-- All pages scripts -->
+        <script src="assets/js/jquery.dynamic.js"></script>
+        <script src="assets/js/main.js"></script>
