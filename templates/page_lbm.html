@@ -1,0 +1,121 @@
+{% extends "page_base.html" %}
+
+{% block info %}
+<p class="intro">
+    Please <a href="">view all posuere parturient</a> class vestibulum molestie ipsum parturient metus
+    nisl curabitur a non cursus a eros mus orci ut augue volutpat.
+    <br/><br/>
+    Hendrerit ultrices elementum parturient curabitur consectetur habitant a tincidunt et convallis
+    nec parturient ut donec.
+    </p>
+{% endblock %}
+
+{% block jobinfo %}
+
+
+<!-- Start .panel -->
+<div class="panel-heading">
+    <h4 class="panel-title">May 2016 Jobs</h4>
+</div>
+<div class="panel-body pt0">
+    <div class="progressbar-stats-1">
+        <div class="stats">
+            <div id="visitor_number" class="stats-number" data-from="0" data-to="76">{{jobs_open}}<span style="font-size: 0.6em">still open</span></div>
+        </div>
+        <div class="progress animated-bar flat transparent progress-bar-xs mb10 mt0">
+            <div style="width: 23%" class="progress-bar progress-bar-white" role="progressbar" data-transitiongoal="63"></div>
+        </div>
+        <div class="stats">
+            <div style="margin-top: 0;" id="visitor_number" class="stats-number" data-from="0" data-to="76">43 <span style="font-size: 0.6em;">not invoiced</span></div>
+        </div>
+        <div class="progress animated-bar flat transparent progress-bar-xs mb10 mt0">
+            <div style="width: 32%" class="progress-bar progress-bar-white" role="progressbar" data-transitiongoal="63"></div>
+        </div><!-- 
+        <div class="comparison">
+            <p class="mb0"><i class="fa fa-arrow-circle-o-up s20 mr5 pull-left"></i> 10% more than for the last month</p>
+        </div> -->
+    </div>
+</div>
+
+{% endblock %}
+
+{% block data %}
+
+<table id="basic-datatables" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+	<thead>
+	<tr>
+    	<th>Processed</th>
+            <th>Client</th>
+            <th>Publication</th>
+            <th>Reg</th>
+            <th>Delivery Date</th>
+            <th>Job #</th>
+            <th>Inv #</th>
+            <th>Purch #</th>
+            <th>Linehaul</th>
+            <th>P/Adv</th>
+            <th>Invoiced</th>
+            <th>Weight</th>
+            <th>Type</th>
+            <th>Canc</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Processed</th>
+            <th>Client</th>
+            <th>Publication</th>
+            <th>Reg</th>
+            <th>Delivery Date</th>
+            <th>Job #</th>
+            <th>Inv #</th>
+            <th>Purch #</th>
+            <th>Linehaul</th>
+            <th>P/Adv</th>
+            <th>Invoiced</th>
+            <th>Weight</th>
+            <th>Type</th>
+            <th>Canc</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
+	<tbody>
+	    {% for job in jobs %}
+	    <tr>
+            <td>
+				{% if job.is_finished == 'Y' %}
+                	<span href="" class="tipB active" title="" data-original-title="This job is finished"><i class="glyphicon glyphicon-ok"></i></span></td>
+				{% else %}
+					N
+				{% endif %}
+            <td>{{job.client}}</td>
+            <td>{{job.publication}}</td>
+            <td>{{job.is_regular}}</td>
+            <td>{{job.delivery_date}}</td>
+            <td>{{job.job_no}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{job.type}}</td>
+            <td>
+                <span href="" class="tipB active" title="" data-original-title="This job is canceled"><i class="glyphicon glyphicon-ban-circle"></i></span></td>
+            <td>
+                <a href="" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
+                <a href="CO-lbm-jobs-edit.php" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
+                <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
+            </td>
+
+        </tr>
+		{% endfor %}
+	</tbody>
+
+
+{% endblock %}
+
+
