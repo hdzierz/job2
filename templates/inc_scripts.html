@@ -1,67 +1,67 @@
 {% load staticfiles %}
         <!-- Javascripts -->
         <!-- Load pace first -->
-        <script src={% static "assets/plugins/core/pace/pace.min.js" %}"></script>
+        <script src="{% static "assets/plugins/core/pace/pace.min.js" %}"></script>
         <!-- Important javascript libs(put in all pages) -->
         <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script>
-        window.jQuery || document.write('<script src={% static "assets/js/libs/jquery-2.1.1.min.js" %}">\x3C/script>')
+        window.jQuery || document.write('<script src="{% static "assets/js/libs/jquery-2.1.1.min.js" %}">\x3C/script>')
         </script>
         <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script>
-        window.jQuery || document.write('<script src={% static "assets/js/libs/jquery-ui-1.10.4.min.js" %}">\x3C/script>')
+        window.jQuery || document.write('<script src="{% static "assets/js/libs/jquery-ui-1.10.4.min.js" %}">\x3C/script>')
         </script>
         <!--[if lt IE 9]>
-          <script type="text/javascript" src={% static "assets/js/libs/excanvas.min.js" %}"></script>
+          <script type="text/javascript" src="{% static "assets/js/libs/excanvas.min.js" %}"></script>
           <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-          <script type="text/javascript" src={% static "assets/js/libs/respond.min.js" %}"></script>
+          <script type="text/javascript" src="{% static "assets/js/libs/respond.min.js" %}"></script>
         <![endif]-->
         <!-- Bootstrap plugins -->
-        <script src={% static "assets/js/bootstrap/bootstrap.js" %}"></script>
+        <script src="{% static "assets/js/bootstrap/bootstrap.js" %}"></script>
         <!-- Core plugins ( not remove ) -->
-        <script src={% static "assets/js/libs/modernizr.custom.js" %}"></script>
+        <script src="{% static "assets/js/libs/modernizr.custom.js" %}"></script>
         <!-- Handle responsive view functions -->
-        <script src={% static "assets/js/jRespond.min.js" %}"></script>
+        <script src="{% static "assets/js/jRespond.min.js" %}"></script>
         <!-- Custom scroll for sidebars,tables and etc. -->
-        <script src={% static "assets/plugins/core/slimscroll/jquery.slimscroll.min.js" %}"></script>
-        <script src={% static "assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js" %}"></script>
+        <script src="{% static "assets/plugins/core/slimscroll/jquery.slimscroll.min.js" %}"></script>
+        <script src="{% static "assets/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js" %}"></script>
         <!-- Remove click delay in touch -->
-        <script src={% static "assets/plugins/core/fastclick/fastclick.js" %}"></script>
+        <script src="{% static "assets/plugins/core/fastclick/fastclick.js" %}"></script>
         <!-- Increase jquery animation speed -->
-        <script src={% static "assets/plugins/core/velocity/jquery.velocity.min.js" %}"></script>
+        <script src="{% static "assets/plugins/core/velocity/jquery.velocity.min.js" %}"></script>
         <!-- Quick search plugin (fast search for many widgets) -->
-        <script src={% static "assets/plugins/core/quicksearch/jquery.quicksearch.js" %}"></script>
+        <script src="{% static "assets/plugins/core/quicksearch/jquery.quicksearch.js" %}"></script>
         <!-- Bootbox fast bootstrap modals -->
-        <script src={% static "assets/plugins/ui/bootbox/bootbox.js" %}"></script>
+        <script src="{% static "assets/plugins/ui/bootbox/bootbox.js" %}"></script>
 
         <!-- Forms plugins -->
-        <script src={% static "assets/plugins/forms/fancyselect/fancySelect.js" %}"></script>
-        <script src={% static "assets/plugins/forms/select2/select2.js" %}"></script>
+        <script src="{% static "assets/plugins/forms/fancyselect/fancySelect.js" %}"></script>
+        <script src="{% static "assets/plugins/forms/select2/select2.js" %}"></script>
         <!-- Format input fields: https://igorescobar.github.io/jQuery-Mask-Plugin/ -->
-        <!-- script src={% static "assets/plugins/forms/maskedinput/jquery.maskedinput.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/forms/maskedinput/jquery.maskedinput.js" %}"></script -->
         <!-- Dual list box: http://www.virtuosoft.eu/code/bootstrap-duallistbox/ -->
-        <!-- script src={% static "assets/plugins/forms/dual-list-box/jquery.bootstrap-duallistbox.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/forms/dual-list-box/jquery.bootstrap-duallistbox.js" %}"></script -->
         <!-- Spinner: http://www.virtuosoft.eu/code/bootstrap-touchspin/ -->
-        <!-- script src={% static "assets/plugins/forms/spinner/jquery.bootstrap-touchspin.js" %}"></script -->
-        <script src={% static "assets/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js" %}"></script>
+        <!-- script src="{% static "assets/plugins/forms/spinner/jquery.bootstrap-touchspin.js" %}"></script -->
+        <script src="{% static "assets/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js" %}"></script>
         <!-- Time picker -->
-        <!-- script src={% static "assets/plugins/forms/bootstrap-timepicker/bootstrap-timepicker.js"></script -->
+        <!-- script src="{% static "assets/plugins/forms/bootstrap-timepicker/bootstrap-timepicker.js"></script -->
         <!-- Color picker -->
-        <!-- script src={% static "assets/plugins/forms/bootstrap-colorpicker/bootstrap-colorpicker.js"></script -->
-        <script src={% static "assets/plugins/forms/bootstrap-tagsinput/bootstrap-tagsinput.js" %}"></script>
-        <script src={% static "assets/js/libs/typeahead.bundle.js" %}"></script>
+        <!-- script src="{% static "assets/plugins/forms/bootstrap-colorpicker/bootstrap-colorpicker.js"></script -->
+        <script src="{% static "assets/plugins/forms/bootstrap-tagsinput/bootstrap-tagsinput.js" %}"></script>
+        <script src="{% static "assets/js/libs/typeahead.bundle.js" %}"></script>
         <!-- Script for WYSIWYG editor: http://summernote.org/ -->
-        <!-- script src={% static "assets/plugins/forms/summernote/summernote.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/forms/summernote/summernote.js" %}"></script -->
         <!-- Script for markdown editor: http://www.codingdrama.com/bootstrap-markdown/ -->
-        <!-- script src={% static "assets/plugins/forms/bootstrap-markdown/bootstrap-markdown.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/forms/bootstrap-markdown/bootstrap-markdown.js" %}"></script -->
         <!-- Dropping files for upload -->
-        <!-- script src={% static "assets/plugins/forms/dropzone/dropzone.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/forms/dropzone/dropzone.js" %}"></script -->
         <!-- Small inline charts: http://omnipotent.net/jquery.sparkline/#s-about -->
-        <!-- script src={% static "assets/plugins/charts/sparklines/jquery.sparkline.js" %}"></script -->
+        <!-- script src="{% static "assets/plugins/charts/sparklines/jquery.sparkline.js" %}"></script -->
 
         <!-- Coural custom data.. -->
         <script src="{% static "CO-assets/js/main.js" %}"></script>
 
         <!-- All pages scripts -->
-        <script src={% static "assets/js/jquery.dynamic.js" %}"></script>
-        <script src={% static "assets/js/main.js" %}"></script>
+        <script src="{% static "assets/js/jquery.dynamic.js" %}"></script>
+        <script src="{% static "assets/js/main.js" %}"></script>
