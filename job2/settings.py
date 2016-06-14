@@ -56,7 +56,7 @@ ROOT_URLCONF = 'job2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/ubuntu/job2/templates',],
+        'DIRS': [BASE_DIR + '/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural',
         'USER': 'django',
-        'PASSWORD': 'krat2bum',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PASSWORD': 'inkl67z',
+        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     },    
     'default2': {
