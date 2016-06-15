@@ -1,0 +1,133 @@
+// ***************************************************
+// **** Imports
+
+// Mixins - Compass css3
+@import compass/css3
+// or more specific: @import "compass/css3/background-size"
+
+// Mixins - custom
+@import "partials/mixins"
+
+// google fonts ie
+//@import url(https://fonts.googleapis.com/css?family=Merriweather:400,700)
+//@import url(https://fonts.googleapis.com/css?family=Oswald:400,300,700)
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,600,700)
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,700,400italic,700italic)
+
+// ***************************************************
+// **** Variables
+
+// General
+// dev
+//$assetsPath: '/wpTestsite/wp-content/themes/_blank-child-theme-fullwidth/FN-assets/'
+// live
+//$assetsPath: '/wp-content/themes/projectName/FN-assets/'
+
+$transition-style: 500ms ease
+
+$black: #000
+$white: #fff
+$lightgrey: #f3f3f3
+$midgrey: #999
+$grey: #4F5250
+$green: #9ACA8F
+$green-15: #e7ede4
+$darkgreen: #08931C
+$yellow: #FFFFA6
+$red: #FE0000
+
+$input-border-color: #7fe1f8
+$panel-border: #aed3eb
+
+$panel-row-bg: #e9fafe
+$panel-row-alt-bg: #e0f8fd
+
+$form-header: rgba(174,211,235,0.3)
+
+$text-color: #333
+$link-color: #0bacd3
+//$link-color-hi: #ff3333
+
+$icon-link-color: $grey
+$icon-link-color-hi: #07718a
+$icon-link-color-active: $darkgreen
+
+$sidebar-bg-color: #2a2b2a
+$sidebar-sub-bg-color: #383838
+
+// Navbar width (based on 210px default)
+$navbar-base-li-width: 115px
+$navbar-base-width: 210px
+$navbar-extend: 40px
+$navbar-li-width: calc(#{$navbar-base-li-width} + #{$navbar-extend})
+$navbar-width: calc(#{$navbar-base-width} + #{$navbar-extend})
+// Navbar width
+$navbar-height: 40px
+
+$submenu-color-hi: #999
+
+$topmenu-bg-lo: $green
+$topmenu-bg-hi: rgba(255,255,255,0.3)
+$topmenu-lo: rgba(0,0,0,0.3)
+$topmenu-hi: $black
+$topmenu-toggle-lo: rgba(0,0,0,0.1)
+
+// old........
+$max-width: 1040px
+
+// Colors
+$midgrey: #aaa
+
+$body-bg-color: #e8e8e8
+
+$menu-font-lo: #888
+$menu-bg: #eee
+$menu-font-hi: #000
+$menu-bg-hi: #fff
+
+$submenu-color: #fff
+$submenu-bg: #000
+$submenu-bg-hi: #fff
+
+$menu-footer-font-hi: #787878
+
+$accent-color: #e6402a
+$h1-color: #8a8a8a
+$h2-color: #EC9D55
+
+$footer-bg-color: #f3f3f3
+$footer-text: #666
+
+// other
+$system-header-bg: #ccc
+$comment-respond-bg-color: #e8e8e8
+$form-border-color: #999
+$header-height: 125px
+$top-bg-height: 80px
+$logo-width: 218px
+$logo-height: 108px
+
+$fullwidth-header-margin: 50px
+$fullwidth-manual-margin: 20px
+$fullwidth-header-margin-at-1100: 30px
+$content-margin-at-1100: 30px
+
+$fullwidth-image-height: 250px
+
+$nav-space-for-logo: calc(#{$logo-width} + #{$fullwidth-header-margin} + #{$fullwidth-manual-margin})
+
+// Small screens
+$header-height-smallscreen: calc(#{$header-height}*0.8)
+$nav-space-for-logo-smallscreen: calc((#{$logo-width}*0.8) + #{$fullwidth-header-margin} + #{$fullwidth-manual-margin})
+
+
+// ***************************************************
+// **** Partials
+
+@import "partials/base"
+@import "partials/navigations"
+@import "partials/right-sidebar"
+@import "partials/forms"
+@import "partials/tables"
+@import "partials/media-queries"
+
