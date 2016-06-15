@@ -18,6 +18,7 @@ from django.contrib import admin
 from lbm import views
 
 urlpatterns = [
+    url(r'^$', views.page_home, name='page_home'),    
     url(r'^admin/', admin.site.urls),
     url(r'^lbm/', views.page_lbm, name='page_lbm'),
 ]

@@ -6,6 +6,11 @@ from .models import *
 
 # Create your views here.
 
+
+def page_home(request):
+    return render(request, 'index.html')
+
+
 def page_lbm(request):
     jobs = Job.objects.all()[:20]
     jobs_open = Job.objects.filter(finished='N').count() 
