@@ -5,34 +5,11 @@
 //## Gray and brand colors for use across Bootstrap.
 @white:                 #fff;
 
-// New blue base color
-//@base-color: 						#489cd2;
-@base-color: 						#0bacd3;
-@base-color-light:			lighten(@base-color, 52%);
-@base-color-light-alt:		lighten(@base-color, 50%);
-
-@base-color-panel-header:			#aed3eb;
-@base-color-panel-border: #aed3eb;
-
-@table-hover:						#aed3eb;
-
-@base-color-form-border:			lighten(@base-color, 49.5%);
-@base-color-form-group-border:			lighten(@base-color, 49.5%);
-@base-color-input-border:			lighten(@base-color, 35%);
-
-@panel-darker:					lighten(@base-color, 30%);
-
-//@gray-darker:           lighten(#000, 13.5%); // #222
-//@gray-dark:             lighten(#000, 20%);   // #333
-//@gray:                  lighten(#000, 33.5%); // #555
-//@gray-light:            lighten(#000, 46.7%); // #777
-//@gray-lighter:          lighten(#000, 93.5%); // #eee
-
 @gray-darker:           lighten(#000, 13.5%); // #222
 @gray-dark:             lighten(#000, 20%);   // #333
-@gray:                  lighten(#489cd2, 15%); // #555
-@gray-light:            lighten(#489cd2, 20%); // #777
-@gray-lighter:          lighten(#489cd2, 25%); // #eee
+@gray:                  lighten(#000, 33.5%); // #555
+@gray-light:            lighten(#000, 46.7%); // #777
+@gray-lighter:          lighten(#000, 93.5%); // #eee
 
 @red:                   #db5565;
 @red-light:             #df6a78;
@@ -187,20 +164,13 @@
 @table-condensed-cell-padding:  5px;
 
 @table-bg:                      transparent;
-//@table-bg-accent:               #f9f9f9;
-//@table-bg-hover:                #f5f5f5;
-// TS new
-@table-bg-accent:               @base-color-light-alt;
-@table-bg-hover:                @table-hover;
-@table-bg-active:               @table-hover;
+@table-bg-accent:               #f9f9f9;
+@table-bg-hover:                #f5f5f5;
+@table-bg-active:               @table-bg-hover;
 
-//@table-border-color:            @border-color;
-// TS new
-@table-border-color:						@base-color-panel-header;
+@table-border-color:            @border-color;
 @table-highlight-bg:            #fffed5;
-//@table-head-bg:                 darken(@body-bg, 4%); 
-// TS new
-@table-head-bg:									@base-color-panel-header;   
+@table-head-bg:                 darken(@body-bg, 4%);    
 @table-head-color:              @text-color;     
 
 
@@ -258,10 +228,7 @@
 @input-bg-disabled:              @gray-lighter;
 
 @input-color:                    @text-color;
-
-//@input-border:                   darken(@border-color, 10%);
-// TS new:
-@input-border:                   @base-color-input-border;
+@input-border:                   darken(@border-color, 10%);
 @input-border-radius:            @border-radius-base;
 
 @input-border-focus:             darken(@input-border, 5%);
@@ -279,9 +246,7 @@
 @input-group-addon-bg:           @gray-lighter;
 @input-group-addon-border-color: @input-border;
 
-//@hover-stripped-bg:              lighten(@gray-lighter, 4%);
-// TS new
-@hover-stripped-bg:              @base-color-light-alt;
+@hover-stripped-bg:              lighten(@gray-lighter, 4%);
 
 //== Checkboxes
 //
@@ -631,9 +596,7 @@
 @progress-bar-color:          @white;
 @progress-bar-border-radius:  10px;
 
-//@progress-bar-bg:             darken(@body-bg, 15%);
-// TS new
-@progress-bar-bg:             @white;
+@progress-bar-bg:             darken(@body-bg, 15%);
 @progress-bar-primary-bg:     @brand-primary;
 @progress-bar-success-bg:     @brand-success;
 @progress-bar-warning-bg:     @brand-warning;
@@ -772,9 +735,7 @@
 //== Panels
 // -------------------------
 
-//@panel-bg:                    #fff;
-
-@panel-bg:           					@base-color-light;
+@panel-bg:                    #fff;
 @panel-placeholder-bg:        darken(@body-bg, 15%);
 @panel-body-padding:          15px;
 @panel-heading-padding:       10px 15px;
@@ -787,10 +748,7 @@
 
 @panel-default-text:          @gray-dark;
 @panel-default-border:        @panel-inner-border;
-//@panel-default-heading-bg:    @panel-footer-bg;
-//TS new
-//@panel-default-border:        @base-color-panel-border;
-@panel-default-heading-bg:    @base-color-panel-header;
+@panel-default-heading-bg:    @panel-footer-bg;
 
 @panel-primary-text:          @white;
 @panel-primary-border:        @blue-dark;
