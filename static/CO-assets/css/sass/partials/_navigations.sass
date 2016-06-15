@@ -1,0 +1,160 @@
+// Top nav -------------------
+.page-navbar
+	background-color: $topmenu-bg-lo
+	box-shadow: 0px 1px 1px 0px rgba(42, 43, 42, 0.15)
+	.navbar-brand
+		width: $navbar-width
+		height: $navbar-height
+		background-color: $sidebar-bg-color
+		> img
+			margin: 20px 40px
+			width: 138px
+		&.collapse-sidebar
+			padding: 6px
+			> img
+				width: auto
+				margin: 0
+	.navbar-nav
+		> li
+			p
+				margin: 0
+				padding: 8px 0 0 20px
+				color: $white
+				text-transform: uppercase
+				font-size: 1.125em
+			> a
+				height: $navbar-height
+				padding: 8px 10px
+				color: $topmenu-lo
+				i
+					font-size: 1.5em
+				&:hover
+					background-color: $topmenu-bg-hi
+					color: $topmenu-hi
+
+// Main nav ------------------
+
+// Menu toggle icon
+.toggle-sidebar,
+.log-out
+	background: $topmenu-toggle-lo
+.toggle-sidebar	
+	> a
+		border-right: 1px solid rgba(0, 0, 0, 0.05)
+		&:hover,
+		&:focus
+			border-right: 1px solid rgba(255,255,255,0.5)
+.log-out	
+	> a
+		border-left: 1px solid rgba(0, 0, 0, 0.05)
+		&:hover,
+		&:focus
+			border-left: 1px solid rgba(255,255,255,0.5)
+.navbar-nav
+	li.toggle-sidebar,
+	li.log-out
+		> a
+			padding: 10px 19px 10px 20px
+
+.menu-toggle
+	span
+		display: block
+		width: 20px
+		height: 2px
+		margin: 3px 0
+		background: $topmenu-lo
+		z-index: 99
+		+transition(all $transition-style)
+.toggled-on .menu-toggle
+	span:nth-child(1)
+		margin-top: 14px
+		+rotate(-45deg)
+	span:nth-child(2)
+		display: none
+	span:nth-child(3)
+		margin-top: -8px
+		+rotate(45deg)
+
+.page-sidebar
+	width: 250px
+	.sidebar-inner
+		background-color: $sidebar-bg-color
+	.side-nav
+		.nav
+			> li
+				a
+					color: $white
+					.txt
+						max-width: $navbar-li-width
+					i
+						color: $white
+					.label
+						float: inherit
+						background-color: #666
+						margin-left: 8px
+					&.active .txt
+						color: $submenu-color-hi
+					&:hover
+						color: #999
+					&:focus,
+					&:expand
+						background-color: #3f3f3f
+				ul.sub
+					> li a
+						padding: 5px 20px 4px 55px
+						&.active:before,
+						&:hover:before
+							content: ">"
+							margin: 0 10px
+							color: $submenu-color-hi
+						&:before
+							border: none
+							width: 0
+						&:after
+							width: 0px
+					&.show li .sub
+						&:after,
+						&:before
+							height: 0
+	&.hide-sidebar
+		margin-left: -250px
+		&:after
+			left: -250px
+	&:after
+		width: $navbar-width
+		background-color: $sidebar-bg-color
+	&.sidebar-fixed
+		overflow-y: scroll
+
+// Bootstrap override
+.nav > li > a:hover,
+.nav > li > a:focus
+	background-color: $topmenu-bg-hi
+
+.side-nav
+	.nav
+		margin-top: 33px
+
+// Main nav collapsed
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub,
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub li a,
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub li.hasSub ul.sub,
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub li.hasSub ul.sub li a
+	background-color: $sidebar-sub-bg-color
+
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub li.hasSub a.notExpand
+	background-color: #484848
+
+.page-sidebar.collapse-sidebar .nav li.hover-li ul.sub li:first-child
+	margin-top: 0
+
+.page-sidebar.collapse-sidebar .side-nav .nav > li ul.sub > li a.active:before,
+.page-sidebar.collapse-sidebar .side-nav .nav > li ul.sub > li a:hover:before
+	margin: 5px -20px
+
+.page-sidebar.collapse-sidebar .side-nav .nav > li ul.sub > li ul.sub > li a.active:before,
+.page-sidebar.collapse-sidebar .side-nav .nav > li ul.sub > li ul.sub > li a:hover:before
+	margin: 5px -10px
+
+.page-sidebar .side-nav .nav > li a:focus
+	background-color: $sidebar-sub-bg-color

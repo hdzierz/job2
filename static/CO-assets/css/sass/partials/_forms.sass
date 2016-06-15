@@ -1,0 +1,89 @@
+.form-horizontal.group-border .form-group, .form-inline.group-border .form-group
+	//padding-bottom: 7px
+	//padding-top: 7px
+
+form 
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12
+		margin-top: 2px
+		margin-bottom: 2px
+
+.input-group-addon,
+.form-control
+	//padding: 3px 12px
+
+.form-control
+	//height: 24px
+	//font-size: 14px
+
+.form-horizontal .control-label
+	//font-size: 0.9em
+
+.form-inline .CO-editable-tables .form-control
+	width: 85px
+	padding: 3px 4px
+	&.shortNumber
+		min-width: 35px
+	&.longNumber
+		min-width: 50px
+	&.shortInitials
+		width: 35px
+
+.CO-editable-tables
+	#basic-datepicker
+		min-width: 70px
+.table.CO-editable-tables > thead:first-child > tr:first-child > th
+	white-space: initial
+
+// Uneditable formdata:
+.form-horizontal .form-group.setData
+	label
+		font-weight: bold
+@media (min-width: 768px)
+	.setData
+		div p
+			padding-top: 7px
+			margin: 0
+
+.form-group-header
+	background-color: #aed3eb
+	background-color: $form-header
+
+// Change colours of default button (to same colours as info button)
+.btn-default
+	color: #fff
+	background-color: #29b6d8
+	&:hover,
+	&:focus
+		background-color: #24a5c4
+		border-color: #29b6d8
+		color: #fff
+
+.pager,
+.pagination
+	> li
+		> a,
+		> span
+			border: 1px solid #aed3eb
+
+.pagination
+	> li
+		> a:hover,
+		> span:hover,
+		> a:focus,
+		> span:focus
+			border: 1px solid #aed3eb
+
+// Custom override of bootstrap colors
+// - doesn't work through 'custom-variables.less' for some peculiar reason
+.select2-container .select2-choice
+	border: 1px solid $input-border-color
+
+.bwizard
+	.wizard-progress,
+	.bwizard-steps
+		border-bottom: 1px solid $panel-border
+		background-color: $panel-row-alt-bg
+	.bwizard-steps
+		border-bottom: 1px solid $panel-border
+		background-color: $panel-row-bg
+

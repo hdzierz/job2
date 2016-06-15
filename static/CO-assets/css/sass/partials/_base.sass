@@ -1,0 +1,158 @@
+// ***************************************************
+// **** Fonts
+
+body,
+button,
+input,
+select,
+textarea
+	background-color: $white
+	//font-family: 'Open Sans', sans-serif
+	font-size: 16px
+
+body
+	//background-color: $body-bg-color
+	color: $text-color
+
+p
+	margin: 0 0 1.5em 0
+
+a
+	color: $link-color
+
+h1,
+h1.page-title,
+h2,
+h3,
+h4,
+h5,
+h6
+	//clear: both
+	font-weight: 600
+	font-style: normal
+	line-height: 1.5
+
+h1
+	font-family: 'Dosis', sans-serif
+	font-size: 32px
+	margin: 0 0 15px 0
+h2
+	font-size: 27px
+	margin: 0
+h3
+	font-size: 24px
+	margin: 0
+	font-weight: normal
+h4
+	font-size: 22px
+	margin: 0
+h5
+	font-size: 20px
+	margin: 0
+h6
+	font-size: 18px
+	margin: 0
+
+hr
+	background: none
+	border: 0
+	border-top: 1px solid $black
+	margin: 0
+
+// --- Coural content
+.page-content #page-header.home
+	margin-bottom: 0
+
+.home
+	h1
+		font-size: 45px
+		margin: -20px 0 15px 0
+
+.last-login
+	margin: 0 0 1em 0
+	font-size: 0.9em
+	color: $grey
+
+.page-content
+	padding-top: $navbar-height
+	#page-header
+		padding: 40px 60px
+		background-color: $green-15
+		box-shadow: none
+	&.sidebar-page
+		margin-left: $navbar-width
+
+#footer.sidebar-page
+	margin-left: $navbar-width
+
+#page-header
+	.intro
+		font-family: 'Open Sans', sans-serif
+		font-style: italic
+		font-weight: 300
+	.header-close
+		position: absolute
+		top: 15px
+		right: 20px
+		color: $black
+	&.collapsed
+		padding: 8px 20px
+		height: 40px
+		overflow: hidden
+		.intro
+			font-size: 0.875em
+			line-height: 1.2em
+		h1
+			font-size: 1.25em
+		.header-close
+			+rotate(180deg)
+		.panel-heading .panel-title
+			padding: 5px 0
+		.panel .panel-controls-right a
+			padding: 4px 5px
+		.progressbar-stats-1 .stats .stats-number
+			font-size: 20px
+			span
+				font-size: 0.8em !important
+	.panel
+		margin-bottom: 0
+		&.panel-info
+			margin-top: 35px
+
+.page-content #page-header .page-header
+	margin-bottom: 0
+
+.timeline:after
+	width: 0
+
+#right-sidebar
+	z-index: 9
+
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12
+	//margin-top: 10px
+
+input[type="checkbox"]:focus
+	box-shadow: none
+
+.inv-total-bg
+	background-color: rgba(41,182,216,0.2)
+.table-bordered > tbody > tr > td.inv-div-line
+	border-bottom: 1px solid #22b7bb
+
+.nivo-slice
+	overflow: hidden!important
+
+// --- Scrollbars (+ .about-us as example)
+// body,
+// .about-us
+// 	&::-webkit-scrollbar
+// 		width: 1em
+// body,
+// .about-us
+// 	&::-webkit-scrollbar-track
+// 		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+// body,
+// .about-us
+// 	&::-webkit-scrollbar-thumb
+// 		background-color: rgba(0,0,0,0.3)
+//		outline: 1px solid slategrey
