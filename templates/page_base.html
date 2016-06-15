@@ -5,7 +5,11 @@
     <head>
         <meta charset="utf-8">
         <title>Coural Job System | LBM Jobs Current</title>
-	{% include "inc_html_header.html" %}
+        {% include "inc_html_header.html" %}
+        
+        {% block homeslidercss %}
+        {% endblock %}
+
     </head>
     <body>
         <!--[if lt IE 9]>
@@ -29,6 +33,11 @@
                 <!-- .page-content-wrapper -->
                 <div class="page-content-wrapper">
                     <div class="page-content-inner">
+
+
+                    {% block homeslider %}
+                    {% endblock %}  
+
                         <!-- .page-content-inner -->
                         <div id="page-header" class="clearfix">
                             <!-- Start .row -->
@@ -40,31 +49,15 @@
 					{% endblock %}
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="panel panel-info tile panelClose panelRefresh">
 					{% block jobinfo %}
 					{% endblock %}
-                                        <!-- Start .panel -->
-                                    </div>
-                                    <!-- End .panel -->
-                                </div>
                             </div>
                             <a href="#" class="header-close"><i class="fa fa-chevron-up"></i></a>
                             
                         </div>
 
-                        <!-- Data tables -->
-                        <!-- Start .row -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="bs-callout bs-callout-info fade in">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <h4>We found <strong>38 jobs</strong></h4>
-                                    <p>Hello! You searched for a client called '<strong>Fagan motors</strong>' and jobs between '<strong>5th March</strong>' and '<strong>12th May</strong>'.
-                                    <br/>We found <strong>38 jobs</strong> that match these criteria.</p>
-                                </div>
-                            </div>
-                        </div>
+                    {% block searchresults %}
+                    {% endblock %}
 
                         <!-- Start .row -->
                         <div class="row"> 
@@ -72,120 +65,14 @@
                             <!-- col-lg-12 start here -->
                             <div class="col-lg-12">
 
-                                <!-- Coural form 'current jobs' -->
-                                <div class="panel panel-default toggle panelMove panelClose panelRefresh">
-                                    <!-- Start .panel -->
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">Search for jobs</h4>
-                                    </div>
-                                    <div class="panel-body pt0 pb0">
-                                        <form class="form-horizontal group-border stripped">
-                                            <div class="form-group">
-                                                <label class="col-lg-2 col-md-3 control-label" for="">Job detail</label>
-                                                <div class="col-lg-10 col-md-9">
-                                                    <div class="row">
-                                                        <!-- Start .row -->
-                                                        <div class="col-md-4">
-                                                            <select class="form-control select2">
-                                                                <option value=""></option>
-                                                                <option value="alinegroup">A Line Group</option>
-                                                                <option value="Abron">Abron</option>
-                                                                <option value="Fagan">Fagan Motors</option>
-                                                                <option value="FF">Fairfax - NZF</option>
-                                                                <option value="FFW">Fairfax W/Leader</option>
-                                                                <option value="FFWLG">Fairfax Wellington</option>
-                                                                <option value="FedF">Federated Farmers</option>
-                                                                <option value="GEO">GEO Hutchinson</option>
-                                                                <option value="CA">California</option>
-                                                                <option value="NV">Nevada</option>
-                                                                <option value="OR">Oregon</option>
-                                                                <option value="WA">Washington</option>
-                                                                <option value="AZ">Arizona</option>
-                                                                <option value="CO">Colorado</option>
-                                                                <option value="ID">Idaho</option>
-                                                                <option value="NE">Nebraska</option>
-                                                                <option value="NM">New Mexico</option>
-                                                                <option value="ND">North Dakota</option>
-                                                                <option value="UT">Utah</option>
-                                                                <option value="WY">Wyoming</option>
-                                                                <option value="AL">Alabama</option>
-                                                                <option value="AR">Arkansas</option>
-                                                                <option value="IL">Illinois</option>
-                                                                <option value="IA">Iowa</option>
-                                                            </select>
-                                                            <span class="help-block">Client</span>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <select class="form-control select2">
-                                                                <option value=""></option>
-                                                                <option value="acuppa">A cuppa withus</option>
-                                                                <option value="Abron">Abron</option>
-                                                                <option value="Fagan">Fagan Motors</option>
-                                                                <option value="FF">Fairfax - NZF</option>
-                                                                <option value="FFW">Fairfax W/Leader</option>
-                                                                <option value="FFWLG">Fairfax Wellington</option>
-                                                                <option value="FedF">Federated Farmers</option>
-                                                                <option value="GEO">GEO Hutchinson</option>
-                                                            </select>
-                                                            <span class="help-block">Publication</span>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <select class="form-control select2">
-                                                                <option value=""></option>
-                                                                <option value="alinegroup">11990</option>
-                                                                <option value="">11991</option>
-                                                                <option value="">11993</option>
-                                                                <option value="">11994</option>
-                                                                <option value="">11999</option>
-                                                                <option value="">12021</option>
-                                                                <option value="">12100</option>
-                                                                <option value="">12555</option>
-                                                                <option value="">12710</option>
-                                                                <option value="">12713</option>
-                                                            </select>
-                                                            <span class="help-block">Job #</span>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End .row -->
-                                                </div>
-                                            </div>
-                                            <!-- End .form-group  -->
-                                            <div class="form-group">
-                                                <label class="col-lg-2 col-md-3 control-label" for="">Date range</label>
-                                                <div class="col-lg-10 col-md-9">
-                                                    <div class="input-daterange input-group">
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <input type="text" class="form-control" name="start" />
-                                                        <span class="input-group-addon">to</span>
-                                                        <input type="text" class="form-control" name="end" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End .form-group  -->
-                                            
-                                            <div class="form-group">
-                                                <div class="col-lg-offset-2 col-lg-10 col-md-offset-3 col-md-9">
-                                                    <button type="submit" class="btn btn-default">Search</button>
-                                                </div>
-                                            </div>
-                                            <!-- End .form-group  -->
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- End .panel -->
+                    {% block searchform %}
+                    {% endblock %}           
 
-                                <!-- Coural data "Current Jobs" -->
-                                <div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
-                                    <!-- Start .panel -->
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
-                                    </div>
-                                    <div class="panel-body">
+
 					{% block data %}
 					{% endblock %}
-                                    </div>
-                                </div>
-                                <!-- End .panel -->
+
+
                             </div>
 
                         </div>

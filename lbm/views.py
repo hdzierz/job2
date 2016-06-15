@@ -13,6 +13,6 @@ def page_home(request):
 
 def page_lbm(request):
     jobs = Job.objects.all()[:20]
-    jobs_open = Job.objects.filter(finished='N').count() 
+    jobs_open = Job.objects.filter(finished='N').count()
     return render(request, 'page_lbm.html', {"jobs" : jobs, "jobs_open": jobs_open}) 
 

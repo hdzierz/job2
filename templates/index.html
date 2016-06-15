@@ -1,0 +1,43 @@
+{% extends "page_base.html" %}
+
+{% load staticfiles %}
+
+{% block homeslidercss %}
+<link rel="stylesheet" href="{% static "CO-assets/vendor/nivo/themes/default/default.css" %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static "CO-assets/vendor/nivo/css/nivo-slider.css" %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block homeslider %}
+<div class="row" style="margin: -20px;">
+    <div class="slider-wrapper theme-default">
+    <div id="slider" class="nivoSlider">
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image1.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image1.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image2.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image2.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image3.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image3.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image4.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image4.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image5.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image5.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image6.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image6.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image7.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image7.jpg" %}" alt="" />
+      <img src="{% static "CO-assets/vendor/nivo/img/coural-image8.jpg" %}" data-thumb="{% static "CO-assets/vendor/nivo/img/coural-image8.jpg" %}" alt="" />
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block info %}
+<p class="last-login">Last login 21 May, 8:47</p>
+<p class="intro">
+    Hi Dayna. Here you can find all sagittis a et fermentum suspendisse nisl sem
+    arcu vivamus hac consectetur id a hendrerit cum euismod quisque ipsum parturient
+    penatibus diam proin parturient a parturient.
+
+    <br/><br/>A good starting points to onubia risus maecenas senectus parturient. Tincidunt malesuada:
+    <ol>
+        <li><a href="CO-ticket-invoicing.php"><span class="txt">Ticket Invoicing</span></a> - hendrerit eleifend dictum!</li>
+        <li><a href="CO-lbm-job-booking.php"><span class="txt">LBM Job Booking</span></a></li>
+        <li>Tortor semper, a todient qui <a href="CO-contacts.php"><span class="txt">Contacts</span></a>.</li>
+    </ol>
+</p>
+{% endblock %}
+
+

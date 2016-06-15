@@ -38,7 +38,11 @@ jQuery(document).ready(function($) {
   $(".bs-callout-info .close").click(function(){
     $(this).parent().css("display","none");
   });
-   
+
+  $(".search-jobs").click(function(event){
+    event.stopPropagation();
+    $(".bs-callout-info").css("display","block");
+  });
   
   // Toggle something
   $(".toggle-sidebar").click(function(){
