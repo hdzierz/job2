@@ -1,6 +1,7 @@
 {% extends "page_base.html" %}
 
 {% block info %}
+<h1>LBM Jobs</h1>
 <p class="intro">
     Please <a href="">view all posuere parturient</a> class vestibulum molestie ipsum parturient metus
     nisl curabitur a non cursus a eros mus orci ut augue volutpat.
@@ -166,8 +167,8 @@
 
 {% block data %}
 <!-- Coural data "Current Jobs" -->
+<!-- Start .panel -->
 <div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
-    <!-- Start .panel -->
     <div class="panel-heading">
         <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
     </div>
@@ -175,7 +176,9 @@
         <table id="basic-datatables" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
         	<thead>
             	<tr>
-                	<th>Processed</th>
+                    <th>Action</th>
+                    <th>Proc.</th>
+                    <th>Canc.</th>
                     <th>Client</th>
                     <th>Publication</th>
                     <th>Reg</th>
@@ -188,13 +191,13 @@
                     <th>Invoiced</th>
                     <th>Weight</th>
                     <th>Type</th>
-                    <th>Canc</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Processed</th>
+                    <th>Action</th>
+                    <th>Proc.</th>
+                    <th>Canc.</th>
                     <th>Client</th>
                     <th>Publication</th>
                     <th>Reg</th>
@@ -207,19 +210,28 @@
                     <th>Invoiced</th>
                     <th>Weight</th>
                     <th>Type</th>
-                    <th>Canc</th>
-                    <th>Action</th>
                 </tr>
             </tfoot>
         	<tbody>
         	    {% for job in jobs %}
         	    <tr>
+                    <td class="action">
+                        <a href="" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="CO-lbm-jobs-edit.php" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                        <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
+                        <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
                     <td>
-        				{% if job.is_finished == 'Y' %}
-                        	<span href="" class="tipB active" title="" data-original-title="This job is finished"><i class="glyphicon glyphicon-ok"></i></span></td>
-        				{% else %}
-        					N
-        				{% endif %}
+                        {% if job.is_finished == 'Y' %}
+                            <span href="" class="tipB active" title="" data-original-title="This job is finished"><i class="glyphicon glyphicon-ok"></i></span>
+                        {% else %}
+                            N
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span href="" class="tipB active" title="" data-original-title="This job is canceled"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    </td>
                     <td>{{job.client}}</td>
                     <td>{{job.publication}}</td>
                     <td>{{job.is_regular}}</td>
@@ -232,15 +244,6 @@
                     <td></td>
                     <td></td>
                     <td>{{job.type}}</td>
-                    <td>
-                        <span href="" class="tipB active" title="" data-original-title="This job is canceled"><i class="glyphicon glyphicon-ban-circle"></i></span></td>
-                    <td>
-                        <a href="" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="CO-lbm-jobs-edit.php" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-                        <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
-                        <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
-                        <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
-                    </td>
 
                 </tr>
         		{% endfor %}

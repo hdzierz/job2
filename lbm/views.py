@@ -16,3 +16,5 @@ def page_lbm(request):
     jobs_open = Job.objects.filter(finished='N').count()
     return render(request, 'page_lbm.html', {"jobs" : jobs, "jobs_open": jobs_open}) 
 
+def page_reports_lbm_jobDetails(request):
+    return render(request, 'page_reports_lbm_jobDetails.html')
