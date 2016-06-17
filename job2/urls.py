@@ -20,6 +20,7 @@ from lbm import views
 urlpatterns = [
     url(r'^$', views.page_home, name='page_home'),    
     url(r'^admin/', admin.site.urls),
-    url(r'^lbm/', views.page_lbm, name='page_lbm'),
+    url(r'^lbm/jobsCurrent', views.page_lbm, name='page_lbm'),
+    url(r'^lbm/jobBooking', views.page_lbm_jobBooking, name='page_lbm_jobBooking'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
 ]
