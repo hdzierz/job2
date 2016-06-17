@@ -579,23 +579,28 @@ td {
   font-size: 0.95em;
 }
 /* line 11, sass/partials/_tables.sass */
+td.action {
+  white-space: nowrap;
+}
+/* line 13, sass/partials/_tables.sass */
 td .glyphicon {
+  padding: 2px;
   font-size: 0.9em;
 }
-/* line 15, sass/partials/_tables.sass */
+/* line 17, sass/partials/_tables.sass */
 td .active i {
   color: #08931C;
 }
-/* line 18, sass/partials/_tables.sass */
+/* line 20, sass/partials/_tables.sass */
 td a i {
   color: #4F5250;
 }
-/* line 20, sass/partials/_tables.sass */
+/* line 22, sass/partials/_tables.sass */
 td a:hover i {
   color: #07718a;
 }
 
-/* line 23, sass/partials/_tables.sass */
+/* line 25, sass/partials/_tables.sass */
 .table > thead:first-child > tr:first-child > th,
 .table > tfoot th {
   font-family: "Oswald", sans-serif;

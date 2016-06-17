@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', views.page_home, name='page_home'),    
     url(r'^admin/', admin.site.urls),
     url(r'^lbm/', views.page_lbm, name='page_lbm'),
+    url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
 ]

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+        {% load staticfiles %}
         <!-- Javascripts -->
         <!-- Load pace first -->
         <script src="{% static "assets/plugins/core/pace/pace.min.js" %}"></script>
@@ -58,6 +58,37 @@
         <!-- script src="{% static "assets/plugins/forms/dropzone/dropzone.js" %}"></script -->
         <!-- Small inline charts: http://omnipotent.net/jquery.sparkline/#s-about -->
         <!-- script src="{% static "assets/plugins/charts/sparklines/jquery.sparkline.js" %}"></script -->
+
+        <!-- ++++++++++++++++++++++++++ -->
+        <!-- Per page JS: -->
+        <!-- ++++++++++++++++++++++++++ -->
+        <!-- case "CO-lbm-jobs":
+        case "CO-lbm-jobs-edit":
+        case "CO-depot-jobs":
+        case "CO-contacts": -->
+            <!-- Table scripts (433kb / 85kb / 5kx / 22kb) -->
+            <script src="{% static "assets/plugins/tables/datatables/jquery.dataTables.js" %}"></script> 
+            <script src="{% static "assets/plugins/tables/datatables/dataTables.tableTools.js" %}"></script>
+            <script src="{% static "assets/plugins/tables/datatables/dataTables.bootstrap.js" %}"></script>
+            <script src="{% static "assets/plugins/tables/datatables/dataTables.responsive.js" %}"></script>
+            <!-- Coural custom data.. -->
+            <script src="{% static "CO-assets/js/pages/tables-data.js" %}"></script>
+            <!---script src="{% static "CO-assets/js/pages/forms.js" %}"></script--->
+        <!-- case "CO-lbm-job-booking": -->
+            <!-- Form wizard scripts -->
+            <script src="{% static "assets/plugins/forms/bootstrap-wizard/jquery.bootstrap.wizard.js" %}"></script>
+            <script src="{% static "assets/plugins/forms/validation/jquery.validate.js" %}"></script>
+            <script src="{% static "assets/plugins/forms/validation/additional-methods.min.js" %}"></script>
+            <!-- Coural custom page data.. -->
+            <script src="{% static "CO-assets/js/pages/forms-wizard.js" %}"></script>
+            <script src="{% static "CO-assets/js/pages/forms.js" %}"></script>
+            <script src="{% static "CO-assets/js/pages/lbm-job-booking.js" %}"></script>
+        <!-- case "CO-lbm-tickets-bcti":
+        case "CO-ticket-invoicing": 
+        case "CO-ticket-redempt-inv": -->
+            <!-- Coural custom data.. -->
+            <!---script src="{% static "CO-assets/js/pages/forms.js" %}"></script--->
+
 
         <!-- Coural custom data.. -->
         <script src="{% static "CO-assets/js/main.js" %}"></script>
