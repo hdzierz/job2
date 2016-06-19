@@ -1,0 +1,982 @@
+{% extends "page_base.html" %}
+
+{% block info %}
+<h1>LBM Job Booking</h1>
+<p class="intro">
+    Anon cursus a eros mus orci ut class vestibulum molestie ipsum parturient metus nisl curabitur a non cursus view all posuere parturient a eros mus orci ut augue volutpat.
+</p>
+{% endblock %}
+
+
+{% block data %}
+<!-- LBM job booking form -->
+<div class="row">
+    
+    <div class="col-lg-12 col-md-12">
+        <!-- col-lg-12 start here -->
+        <div class="panel panel-default toggle panelMove panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Job details</h4>
+            </div>
+            <div class="panel-body pt0 pb0">
+                <div id="wizard1" class="bwizard">
+                    <!-- Start .bwizard -->
+                    <ul class="bwizard-steps">
+                        <li class="active">
+                            <a href="#tab1" data-toggle="tab">
+                                <span class="step-number">1</span>
+                                <span class="step-text">General info</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab2" data-toggle="tab">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Customer charges</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="wizard-progress">
+                        <div id="bar" class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <form class="form-horizontal group-border stripped" role="form">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-3 control-label">Regular (Yes)</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
+                                        <input class="form-control" name="regular" type="checkbox" value="Y">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Purchase #</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="purchase_no" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">PMP job #</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label" for="">Delivery date</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="basic-datepicker-2" type="text" class="form-control basic-datepicker">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-8 col-md-9 col-sm-9 col-xs-6 control-label">Or IOA</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="ioa" type="checkbox" value="Y">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Charge to</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <select class="form-control select2">
+                                            <option value="60">AC Pet Foods</option>
+                                            <option value="618">Ace City Couriers</option>
+                                            <option value="241">Adplus</option>
+                                            <option value="156">Advance Freight &amp; Couriers Limited</option>
+                                            <option value="81">Advertising House</option>
+                                            <option value="282">Ag Research</option>
+                                            <option value="604">AgFirst HB</option>
+                                            <option value="612">AgFirst Northland</option>
+                                            <option value="289">AgFirst Waikato</option>
+                                            <option value="82">Agmax Industries</option>
+                                            <option value="554">AgRecord</option>
+                                            <option value="343">Agribusiness Consultants</option>
+                                            <option value="435">AgriHealth NZ</option>
+                                            <option value="401">Agrilife</option>
+                                            <option value="631">AgriSea</option>
+                                            <option value="644">Agriseeds</option>
+                                            <option value="585">AgriSpecialists</option>
+                                            <option value="454">Agrissentials</option>
+                                            <option value="429">Agrowquip</option>
+                                            <option value="319">Alan Hayward</option>
+                                            <option value="414">Alex Suddaby</option>
+                                            <option value="679">All Tree Services</option>
+                                            <option value="338">Allan Anderson</option>
+                                            <option value="627">Alleva</option>
+                                            <option value="259">Allfarm </option>
+                                            <option value="411">Almac</option>
+                                            <option value="468">Altex</option>
+                                            <option value="160">Amalgamated Publications</option>
+                                            <option value="470">AMT Hawera</option>
+                                            <option value="653">ANZCO</option>
+                                            <option value="449">Aoraki Polytech</option>
+                                            <option value="1">APN Holdings</option>
+                                            <option value="97">Arcadia Marketing</option>
+                                            <option value="157">Arrow Freight &amp; Furniture</option>
+                                            <option value="409">AT Appliances</option>
+                                            <option value="581">Avoca</option>
+                                            <option value="387">Awakino Contractors</option>
+                                            <option value="714">Barfoot Whangarei</option>
+                                            <option value="273">Bauer Media</option>
+                                            <option value="262">Bay City/Farmside</option>
+                                            <option value="628">Bay Van Couriers</option>
+                                            <option value="440">Bayer NZ</option>
+                                            <option value="295">Bayleys Christchurch</option>
+                                            <option value="198">Bayleys Counties</option>
+                                            <option value="324">Bayleys Feilding</option>
+                                            <option value="322">Bayleys New Plymouth use Bayleys Taranaki</option>
+                                            <option value="24">Bayleys Palmerston North</option>
+                                            <option value="638">Bayleys Rotorua</option>
+                                            <option value="623">Bayleys Taranaki</option>
+                                            <option value="257">Bayleys Tauranga</option>
+                                            <option value="114">BayQuip Agricultural</option>
+                                            <option value="405">BdMax</option>
+                                            <option value="603">Beacon Print</option>
+                                            <option value="389">Beattie Insulators</option>
+                                            <option value="130">Beck Helicopters</option>
+                                            <option value="499">Beef + Lamb Hastings</option>
+                                            <option value="395">Beef + Lamb NZ Alexandra</option>
+                                            <option value="372">Beef + Lamb NZ Christchurch</option>
+                                            <option value="385">Beef + Lamb NZ Feilding</option>
+                                            <option value="617">Beef + Lamb NZ Hamilton</option>
+                                            <option value="384">Beef + Lamb NZ Oamaru</option>
+                                            <option value="453">Beef + Lamb NZ Wellington</option>
+                                            <option value="562">Beef + Lamb NZ Whangarei</option>
+                                            <option value="656">Bell Booth</option>
+                                            <option value="540">Bellerby Farms</option>
+                                            <option value="626">Ben Thomas Panel Beating</option>
+                                            <option value="133">Best-Fed NZ</option>
+                                            <option value="341">Bike Torque</option>
+                                            <option value="107">Bill Milham</option>
+                                            <option value="473">Bintec</option>
+                                            <option value="397">BioBugs Intl</option>
+                                            <option value="555">Biorich</option>
+                                            <option value="223">BLM Feeds Ltd</option>
+                                            <option value="566">Blue Pacific</option>
+                                            <option value="236">Bob Crane</option>
+                                            <option value="271">Bomac Laboratories</option>
+                                            <option value="366">Bonnie Smith</option>
+                                            <option value="535">Bonnie The Cow</option>
+                                            <option value="667">BOP DIA</option>
+                                            <option value="463">BouMatic NZ Limited</option>
+                                            <option value="671">Bowmans</option>
+                                            <option value="726">BreedNZ</option>
+                                            <option value="267">Bridge It NZ Ltd</option>
+                                            <option value="529">Broadgate Harvesting</option>
+                                            <option value="450">Bromley Dairy and Pumps</option>
+                                            <option value="577">Brownfreight</option>
+                                            <option value="727">Bullseye Direct</option>
+                                            <option value="201">Business Media Press</option>
+                                            <option value="154">Butlers Livestock Services</option>
+                                            <option value="16">C-Dax</option>
+                                            <option value="699">Calder Contracting</option>
+                                            <option value="647">Cambridge Info</option>
+                                            <option value="373">Canterbury Farming</option>
+                                            <option value="370">Canterbury Log Burners</option>
+                                            <option value="357">Canterbury Processors</option>
+                                            <option value="651">Canterbury Seed</option>
+                                            <option value="654">Carol Joines</option>
+                                            <option value="645">Carolyn Collier</option>
+                                            <option value="404">Carpet Court</option>
+                                            <option value="610">Carrfields Auckland</option>
+                                            <option value="684">Carthew Genetics</option>
+                                            <option value="519">Castle Parcels</option>
+                                            <option value="301">CB Norwood Distributors</option>
+                                            <option value="36">Central Excavations</option>
+                                            <option value="599">Central Livestock</option>
+                                            <option value="598">Central Livestock</option>
+                                            <option value="597">Central Livestock</option>
+                                            <option value="423">Central Tractors</option>
+                                            <option value="235">Cervus Manawatu</option>
+                                            <option value="701">Cervus Rotorua</option>
+                                            <option value="498">Cervus Stratford</option>
+                                            <option value="445">Cervus Waipawa</option>
+                                            <option value="231">Cervus Waipukurau</option>
+                                            <option value="205">Cervus Whangarei</option>
+                                            <option value="492">Chainsaw and Outdoor Power </option>
+                                            <option value="326">Chevpac</option>
+                                            <option value="377">Chilly Cow</option>
+                                            <option value="551">CLBS</option>
+                                            <option value="215">Client</option>
+                                            <option value="609">Clutha Ag</option>
+                                            <option value="500">CMP Canterbury</option>
+                                            <option value="678">Coast To Coast Helicopters</option>
+                                            <option value="255">Coast to Coast Transport</option>
+                                            <option value="723">Coastline Honda</option>
+                                            <option value="426">Cochranes</option>
+                                            <option value="83">Cohesion Communications</option>
+                                            <option value="260">Collartron Systems</option>
+                                            <option value="461">Compass Engineering</option>
+                                            <option value="369">Computer Trouble Shooters</option>
+                                            <option value="142">Concrete Grooving</option>
+                                            <option value="573">Conservative Party</option>
+                                            <option value="161">Constant Couriers</option>
+                                            <option value="339">Cool</option>
+                                            <option value="457">Counties Custom Killing</option>
+                                            <option value="194">Country Copy</option>
+                                            <option value="596">Country Lifestyle Block Serv</option>
+                                            <option value="489">Country Living Expo</option>
+                                            <option value="206">Coural Logistics Auckland</option>
+                                            <option value="162">Coural Logistics Christchurch</option>
+                                            <option value="208">Coural Office</option>
+                                            <option value="561">Courtesy Motorcycles</option>
+                                            <option value="683">Cow Consultant Ltd</option>
+                                            <option value="265">Cropmark Seeds</option>
+                                            <option value="134">CRT Co-operative </option>
+                                            <option value="663">Cycle  Classic</option>
+                                            <option value="593">Dairy Business</option>
+                                            <option value="680">Dairy Farm Consulting</option>
+                                            <option value="281">Dairy Livestock Ltd</option>
+                                            <option value="431">DairyConsult</option>
+                                            <option value="541">Dairying Trust</option>
+                                            <option value="126">DairyNZ</option>
+                                            <option value="286">Darrin Chubb</option>
+                                            <option value="342">Dave Boyt Whangarei</option>
+                                            <option value="3">David McPherson</option>
+                                            <option value="403">Dean File (Bayleys)</option>
+                                            <option value="681">Deck and Fence Pro</option>
+                                            <option value="594">Delta Group</option>
+                                            <option value="424">Digital Harvest</option>
+                                            <option value="285">Direct Fuels</option>
+                                            <option value="478">DomHealth</option>
+                                            <option value="476">Donaldson Investments</option>
+                                            <option value="522">Doodle</option>
+                                            <option value="61">Dow Agroscience</option>
+                                            <option value="144">DPI</option>
+                                            <option value="621">Drainways</option>
+                                            <option value="219">Duddy Partnership</option>
+                                            <option value="305">Dunamis Haulage Limited</option>
+                                            <option value="434">Duncan Realty Rotorua</option>
+                                            <option value="375">Duroweld</option>
+                                            <option value="467">Dynamic Maintenance</option>
+                                            <option value="545">East Coast Rural Support</option>
+                                            <option value="586">Eastland Rural Supplies</option>
+                                            <option value="682">Eastown</option>
+                                            <option value="313">Eastworx</option>
+                                            <option value="402">Echodale</option>
+                                            <option value="217">Effluent &amp; Irrigation Services</option>
+                                            <option value="446">Effluent Pumping Services</option>
+                                            <option value="280">Elders Christchurch</option>
+                                            <option value="334">Elders Gisborne</option>
+                                            <option value="117">Elders Katikati</option>
+                                            <option value="315">Eleven</option>
+                                            <option value="410">Ellisons Aluminium</option>
+                                            <option value="697">Energy Vets</option>
+                                            <option value="657">Enliven BOP</option>
+                                            <option value="141">Envirofert</option>
+                                            <option value="352">Environment First</option>
+                                            <option value="556">Erin Skelsey</option>
+                                            <option value="118">Etec</option>
+                                            <option value="331">Exclusively Franklin</option>
+                                            <option value="503">Fagan Motors</option>
+                                            <option value="207">Fairfax - NZF</option>
+                                            <option value="27">Fairfax Darg</option>
+                                            <option value="715">Fairfax Rotorua Review</option>
+                                            <option value="430">Fairfax W/Leader</option>
+                                            <option value="537">Fairfax Waikato Farmers</option>
+                                            <option value="634">Fairfax Wellington</option>
+                                            <option value="344">Fairfax WRCN</option>
+                                            <option value="367">Farm Environment Award Trust</option>
+                                            <option value="101">Farm Mapping</option>
+                                            <option value="563">Farm Services Manawatu</option>
+                                            <option value="221">Farmers Industries</option>
+                                            <option value="530">Farmforward</option>
+                                            <option value="719">Farmlands RE Gisborne</option>
+                                            <option value="508">Fastway</option>
+                                            <option value="635">Federated Farmers</option>
+                                            <option value="317">Fiber-Fresh</option>
+                                            <option value="520">Finance House</option>
+                                            <option value="412">Fiordland Frontier</option>
+                                            <option value="263">Fitzgerald Holdings</option>
+                                            <option value="502">Fluid NZ</option>
+                                            <option value="329">Frenz Intl</option>
+                                            <option value="347">Frizzell</option>
+                                            <option value="116">Garden Gloves/Orari Nursery</option>
+                                            <option value="611">Gatemaster</option>
+                                            <option value="378">GEA Farm Technologies</option>
+                                            <option value="248">GEO Hutchinson</option>
+                                            <option value="381">GEON Print</option>
+                                            <option value="376">Gibb Gro</option>
+                                            <option value="230">Giltrap Farm Mach</option>
+                                            <option value="471">Grakar</option>
+                                            <option value="277">Grant Moore Tailing</option>
+                                            <option value="722">Graymont</option>
+                                            <option value="330">Greatlake Transport </option>
+                                            <option value="249">Greenleaf Nurseries</option>
+                                            <option value="575">Grosafe</option>
+                                            <option value="724">GroutPro</option>
+                                            <option value="636">Growth Distribution</option>
+                                            <option value="637">GuardIt</option>
+                                            <option value="570">GuyCo</option>
+                                            <option value="244">Gwenda Merriman</option>
+                                            <option value="151">H &amp; T Agronomics</option>
+                                            <option value="606">H&amp;J Bruce Transport Ltd</option>
+                                            <option value="303">H2 Group</option>
+                                            <option value="578">Harcourts Hamilton</option>
+                                            <option value="700">Harcourts Havelock North</option>
+                                            <option value="674">Harcourts HB</option>
+                                            <option value="29">Harcourts Invercargill</option>
+                                            <option value="213">Harcourts Morrinsville</option>
+                                            <option value="47">Harcourts Palmerston North</option>
+                                            <option value="487">Harcourts Pukekohe</option>
+                                            <option value="447">Harcourts Taupo</option>
+                                            <option value="123">Harcourts Waikato</option>
+                                            <option value="705">Harcouts Te Awamutu</option>
+                                            <option value="580">Harry Marett</option>
+                                            <option value="451">Harveys Kaiapoi</option>
+                                            <option value="459">Harveys Tokoroa</option>
+                                            <option value="355">Hastings District Council</option>
+                                            <option value="306">Hautapu Pine Products</option>
+                                            <option value="307">Hautapu Rural Supplies</option>
+                                            <option value="211">Hautapu Welders</option>
+                                            <option value="113">Hawera Rewinds</option>
+                                            <option value="234">Hawkes Bay Regional Council</option>
+                                            <option value="686">Hawkes Bay Today</option>
+                                            <option value="549">HB Farm Forestry</option>
+                                            <option value="238">HB Hidden Fence</option>
+                                            <option value="641">Headlands</option>
+                                            <option value="690">Heartland Print</option>
+                                            <option value="475">Heartland Rural Supplies</option>
+                                            <option value="687">Heavy Machinery Services</option>
+                                            <option value="427">Helen Heddell</option>
+                                            <option value="420">Heli A1</option>
+                                            <option value="441">Heli-Hire Ltd</option>
+                                            <option value="269">Herd Homes Systems</option>
+                                            <option value="150">Hodder &amp; Taylor Agronomics</option>
+                                            <option value="717">Hokonui Rural Transport</option>
+                                            <option value="191">Holloway Advertising</option>
+                                            <option value="602">Horizons</option>
+                                            <option value="501">HortiGro</option>
+                                            <option value="199">Hot Mustard</option>
+                                            <option value="325">Humpridge</option>
+                                            <option value="474">Hunterville Service Centre</option>
+                                            <option value="615">Hunting &amp; Fishing Thames</option>
+                                            <option value="516">Hydroflow</option>
+                                            <option value="93">Hynds Pipes</option>
+                                            <option value="300">IC Motorgroup</option>
+                                            <option value="258">Ideas Company</option>
+                                            <option value="209">Ingham Feeds &amp; Nutrition</option>
+                                            <option value="711">Inkwise</option>
+                                            <option value="608">Innovative Interiors</option>
+                                            <option value="589">Installer Services - on stop credit</option>
+                                            <option value="583">Installer Services Hawkes Bay</option>
+                                            <option value="640">Installer Services Manawatu</option>
+                                            <option value="302">Intermedia</option>
+                                            <option value="354">Intervet</option>
+                                            <option value="335">iTAG</option>
+                                            <option value="607">Jacqui Robinson</option>
+                                            <option value="444">Jaden Design</option>
+                                            <option value="131">James Wyeth Scanning Services</option>
+                                            <option value="314">Jan Bell</option>
+                                            <option value="710">Janis Caulfield-Carlsen</option>
+                                            <option value="521">Jason and Lisa Suisted</option>
+                                            <option value="349">JB Business</option>
+                                            <option value="466">Jets Transport Ltd</option>
+                                            <option value="91">Jo Foster Consultancy</option>
+                                            <option value="462">John Farrells Nurseries</option>
+                                            <option value="210">John Hatwell</option>
+                                            <option value="706">Johnsons Glass</option>
+                                            <option value="491">Josh Grimmett</option>
+                                            <option value="408">JTL Carbon Consulting</option>
+                                            <option value="299">Kaipara Workwear</option>
+                                            <option value="477">KC Motors</option>
+                                            <option value="622">Ken Wilson Meats</option>
+                                            <option value="363">Kensair</option>
+                                            <option value="646">Kiwi Pollen</option>
+                                            <option value="652">Kiwi Span Manawatu</option>
+                                            <option value="531">Kiwiseed</option>
+                                            <option value="139">Kouldja Clothing</option>
+                                            <option value="660">Landpower</option>
+                                            <option value="327">Landscape Management</option>
+                                            <option value="202">Leader Products</option>
+                                            <option value="246">Lifestyle Livestock</option>
+                                            <option value="336">Liquid Applications</option>
+                                            <option value="407">Live Creative</option>
+                                            <option value="196">Livestock Exchange</option>
+                                            <option value="632">LJ Hooker HLZ</option>
+                                            <option value="650">LJ Hooker Tim</option>
+                                            <option value="147">Local Matters</option>
+                                            <option value="396">Lowe Corporation</option>
+                                            <option value="100">Lumberland</option>
+                                            <option value="560">Maber Motors</option>
+                                            <option value="308">Macabins Builders</option>
+                                            <option value="272">Macaulay Motors</option>
+                                            <option value="559">Macauley Metals</option>
+                                            <option value="225">Mainland Stockfeeds</option>
+                                            <option value="704">Mainmark Engineering</option>
+                                            <option value="418">Mainstream New Zealand Limited</option>
+                                            <option value="629">Maipo Ltd</option>
+                                            <option value="28">Malcove</option>
+                                            <option value="63">Manawatu Vets</option>
+                                            <option value="688">Maramarua Golf Club</option>
+                                            <option value="48">Max Birt Sawmills</option>
+                                            <option value="298">Max Security</option>
+                                            <option value="337">Maxim Print and Publishing</option>
+                                            <option value="484">Maylene Papuni</option>
+                                            <option value="533">McCurdy Engineering</option>
+                                            <option value="406">McInnes Manufacturing</option>
+                                            <option value="251">McKee Plastics</option>
+                                            <option value="109">Meadowslea Romney Stud</option>
+                                            <option value="106">Mech Agriculture</option>
+                                            <option value="137">Media Consultancy</option>
+                                            <option value="13">Merial Ancare</option>
+                                            <option value="433">Meridian Energy</option>
+                                            <option value="288">Message2Market</option>
+                                            <option value="297">Metro Urgent Limited</option>
+                                            <option value="128">Mid-West Machinery</option>
+                                            <option value="725">Migration Success</option>
+                                            <option value="253">Mineral Systems</option>
+                                            <option value="316">Mobile Vet</option>
+                                            <option value="532">Moller Johnson</option>
+                                            <option value="214">Morrison McDougall</option>
+                                            <option value="538">Murray Implements</option>
+                                            <option value="659">MW Media</option>
+                                            <option value="534">MyGrain Stockfeed</option>
+                                            <option value="642">MyLoadingRamp</option>
+                                            <option value="558">NDL</option>
+                                            <option value="698">Neale Grubb - Pgg Wrightson</option>
+                                            <option value="417">Neil Jamieson</option>
+                                            <option value="689">NEPO Limited</option>
+                                            <option value="437">Netsmart</option>
+                                            <option value="472">Network Electrical Servicing</option>
+                                            <option value="140">New Plymouth Motorcycles</option>
+                                            <option value="709">New Zealand Couriers</option>
+                                            <option value="163">New Zealand Couriers Limited</option>
+                                            <option value="345">Noeline Awarau</option>
+                                            <option value="356">Norbrook </option>
+                                            <option value="399">North Canterbury Equipment</option>
+                                            <option value="203">North South Multimedia</option>
+                                            <option value="264">Northland Machinery</option>
+                                            <option value="103">Norwood Palm Nth</option>
+                                            <option value="323">Norwoods Christchurch</option>
+                                            <option value="565">Norwoods Hastings</option>
+                                            <option value="321">Norwoods Hawera</option>
+                                            <option value="458">Norwoods Morrinsville</option>
+                                            <option value="579">Norwoods New Plymouth</option>
+                                            <option value="279">Norwoods Te Awamutu</option>
+                                            <option value="170">Now Couriers</option>
+                                            <option value="548">Nufarm</option>
+                                            <option value="224">Nunumba</option>
+                                            <option value="673">Nutrient Management Services</option>
+                                            <option value="361">Nutrimix</option>
+                                            <option value="261">Nutritech</option>
+                                            <option value="666">NW Media</option>
+                                            <option value="428">NZ Ag Machinery </option>
+                                            <option value="702">NZ Cycle</option>
+                                            <option value="351">NZ Dairy Industry Awards</option>
+                                            <option value="190">NZ Document Exchange</option>
+                                            <option value="398">NZ Farmers Livestock</option>
+                                            <option value="460">NZ Vet</option>
+                                            <option value="333">NZ Young Farmers</option>
+                                            <option value="668">NZDD</option>
+                                            <option value="669">NZR - Peter Barnett</option>
+                                            <option value="7">NZX Rural</option>
+                                            <option value="240">Oaklee Marketing</option>
+                                            <option value="242">OLeary Engineering</option>
+                                            <option value="619">Omnia</option>
+                                            <option value="232">On Target Marketing</option>
+                                            <option value="600">OnFarm Safety</option>
+                                            <option value="582">OPSM</option>
+                                            <option value="102">Orari Gorge Station</option>
+                                            <option value="542">Osbourne Sales</option>
+                                            <option value="296">Otautau Freight</option>
+                                            <option value="510">Other</option>
+                                            <option value="283">Outgro</option>
+                                            <option value="452">P&amp;M Contracting</option>
+                                            <option value="320">Palmfeild Motors</option>
+                                            <option value="243">Paradise Valley Ventures</option>
+                                            <option value="108">Pastoral Realty</option>
+                                            <option value="708">PBT</option>
+                                            <option value="172">PBT Couriers</option>
+                                            <option value="94">Peter Walsh &amp; Associates</option>
+                                            <option value="379">Peter Young Farm Advisory Services</option>
+                                            <option value="78">PGG Wrightson</option>
+                                            <option value="311">PGG Wrightson Hawera</option>
+                                            <option value="523">Piako Fete</option>
+                                            <option value="525">Pieroth Wines</option>
+                                            <option value="630">Pivot Anchors</option>
+                                            <option value="438">Placemakers Hawera</option>
+                                            <option value="393">Plants Direct</option>
+                                            <option value="364">Plastic Concepts</option>
+                                            <option value="527">Plumbing &amp; Heat</option>
+                                            <option value="464">PMP Catalogues</option>
+                                            <option value="514">PMP News Cant</option>
+                                            <option value="518">PMP News Guar</option>
+                                            <option value="513">PMP News Pen Press</option>
+                                            <option value="517">PMP News Rang</option>
+                                            <option value="552">PMP News Regional</option>
+                                            <option value="515">PMP News Wairarapa</option>
+                                            <option value="528">PMP News We Sun</option>
+                                            <option value="692">PMP News Your Camb News</option>
+                                            <option value="6">PMP Newspapers</option>
+                                            <option value="494">PMP PO Boxes </option>
+                                            <option value="595">PMP Print</option>
+                                            <option value="707">Post Haste</option>
+                                            <option value="187">Post Haste Couriers</option>
+                                            <option value="360">Power Farming</option>
+                                            <option value="624">Power Farming Gis</option>
+                                            <option value="480">Power Farming Gore</option>
+                                            <option value="625">Power Farming HB</option>
+                                            <option value="479">Power Farming Invercargill</option>
+                                            <option value="675">Pratts Plumbing</option>
+                                            <option value="145">Premier Stockfeeds</option>
+                                            <option value="291">Primary ITO</option>
+                                            <option value="465">Professionals Palmerston North</option>
+                                            <option value="557">Profit Focussed Farming</option>
+                                            <option value="275">Progressive Livestock</option>
+                                            <option value="358">Property Brokers Ashburton</option>
+                                            <option value="616">Property Brokers Matamata</option>
+                                            <option value="648">Property Brokers Pahiatua</option>
+                                            <option value="195">Property Brokers Palm Nth</option>
+                                            <option value="693">Property Brokers Rangiora</option>
+                                            <option value="696">Property Brokers Wanganui</option>
+                                            <option value="553">Pursuit Design</option>
+                                            <option value="504">Pyes Contracting</option>
+                                            <option value="371">Qik-Find NZ Ltd</option>
+                                            <option value="703">QTR Transport Limited</option>
+                                            <option value="95">Raho Ruru Romneys</option>
+                                            <option value="661">Rata Industries</option>
+                                            <option value="233">Ravensdown</option>
+                                            <option value="284">Ray White Hamilton</option>
+                                            <option value="485">Ray White Ohaupo</option>
+                                            <option value="655">Ray White Wanganui</option>
+                                            <option value="332">RD Marketing</option>
+                                            <option value="490">Redline Tractors Dargaville</option>
+                                            <option value="348">Redline Tractors Timaru</option>
+                                            <option value="536">Regent Training</option>
+                                            <option value="112">Regional Promotions</option>
+                                            <option value="539">Relocatable House Co</option>
+                                            <option value="469">Reubin Edkins</option>
+                                            <option value="718">Rex Barnfield</option>
+                                            <option value="572">Richard Forgie</option>
+                                            <option value="567">Riverbank Engineering</option>
+                                            <option value="287">Riverside Vets</option>
+                                            <option value="270">Robertson Engineering</option>
+                                            <option value="218">Rotech Equipment</option>
+                                            <option value="543">Ruby Red Lyme</option>
+                                            <option value="127">Rural Family Support Trust</option>
+                                            <option value="256">Rural Fuel</option>
+                                            <option value="432">Rural Research Limited</option>
+                                            <option value="721">Rushton Marketing</option>
+                                            <option value="695">Ryal Bush</option>
+                                            <option value="222">ScanCo</option>
+                                            <option value="237">Seeds &amp; Cereals </option>
+                                            <option value="511">Select</option>
+                                            <option value="576">Skunk Spraying</option>
+                                            <option value="290">Southern Wide Real Estate</option>
+                                            <option value="670">Southland District Council</option>
+                                            <option value="568">Southland Sepentine</option>
+                                            <option value="353">Southland Times</option>
+                                            <option value="111">Sparex Distributors</option>
+                                            <option value="633">Specialised Structures </option>
+                                            <option value="649">Specialised Structures Christchurch</option>
+                                            <option value="713">Spitfire</option>
+                                            <option value="665">Standard Commodities</option>
+                                            <option value="71">Steelfort Engineering </option>
+                                            <option value="505">Strategic Marketing</option>
+                                            <option value="228">Streamline Mail Solutions</option>
+                                            <option value="482">SUB 60</option>
+                                            <option value="9">Sun Media</option>
+                                            <option value="394">Sunshade BOP</option>
+                                            <option value="620">Sustainable Soils</option>
+                                            <option value="220">Swazi Apparel</option>
+                                            <option value="639">Taharoa Tourism </option>
+                                            <option value="716">Taradale Rotary</option>
+                                            <option value="662">Tararua Vets</option>
+                                            <option value="613">Tasman Marine</option>
+                                            <option value="436">Tau Transport Limited</option>
+                                            <option value="192">Te Koe Partnership</option>
+                                            <option value="694">TeeJay Distributors</option>
+                                            <option value="481">Terranota</option>
+                                            <option value="229">Terry Frost</option>
+                                            <option value="85">The Advertising House</option>
+                                            <option value="486">The Double Glazing Company</option>
+                                            <option value="188">The Northern Age</option>
+                                            <option value="672">The Tea House</option>
+                                            <option value="252">Timbco Harvesting</option>
+                                            <option value="143">Timber Trading Company</option>
+                                            <option value="304">Tokoroa Engineering</option>
+                                            <option value="312">Toll IPEC</option>
+                                            <option value="250">Totally Vets</option>
+                                            <option value="448">Totalspan Wanganui</option>
+                                            <option value="439">TracMap</option>
+                                            <option value="497">Tracta</option>
+                                            <option value="278">TransAg Centre</option>
+                                            <option value="197">Transport Linehaul Limited</option>
+                                            <option value="643">Trevan Distributors</option>
+                                            <option value="720">Trina Sheridan</option>
+                                            <option value="383">Tru Test</option>
+                                            <option value="200">Tuaropaki Communications</option>
+                                            <option value="294">Turf Equipment</option>
+                                            <option value="614">Turton FS</option>
+                                            <option value="443">Twin Farm</option>
+                                            <option value="268">Uber Networks</option>
+                                            <option value="292">Ultra-Scan Limited</option>
+                                            <option value="526">UltraScan Nth Canty</option>
+                                            <option value="712">UltraScan Whakatane</option>
+                                            <option value="400">UNN Retail Group</option>
+                                            <option value="456">Urgent Couriers Limited</option>
+                                            <option value="226">Veehof Dairy Services </option>
+                                            <option value="455">Venture Southland</option>
+                                            <option value="374">Viafos Importing</option>
+                                            <option value="266">Victor Brown</option>
+                                            <option value="425">Visual Aspects</option>
+                                            <option value="493">VitaPOWER</option>
+                                            <option value="388">Waikato Business Publications</option>
+                                            <option value="227">Waikato Community Pharmacy Group</option>
+                                            <option value="571">Waikato Milking Systems</option>
+                                            <option value="524">Waimak Property</option>
+                                            <option value="79">Wairere Farm</option>
+                                            <option value="564">Wairoa District Council</option>
+                                            <option value="483">Waiuku Business &amp; Devel Assn</option>
+                                            <option value="92">Walco Engineering</option>
+                                            <option value="212">Wanganui District Council</option>
+                                            <option value="328">Waterford Press</option>
+                                            <option value="676">Welshy Contracting </option>
+                                            <option value="496">Wendy Goss (Bayleys)</option>
+                                            <option value="193">West Auckland Green Party</option>
+                                            <option value="488">Westlea Trading </option>
+                                            <option value="350">Whakatane Hunting &amp; Fishing</option>
+                                            <option value="135">Whatever Marketing </option>
+                                            <option value="495">WhiteboardsNZ</option>
+                                            <option value="276">Williams Contracting</option>
+                                            <option value="569">Williams Irrigation</option>
+                                            <option value="677">Wings &amp; Wheels</option>
+                                            <option value="442">Winmill Media</option>
+                                            <option value="544">Winton Engineering</option>
+                                            <option value="546">Wizwireless</option>
+                                            <option value="310">Wood Waste Express</option>
+                                            <option value="309">Woodstock Quarries</option>
+                                            <option value="254">Wright Advertising</option>
+                                            <option value="574">Young Conservatives</option>
+                                            <option value="318">zAu-Pair</option>
+                                            <option value="75">zBay of Plenty Times</option>
+                                            <option value="691">Zealyn</option>
+                                            <option value="44">zElite Circulars Distribution</option>
+                                            <option value="587">Zenitec</option>
+                                            <option value="685">Zero Turn Mowers</option>
+                                            <option value="124">zFagan Motors Ltd</option>
+                                            <option value="146">zFairview Ventures Ltd</option>
+                                            <option value="189">zFranklin Life Newspaper 2000 Ltd</option>
+                                            <option value="136">zHains Partnership</option>
+                                            <option value="121">zHamill Realty Ltd</option>
+                                            <option value="89">zHelen Dean</option>
+                                            <option value="421">zHouse of Travel</option>
+                                            <option value="105">zHunterville Service Centre</option>
+                                            <option value="391">zHunting &amp; Fishing</option>
+                                            <option value="20">zJudy Rogers</option>
+                                            <option value="365">zKaren Brown-Century 21</option>
+                                            <option value="247">zMan/Rang Rural Family Support Trust</option>
+                                            <option value="346">zMayfield Sports</option>
+                                            <option value="340">zMichael Laws</option>
+                                            <option value="98">zMt Pokaka</option>
+                                            <option value="386">zNorwood</option>
+                                            <option value="392">zNufarm</option>
+                                            <option value="138">Zoetis</option>
+                                            <option value="43">zRathkeale College</option>
+                                            <option value="245">zReach Media</option>
+                                            <option value="362">zRural World Ltd</option>
+                                            <option value="293">zSamantha Palmer</option>
+                                            <option value="359">zSteel Interlock Sheds</option>
+                                            <option value="204">zStreets Ahead Distribution</option>
+                                            <option value="155">zTinker, Tim</option>
+                                            <option value="274">zTrader Group (ACP Media)</option>
+                                            <option value="152">zWHP Knight</option>
+                                            <option value="588">zzzZenitec</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Destination type</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <select class="form-control select2">                                             
+                                            <option value="0" selected="">Please Select</option>
+                                            <option value="num_total">Total</option>
+                                            <option value="num_farmers">Farmers</option>
+                                            <option value="num_lifestyle">Lifestyle</option>
+                                            <option value="num_dairies">Dairy</option>
+                                            <option value="num_sheep">Sheep</option>
+                                            <option value="num_beef">Beef</option>
+                                            <option value="num_sheepbeef">Sheep/Beef</option>
+                                            <option value="num_dairybeef">Dairy/Beef</option>
+                                            <option value="num_hort">Hort</option>
+                                            <option value="rmt">Total #</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Publication</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="firstname" type="text">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Weight</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" name="weight" type="text">
+                                            <span class="input-group-addon">g</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Print advices</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" checked name="quote" type="checkbox" value="Y">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Paper source</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Invoice #</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Job #</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="firstname" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Customer Link</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">DO Details Sent</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" placeholder="Not sent" name="lastname" type="text">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-6 col-md-6 col-sm-6 col-xs-6 control-label" for="">Lodgement date</label>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input id="basic-datepicker" type="text" class="form-control basic-datepicker">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">NI linehaul</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <select class="form-control select2">
+                                            <option value="215">Client</option>
+                                            <option value="206">Coural Logistics Auckland</option>
+                                            <option value="162">Coural Logistics Christchurch</option>
+                                            <option value="208">Coural Office</option>
+                                            <option value="126">DairyNZ</option>
+                                            <option value="144">DPI</option>
+                                            <option value="27">Fairfax Darg</option>
+                                            <option value="344">Fairfax WRCN</option>
+                                            <option value="230">Giltrap Farm Mach</option>
+                                            <option value="249">Greenleaf Nurseries</option>
+                                            <option value="213">Harcourts Morrinsville</option>
+                                            <option value="238">HB Hidden Fence</option>
+                                            <option value="258">Ideas Company</option>
+                                            <option value="302">Intermedia</option>
+                                            <option value="91">Jo Foster Consultancy</option>
+                                            <option value="196">Livestock Exchange</option>
+                                            <option value="147">Local Matters</option>
+                                            <option value="28">Malcove</option>
+                                            <option value="558">NDL</option>
+                                            <option value="240">Oaklee Marketing</option>
+                                            <option value="464">PMP Catalogues</option>
+                                            <option value="6">PMP Newspapers</option>
+                                            <option value="694">TeeJay Distributors</option>
+                                            <option value="643">Trevan Distributors</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">NI drop total</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">SI linehaul</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <select class="form-control select2">
+                                            <option value="215">Client</option>
+                                            <option value="206">Coural Logistics Auckland</option>
+                                            <option value="162">Coural Logistics Christchurch</option>
+                                            <option value="208">Coural Office</option>
+                                            <option value="126">DairyNZ</option>
+                                            <option value="144">DPI</option>
+                                            <option value="27">Fairfax Darg</option>
+                                            <option value="344">Fairfax WRCN</option>
+                                            <option value="230">Giltrap Farm Mach</option>
+                                            <option value="249">Greenleaf Nurseries</option>
+                                            <option value="213">Harcourts Morrinsville</option>
+                                            <option value="238">HB Hidden Fence</option>
+                                            <option value="258">Ideas Company</option>
+                                            <option value="302">Intermedia</option>
+                                            <option value="91">Jo Foster Consultancy</option>
+                                            <option value="196">Livestock Exchange</option>
+                                            <option value="147">Local Matters</option>
+                                            <option value="28">Malcove</option>
+                                            <option value="558">NDL</option>
+                                            <option value="240">Oaklee Marketing</option>
+                                            <option value="464">PMP Catalogues</option>
+                                            <option value="6">PMP Newspapers</option>
+                                            <option value="694">TeeJay Distributors</option>
+                                            <option value="643">Trevan Distributors</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">SI drop total</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+
+                                    <label class="col-lg-8 col-md-9 col-sm-9 col-xs-6 control-label">Total check</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                            <div class="tab-pane" id="tab2">
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-10 col-md-9 col-sm-9 col-xs-9">
+                                        <a href="#" target="_blank">&raquo; Price templates</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Rate (normal)</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="firstname" type="text">
+                                    </div>
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Quantity (normal)</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Includes linehaul</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" checked name="regular" type="checkbox" value="Y">
+                                    </div>
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Rate (extra charge)</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="firstname" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="number" class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Quantity (extra charge)<sup>1</sup></label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="number" id="number" type="text">
+                                    </div>
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Extra charge desc.</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="lastname" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Premium</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="firstname" type="text">
+                                    </div>
+                                    <label class="col-lg-3 col-md-3 col-sm-3 col-xs-6 control-label">Invoice value</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" name="inv-value" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-9 col-md-9 col-sm-9 col-xs-6 control-label">Margin</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" name="margin" type="text">
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-10 col-md-9 col-sm-9 col-xs-9"><sup>1</sup> Extra charges per 1000</label>
+                                </div>
+                            <!-- </div> -->
+                            <!-- Tab 3 -->
+                            <!-- <div class="tab-pane" id="tab3"> -->
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Distributors</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Sub-distributors</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Contractors</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Folding Fee</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-8 col-md-9 col-sm-9 col-xs-6 control-label">Add to invoice</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" name="quote" type="checkbox" value="Y">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Premium</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                            <span class="input-group-addon">$</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Bundle sell</label>
+                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
+                                        <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label" for="">Comments</label>
+                                    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-8">
+                                        <textarea class="form-control icon-textarea" rows="3"></textarea>
+                                        <i class="fa fa-comments textarea-icon s16"></i>
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Show</label>
+                                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
+                                        <input class="form-control" name="quote" type="checkbox" value="Y">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="pager">
+                        <li class="previous"><a href="#">&larr; Back</a>
+                        </li>
+                        <li class="next"><a href="#">Next &rarr;</a>
+                        </li>
+                        <li class="next finish" style="display:none;"><a href="#">Send</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End .bwizard -->
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- col-lg-12 end here -->
+</div>
+<!-- END ROW -->
+<!-- END LBM job booking form -->
+{% endblock %}
+
+
