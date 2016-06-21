@@ -3,6 +3,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
 from .models import *
+from .tables import *
 
 # Create your views here.
 
@@ -22,3 +23,10 @@ def page_lbm_jobBooking(request):
 # Reports ---------
 def page_reports_lbm_jobDetails(request):
     return render(request, 'page_reports_lbm_jobDetails.html')
+
+# Test -------
+def page_test(request):
+    jobs = Job.objects.all()[:20]
+    table = JobTable(jobs)
+    return render(request, 'page_test.html', {'table':table})
+

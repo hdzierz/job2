@@ -1,0 +1,82 @@
+{% extends "page_base.html" %}
+
+{% block info %}
+<h1>LBM Jobs</h1>
+<p class="intro">
+    Please <a href="">view all posuere parturient</a> class vestibulum molestie ipsum parturient metus
+    nisl curabitur a non cursus a eros mus orci ut augue volutpat.
+    <br/><br/>
+    Hendrerit ultrices elementum parturient curabitur consectetur habitant a tincidunt et convallis
+    nec parturient ut donec.
+    </p>
+{% endblock %}
+
+
+{% block jobinfo %}
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div class="panel panel-info tile panelClose panelRefresh">
+        <!-- Start .panel -->
+        <div class="panel-heading">
+            <h4 class="panel-title">May 2016 Jobs</h4>
+        </div>
+        <div class="panel-body pt0">
+            <div class="progressbar-stats-1">
+                <div class="stats">
+                    <div id="visitor_number" class="stats-number" data-from="0" data-to="76">{{jobs_open}}<span style="font-size: 0.6em">still open</span></div>
+                </div>
+                <div class="progress animated-bar flat transparent progress-bar-xs mb10 mt0">
+                    <div style="width: 23%" class="progress-bar progress-bar-white" role="progressbar" data-transitiongoal="63"></div>
+                </div>
+                <div class="stats">
+                    <div style="margin-top: 0;" id="visitor_number" class="stats-number" data-from="0" data-to="76">43 <span style="font-size: 0.6em;">not invoiced</span></div>
+                </div>
+                <div class="progress animated-bar flat transparent progress-bar-xs mb10 mt0">
+                    <div style="width: 32%" class="progress-bar progress-bar-white" role="progressbar" data-transitiongoal="63"></div>
+                </div><!-- 
+                <div class="comparison">
+                    <p class="mb0"><i class="fa fa-arrow-circle-o-up s20 mr5 pull-left"></i> 10% more than for the last month</p>
+                </div> -->
+            </div>
+        </div>
+        <!-- Start .panel -->
+    </div>
+    <!-- End .panel -->
+</div>
+{% endblock %}
+
+
+{% block searchresults %}
+<!-- Start .row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="bs-callout bs-callout-info fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>We found <strong>38 jobs</strong></h4>
+            <p>Hello! You searched for a client called '<strong>Fagan motors</strong>' and jobs between '<strong>5th March</strong>' and '<strong>12th May</strong>'.
+            <br/>We found <strong>38 jobs</strong> that match these criteria.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block searchform %}
+{% endblock %}
+{% load render_table from django_tables2 %}
+
+
+{% block data %}
+<!-- Coural data "Current Jobs" -->
+<!-- Start .panel -->
+<div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
+    <div class="panel-heading">
+        <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
+    </div>
+    <div class="panel-body">
+        {% render_table table %}
+    </div>
+</div>
+<!-- End .panel -->
+{% endblock %}
+
+
