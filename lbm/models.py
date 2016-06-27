@@ -2,10 +2,39 @@ from django.db import models
 
 # Create your models here.
 
+class Client(models.Model):
+    client_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    contact = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    card_id = models.CharField(max_length=30, blank=True, null=True)
+    contact_details = models.TextField(blank=True, null=True)
+    is_parcel_courier = models.IntegerField(blank=True, null=True)
+    invoice_details = models.TextField(blank=True, null=True)
+    c_code = models.IntegerField(blank=True, null=True)
+    has_discount = models.IntegerField(blank=True, null=True)
+    delivery_details = models.TextField(blank=True, null=True)
+    email = models.CharField(max_length=255, blank=True, null=True)
+    is_hauler = models.IntegerField(blank=True, null=True)
+    net_costs = models.CharField(max_length=20, blank=True, null=True)
+    base_price = models.CharField(max_length=20, blank=True, null=True)
+    linehaul = models.CharField(max_length=20, blank=True, null=True)
+    is_linehaul = models.IntegerField()
+    u_nw_1 = models.TextField(blank=True, null=True)
+    u_nw_2 = models.TextField(blank=True, null=True)
+    u_nw_3 = models.TextField(blank=True, null=True)
+    u_nw_4 = models.TextField(blank=True, null=True)
+    u_nw_5 = models.TextField(blank=True, null=True)
+    u_nw_6 = models.TextField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    is_operator = models.IntegerField(blank=True, null=True)
+    discount = models.FloatField(blank=True, null=True)
+
+
 class Job(models.Model):
     job_id = models.IntegerField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
-    client_id = models.IntegerField(blank=True, null=True)
+    client = models.ForeignKey(Client, blank=True, null=True)
     publication = models.CharField(max_length=200, blank=True, null=True)
     client_pub_id = models.IntegerField(blank=True, null=True)
     job_no = models.IntegerField(blank=True, null=True)
