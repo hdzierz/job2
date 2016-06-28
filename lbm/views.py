@@ -4,6 +4,7 @@ from django.template import Context
 from django.http import HttpResponse
 from .models import *
 from .tables import *
+from .forms import *
 
 # Create your views here.
 
@@ -26,7 +27,33 @@ def page_reports_lbm_jobDetails(request):
 
 # Test -------
 def page_test(request):
-    jobs = Job.objects.all()[:20]
-    table = JobTable(jobs)
-    return render(request, 'page_test.html', {'table':table})
+    if request.method == 'POST':
+        filtered = False
+        jobs = Job.objects.filter(finished='N')
+        #if(request.GET.get('frm'):
+        #    jobs.filter()
+        #if(request.GET.get('frm'):
+        #    jobs.filter()
+
+        publication=request.POST.get('publication')
+        if(publication):
+            filtered=True
+            jobs.filter(publication=publication)
+        #if(request.GET.get('frm'):
+        #             jobs.filter()
+        #if(request.GET.get('frm'):
+        #            jobs.filter()
+        if(not filtered):
+            jobs = jobs[:20]
+        table = JobTable(jobs)
+
+        form = JobForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = JobForm()
+        jobs = Job.objects.filter(finished='N')[:20]
+        table = JobTable(jobs)
+
+    return render(request, 'page_test.html', {'form': form, 'table':table})
 
