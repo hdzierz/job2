@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from .models import *
 from .tables import *
 from .forms import *
+import logging
+
 
 # Create your views here.
 
@@ -27,6 +29,7 @@ def page_reports_lbm_jobDetails(request):
 
 # Test -------
 def page_test(request):
+    logging.debug('TT: ' + request.method)
     if request.method == 'POST':
         filtered = False
         jobs = Job.objects.filter(finished='N')
@@ -36,9 +39,10 @@ def page_test(request):
         #    jobs.filter()
 
         publication=request.POST.get('publication')
-        if(publication):
-            filtered=True
-            jobs.filter(publication=publication)
+        #if(publication):
+        logging.debug("Hello")
+        filtered=True
+        jobs = jobs.filter(publication=publication)
         #if(request.GET.get('frm'):
         #             jobs.filter()
         #if(request.GET.get('frm'):
