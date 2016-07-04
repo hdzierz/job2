@@ -12,20 +12,25 @@ import logging
 
 # Home ---------
 def page_home(request):
-    return render(request, 'index.html')
+    page_name = 'home'
+    return render(request, 'index.html', {'page_name':page_name})
 
 # LBM ---------
 def page_lbm(request):
     jobs = Job.objects.all()[:20]
     jobs_open = Job.objects.filter(finished='N').count()
-    return render(request, 'page_lbm.html', {"jobs" : jobs, "jobs_open": jobs_open}) 
+
+    page_name = 'lbm'
+    return render(request, 'page_lbm.html', {'page_name':page_name, "jobs" : jobs, "jobs_open": jobs_open}) 
 
 def page_lbm_jobBooking(request):
-    return render(request, 'page_lbm_jobBooking.html')
+    page_name = 'jobBooking'
+    return render(request, 'page_lbm_jobBooking.html', {'page_name':page_name})
 
 # Reports ---------
 def page_reports_lbm_jobDetails(request):
-    return render(request, 'page_reports_lbm_jobDetails.html')
+    page_name = 'jobDetails'
+    return render(request, 'page_reports_lbm_jobDetails.html', {'page_name':page_name})
 
 # Test -------
 def page_test(request):
@@ -59,5 +64,7 @@ def page_test(request):
         jobs = Job.objects.filter(finished='N')[:20]
         table = JobTable(jobs)
 
-    return render(request, 'page_test.html', {'form': form, 'table':table})
+    page_name = "test"
+
+    return render(request, 'page_test.html', {'form': form, 'table':table, 'page_name':page_name})
 
