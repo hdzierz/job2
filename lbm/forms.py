@@ -4,13 +4,13 @@ from .models import *
 
 choices = [("","")]
 
-clients = Client.objects.all().order_by('name')[:10]
+clients = Client.objects.all().order_by('name')
 for client in clients:
     opt = (client.name, client.name)
     choices.append(opt)
 
 job_choices = [("","")]
-jobs = Job.objects.filter(finished='N').order_by('-job_no')[:10]
+jobs = Job.objects.filter(finished='N').order_by('-job_no')
 for job in jobs:
     job_choices.append((job.job_no, job.job_no))
 
