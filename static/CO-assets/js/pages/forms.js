@@ -13,12 +13,15 @@ $(document).ready(function() {
     });
 
 	//------------- Select 2 -------------//
-	$('.select2').select2({placeholder: 'Start typing'});
+	$('.select2').select2({
+		placeholder: 'Start typing',
+		minimumInputLength: 3
+	});
 
 	//minumum 2 symbols input
 	$('.select2-minimum').select2({
 		placeholder: 'Start typing',
-		minimumInputLength: 2,
+		minimumInputLength: 3
 	});
 
 	//------------- Masked input fields -------------//
