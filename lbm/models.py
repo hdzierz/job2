@@ -125,4 +125,32 @@ class Job(models.Model):
         managed = False
         db_table = 'job'
 
+class Route(models.Model):
+    job = models.ForeignKey(Job, blank=True, null=True)
+    island = models.CharField(max_length=3)
+    area = models.CharField(max_length=255)
+    region = models.CharField(max_length=255)
+    code = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    pmp_areacode = models.IntegerField(blank=True, null=True)
+    pmp_runcode = models.IntegerField(blank=True, null=True)
+    num_lifestyle = models.IntegerField(blank=True, null=True)
+    num_farmers = models.IntegerField(blank=True, null=True)
+    num_dairies = models.IntegerField(blank=True, null=True)
+    num_sheep = models.IntegerField(blank=True, null=True)
+    num_beef = models.IntegerField(blank=True, null=True)
+    num_sheepbeef = models.IntegerField(blank=True, null=True)
+    num_dairybeef = models.IntegerField(blank=True, null=True)
+    num_hort = models.IntegerField(blank=True, null=True)
+    seq_region = models.IntegerField(blank=True, null=True)
+    seq_area = models.IntegerField(blank=True, null=True)
+    seq_code = models.IntegerField(blank=True, null=True)
+    is_hidden = models.CharField(max_length=2)
+    num_nzfw = models.IntegerField(blank=True, null=True)
+    rmt = models.IntegerField(blank=True, null=True)
+    rm_rr = models.IntegerField(blank=True, null=True)
+    rm_f = models.IntegerField(blank=True, null=True)
+    rm_d = models.IntegerField(blank=True, null=True)
+    code_basei = models.CharField(max_length=255)
+    code_rd = models.CharField(max_length=255)
 

@@ -15,14 +15,6 @@ def page_home(request):
     page_name = 'home'
     return render(request, 'index.html', {'page_name':page_name})
 
-# LBM ---------
-def page_lbm(request):
-    jobs = Job.objects.all()[:20]
-    jobs_open = Job.objects.filter(finished='N').count()
-
-    page_name = 'lbm'
-    return render(request, 'page_lbm.html', {'page_name':page_name, "jobs" : jobs, "jobs_open": jobs_open}) 
-
 def page_lbm_jobBooking(request):
     page_name = 'jobBooking'
     return render(request, 'page_lbm_jobBooking.html', {'page_name':page_name})
@@ -32,9 +24,31 @@ def page_reports_lbm_jobDetails(request):
     page_name = 'jobDetails'
     return render(request, 'page_reports_lbm_jobDetails.html', {'page_name':page_name})
 
-# Test -------
-def page_test(request):
-    logging.debug('TT: ' + request.method)
+# LBM ROUTES
+
+def page_lbm_jobRoutes(request, job_id):
+    job = Job.objects.get(pk=job_id)
+
+    if request.method == 'POST':
+
+        form = LbmJobRouteForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = LbmJobRouteForm(request.POST)
+
+    routes = Route.objects.filter(job=job)
+    table = RouteTable(routes)
+
+    page_name = "lbm_routes"
+    return render(request, 'page_lbm_job_routes.html', {'job':job, 
+        'page_name':page_name,
+        'form':form,
+        'table':table})
+
+
+# LBM -------
+def page_lbm(request):
     if request.method == 'POST':
         filtered = False
         jobs = Job.objects.filter(finished='N')
@@ -45,7 +59,6 @@ def page_test(request):
 
         publication=request.POST.get('publication')
         #if(publication):
-        logging.debug("Hello")
         filtered=True
         jobs = jobs.filter(publication=publication)
         #if(request.GET.get('frm'):
@@ -64,7 +77,7 @@ def page_test(request):
         jobs = Job.objects.filter(finished='N')[:20]
         table = JobTable(jobs)
 
-    page_name = "test"
+    page_name = "lbm"
 
     return render(request, 'page_test.html', {'form': form, 'table':table, 'page_name':page_name})
 

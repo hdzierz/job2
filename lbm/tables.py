@@ -1,6 +1,19 @@
 import django_tables2 as tables
-from .models import Job
+from .models import Job, Route
 
+
+class RouteTable(tables.Table):
+   class Meta:
+        model=Route
+        template="django_tables2/bootstrap3.html"
+        fields = (
+                'island',
+                'region',
+                'area',
+                'code',
+                'dest_type',
+                )
+ 
 
 class JobTable(tables.Table):
     action = tables.Column(empty_values=())
