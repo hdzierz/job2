@@ -10,6 +10,15 @@
     <div class="panel-body pt0 pb0">
         <form class="form-horizontal group-border stripped" method="post" >
             {% csrf_token %}
+            {{form.island}} 
+{{form.region}} 
+{{form.area}} 
+{{form.rd}} 
+{{form.version}} 
+{{form.bdl_contractors}} 
+{{form.bdl_qty}} 
+{{form.bdl_price}}
+            <button type="submit" class="btn btn-default">Search</button> 
         </form>
     </div>
 </div>        <!-- End .form-group  -->
