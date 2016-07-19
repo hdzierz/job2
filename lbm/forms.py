@@ -1,6 +1,22 @@
 from django import forms
 from .models import *
 
+island_choices = [("NI","SI")]
+region_choices = [("","")]
+area_choices = [("","")]
+rd_choices = [("","")]
+cont_choices = [("","")]
+
+class LbmJobRouteForm(forms.Form):
+    island = forms.ChoiceField(label="Island", choices=island_choices)
+    region = forms.ChoiceField(label="Region", choices=region_choices)
+    area = forms.ChoiceField(label="Area", choices=area_choices)
+    rd = forms.ChoiceField(label="RD", choices=rd_choices)
+    version = forms.IntegerField()
+    bdl_contractors = forms.ChoiceField(label="Contractor", choices=cont_choices)
+    bdl_qty = forms.IntegerField()
+    bdl_price = forms.FloatField()
+
 
 choices = [("","")]
 

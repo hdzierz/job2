@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from lbm import views
+import lbm.views as views 
 
 urlpatterns = [
     url(r'^$', views.page_home, name='page_home'),    
     url(r'^admin/', admin.site.urls),
     url(r'^lbm/jobsCurrent', views.page_lbm, name='page_lbm'),
     url(r'^lbm/jobBooking', views.page_lbm_jobBooking, name='page_lbm_jobBooking'),
-    url(r'^lbm/test', views.page_test, name='page_test'),
+    url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
+    #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
 ]
