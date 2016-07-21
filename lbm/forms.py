@@ -20,20 +20,20 @@ class LbmJobRouteForm(forms.Form):
 
 choices = [("","")]
 
-clients = Client.objects.all().order_by('name')
-for client in clients:
-    opt = (client.name, client.name)
-    choices.append(opt)
+#clients = Client.objects.all().order_by('name')
+#for client in clients:
+#    opt = (client.name, client.name)
+#    choices.append(opt)
 
 job_choices = [("","")]
-jobs = Job.objects.filter(finished='N').order_by('-job_no')
-for job in jobs:
-    job_choices.append((job.job_no, job.job_no))
+#jobs = Job.objects.filter(finished='N').order_by('-job_no')
+#for job in jobs:
+#    job_choices.append((job.job_no, job.job_no))
 
 pub_choices = [("","")]
-pubs = Job.objects.values('publication').distinct().order_by('publication')
-for pub in pubs:
-    pub_choices.append((pub['publication'],pub['publication']))
+#pubs = Job.objects.values('publication').distinct().order_by('publication')
+#for pub in pubs:
+#    pub_choices.append((pub['publication'],pub['publication']))
 
 class JobForm(forms.Form):
     publication = forms.ChoiceField(label="Publication", choices=pub_choices)

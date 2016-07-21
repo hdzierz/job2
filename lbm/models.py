@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Client(models.Model):
-    client_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
@@ -32,7 +31,6 @@ class Client(models.Model):
 
 
 class Job(models.Model):
-    job_id = models.IntegerField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client = models.ForeignKey(Client, blank=True, null=True)
     publication = models.CharField(max_length=200, blank=True, null=True)
@@ -121,12 +119,8 @@ class Job(models.Model):
     def __unicode__(self):
         return unicode(self.job_no)
 
-    class Meta:
-        managed = False
-        db_table = 'job'
 
 class Route(models.Model):
-    job = models.ForeignKey(Job, blank=True, null=True)
     island = models.CharField(max_length=3)
     area = models.CharField(max_length=255)
     region = models.CharField(max_length=255)
@@ -151,6 +145,26 @@ class Route(models.Model):
     rm_rr = models.IntegerField(blank=True, null=True)
     rm_f = models.IntegerField(blank=True, null=True)
     rm_d = models.IntegerField(blank=True, null=True)
-    code_basei = models.CharField(max_length=255)
+    #code_basei = models.CharField(max_length=255)
     code_rd = models.CharField(max_length=255)
+
+
+class JobRoute(models.Model):
+    job = models.ForeignKey(Job, blank=True, null=True)
+    route = models.ForeignKey(Route,blank=True, null=True)
+    dest_type = models.CharField(max_length=20, blank=True, null=True)
+    amount = models.IntegerField(blank=True, null=True)
+    external = models.CharField(max_length=5, blank=True, null=True)
+    is_edited = models.CharField(max_length=1, blank=True, null=True)
+    version = models.CharField(max_length=30, blank=True, null=True)
+    bundle_price = models.DecimalField(max_digits=12, decimal_places=4, blank=True, null=True)
+    orig_amt = models.IntegerField(blank=True, null=True)
+    alt_dropoff_id = models.IntegerField(blank=True, null=True)
+    dropoff_id = models.IntegerField(blank=True, null=True)
+    doff = models.IntegerField(blank=True, null=True)
+    comments = models.TextField(blank=True, null=True)
+    dist_id = models.IntegerField(blank=True, null=True)
+    subdist_id = models.IntegerField(blank=True, null=True)
+    contractor_id = models.IntegerField(blank=True, null=True)
+    subdist_rate_red = models.FloatField(default=1)
 

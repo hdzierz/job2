@@ -81,12 +81,26 @@ WSGI_APPLICATION = 'job2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coural',
+        'NAME': 'job2',
         'USER': 'django',
         'PASSWORD': 'inkl67z',
         'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
-    },    
+        'OPTIONS': {
+            "init_command": "SET storage_engine=MyISAM",
+        }
+    },   
+    'coural_legacy': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'coural_legacy',
+        'USER': 'django',
+        'PASSWORD': 'inkl67z',
+        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTIONS': {
+            "init_command": "SET storage_engine=MyISAM",
+        }
+    }, 
     'test': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
