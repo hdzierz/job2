@@ -1,0 +1,35 @@
+<table id="employee-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        <thead>
+            <tr>
+		{% for col in cols  %}
+		<th>{{col}}</th>
+		{% endfor  %}
+            </tr>
+        </thead>
+	<tbody>
+	</tbody>
+</table>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" language="javascript" >
+    $(document).ready(function() {
+        var dataTable = $('#employee-grid').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax":{
+                url :"/test", // json datasource
+                type: "get",  // method  , by default get
+                error: function(){  // error handling
+                    $(".employee-grid-error").html("");
+                    $("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                    $("#employee-grid_processing").css("display","none");
+ 
+                }
+            }
+        } );
+    } );
+</script>
+
