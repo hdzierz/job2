@@ -1,5 +1,5 @@
 import django_tables2 as tables
-from .models import Job, Route
+from .models import LBMJob, Route
 
 
 class RouteTable(tables.Table):
@@ -43,7 +43,7 @@ class JobTable(tables.Table):
         return self.render_yes_no(value)
 
     class Meta:
-        model=Job
+        model=LBMJob
         template="django_tables2/bootstrap3.html" 
         fields = (
                 'action',

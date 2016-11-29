@@ -27,7 +27,7 @@ def page_reports_lbm_jobDetails(request):
 # LBM ROUTES
 
 def page_lbm_jobRoutes(request, job_id):
-    job = Job.objects.get(pk=job_id)
+    job = LBMJob.objects.get(pk=job_id)
 
     if request.method == 'POST':
 
@@ -51,7 +51,7 @@ def page_lbm_jobRoutes(request, job_id):
 def page_lbm(request):
     if request.method == 'POST':
         filtered = False
-        jobs = Job.objects.filter(finished='N')
+        jobs = LBMJob.objects.filter(finished='N')
         #if(request.GET.get('frm'):
         #    jobs.filter()
         #if(request.GET.get('frm'):
@@ -74,7 +74,7 @@ def page_lbm(request):
             pass
     else:
         form = JobForm()
-        jobs = Job.objects.filter(finished='N')[:20]
+        jobs = LBMJob.objects.filter(finished='N')[:20]
         table = JobTable(jobs)
 
     page_name = "lbm"

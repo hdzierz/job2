@@ -25,7 +25,7 @@ SECRET_KEY = '@23bx@9u7k(=3f*i17w!owi!_+lgm)l=2(661l411na_tkcpl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['103.18.58.13']
 
 
 # Application definition
@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'django_tables2',
+    'django_extensions',
     'lbm',
+    'master_files',
+    'coural_legacy',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -66,7 +69,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
             ],
         },
     },
@@ -79,34 +81,36 @@ WSGI_APPLICATION = 'job2.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'db_job2': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'django',
+        'USER': 'root',
         'PASSWORD': 'inkl67z',
-        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "init_command": "SET storage_engine=MyISAM",
         }
     },   
-    'coural_legacy': {
+    'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'django',
+        'USER': 'root',
         'PASSWORD': 'inkl67z',
-        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "init_command": "SET storage_engine=MyISAM",
         }
     }, 
-    'test': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+
+DATABASE_ROUTERS = ['coural_legacy.db_router.CouralLegacyDBRouter', 'lbm.db_router.LBMDBRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

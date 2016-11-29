@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 import lbm.views as views 
+import master_files.views as mviews
 
 urlpatterns = [
     url(r'^$', views.page_home, name='page_home'),    
@@ -25,4 +26,7 @@ urlpatterns = [
     url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
     #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
+    url(r'^master_files/route/$', mviews.page_route_list),
+    url(r'^test/$', mviews.page_data_table),
+
 ]
