@@ -26,7 +26,24 @@ urlpatterns = [
     url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
     #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
-    url(r'^master_files/route/$', mviews.page_route_list),
-    url(r'^test/$', mviews.page_data_table),
+    url(r'^master_files/(?P<model>[a-zA-Z0-9]*)/$', mviews.page_list,
+        name='master_files_routes'),
+    url(r'^master_files/route/create/$', mviews.RouteCreate.as_view()),
+    url(r'^master_files/route/update/(?P<pk>[0-9]*)$', mviews.RouteUpdate.as_view()),
+    url(r'^master_files/route/delete/(?P<pk>[0-9]*)$',
+        mviews.RouteDelete.as_view()),
 
+    url(r'^master_files/region/create/$', mviews.RegionCreate.as_view()),
+    url(r'^master_files/region/update/(?P<pk>[0-9]*)$',
+        mviews.RegionUpdate.as_view()),
+    url(r'^master_files/region/delete/(?P<pk>[0-9]*)$',
+        mviews.RegionDelete.as_view()), 
+
+    url(r'^master_files/area/create/$', mviews.AreaCreate.as_view()),
+    url(r'^master_files/area/update/(?P<pk>[0-9]*)$',
+                mviews.AreaUpdate.as_view()),
+    url(r'^master_files/area/delete/(?P<pk>[0-9]*)$',
+                mviews.AreaDelete.as_view()),
+
+    url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
 ]
