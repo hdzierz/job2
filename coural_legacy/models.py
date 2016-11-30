@@ -1176,3 +1176,25 @@ class LCParcelJobRoutePre(models.Model):
     class Meta:
         managed = False
         db_table = 'parcel_job_route_pre'
+
+
+class LCParcelRun(models.Model):
+    parcel_run_id = models.AutoField(primary_key=True)
+    date = models.DateField(blank=True, null=True)
+    dist_id = models.IntegerField(blank=True, null=True)
+    run = models.IntegerField(blank=True, null=True)
+    route_id = models.IntegerField(blank=True, null=True)
+    contractor_id = models.IntegerField(blank=True, null=True)
+    invoice_no = models.IntegerField(blank=True, null=True)
+    exp_no_tickets = models.IntegerField(blank=True, null=True)
+    red_ticket_count = models.IntegerField(blank=True, null=True)
+    real_date = models.DateTimeField(blank=True, null=True)
+    user_id = models.IntegerField(blank=True, null=True)
+    actual = models.IntegerField(blank=True, null=True)
+    dummy = models.IntegerField(blank=True, null=True)
+    batch_no = models.IntegerField(blank=True, null=True)
+    mobile_batch = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'parcel_run'        

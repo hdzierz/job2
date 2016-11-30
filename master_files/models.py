@@ -32,7 +32,6 @@ class Address(models.Model):
     alt_mail_type = models.CharField(max_length=1, blank=True, null=True)
     alt_email = models.CharField(max_length=50, blank=True, null=True)
     alt_fax = models.CharField(max_length=50, blank=True, null=True)
-    client_id = models.IntegerField(blank=True, null=True)
     netpass = models.CharField(max_length=255, blank=True, null=True)
 
 

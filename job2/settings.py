@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
         'USER': 'root',
-        'PASSWORD': 'inkl67z',
+        'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
@@ -94,9 +94,9 @@ DATABASES = {
     },   
     'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coural_legacy',
+        'NAME': 'coural',
         'USER': 'root',
-        'PASSWORD': 'inkl67z',
+        'PASSWORD': '',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {

@@ -9,6 +9,45 @@ from django.forms.models import model_to_dict
 from django.views.generic.edit import *
 
 
+class AddressCreate(CreateView):
+    model = Address
+    fields = '__all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/address/'
+
+    def page_name(self):
+        return  'Create Address'
+
+    def btn(self):
+        return "Create"
+
+
+class AddressUpdate(UpdateView):
+    model = Address
+    fields = '__all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/address/'
+
+    def page_name(self):
+        return  'Update Address'
+
+    def btn(self):
+        return "Update"
+
+
+class AddressDelete(DeleteView):
+    model = Address
+    fields = '_all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/address/'
+
+    def page_name(self):
+        return "Delete Address"
+
+    def btn(self):
+        return "Delete"
+
+
 class RouteCreate(CreateView):
     model = Route
     fields = '__all__'
@@ -260,6 +299,12 @@ def ajax_data_table(request, model):
         spec_order = []
         m = Area
         filt_cols = ["name"]
+    elif(model == "address"):
+        cols = ["pk", "user", "company", ]
+        spec_order = {"user" : "user__last_name"}
+        m = Address
+        filt_cols = ["company"]
+
 
     return data_table(request, cls=m, cols=cols, filt_cols=filt_cols, spec_order=spec_order)
 
@@ -274,7 +319,9 @@ def page_list(request, model):
     elif(model == "area"):
         cols = ["pk", "Name", ]
         sort_col = 1
-
+    elif(model == "address"):
+        cols = ["pk", "User", "Company", ]
+        sort_col = 1
 
     return render(request, 'data_table.html', {'sort_col': sort_col, 'cols': cols, "model": model})
 

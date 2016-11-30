@@ -45,5 +45,11 @@ urlpatterns = [
     url(r'^master_files/area/delete/(?P<pk>[0-9]*)$',
                 mviews.AreaDelete.as_view()),
 
+    url(r'^master_files/address/create/$', mviews.AddressCreate.as_view()),
+    url(r'^master_files/address/update/(?P<pk>[0-9]*)$',
+                mviews.AddressUpdate.as_view()),
+    url(r'^master_files/address/delete/(?P<pk>[0-9]*)$',
+                mviews.AddressDelete.as_view()), 
+
     url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
 ]
