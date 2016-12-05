@@ -1,3 +1,11 @@
+{% extends "page_base.html" %}
+
+{% block data %}
+
+
+<a href='/master_files/{{model}}/create/'>New</a><br />
+
+
 <table id="employee-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
         <thead>
             <tr>
@@ -6,8 +14,13 @@
 		{% endfor  %}
             </tr>
         </thead>
-	<tbody>
-	</tbody>
+	<tfoot>
+            <tr>
+                {% for col in cols  %}
+                <th>{{col}}</th>
+                {% endfor  %}
+            </tr>
+        </tfoot>
 </table>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
@@ -24,17 +37,26 @@
 <script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
 <script type="text/javascript" language="javascript" >
+  
     $(document).ready(function() {
         var dataTable = $('#employee-grid').DataTable( {
 	    dom: 'lBfrtip',
 	    buttons: [
-		'copy', 'csv', 'excel', 'pdf', 'print'
+		'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'printHtml5'
 	    ],
             "processing": true,
             "serverSide": true,
-            "order": [[ 3, "asc" ]],
+	    "order": [[ {{sort_col}}, "asc" ]],
+	    "columnDefs": [{
+		"targets" : 0,
+		"render": function(data, type, row){
+			return "<a href='/master_files/{{model}}/update/"+ row[0]  +"'>Edit</a><br />" +  
+		       "<a href='/master_files/{{model}}/delete/"+ row[0]  +"'>Delete</a>"
+		},
+		"targets": 0		
+	    }],
             "ajax":{
-                url :"/test", // json datasource
+		    url :"/ajax_data_table/{{model}}", // json datasource
                 type: "get",  // method  , by default get
                 error: function(){  // error handling
                     $(".employee-grid-error").html("");
@@ -44,6 +66,20 @@
                 }
             }
         } );
+	$('#employee-grid thead th').each(function (){
+		var title = $(this).text();
+		$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	});
+
+	// Apply the search
+    	dataTable.columns().eq(0).each( function (colIdx) {
+        	$( 'input', dataTable.column(colIdx).header() ).on( 'keyup change', function () {
+                	dataTable.column(colIdx)
+                    	.search( this.value ).draw()
+        	} );
+    	} );
     } );
 </script>
 
+
+{% endblock %}

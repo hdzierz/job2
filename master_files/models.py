@@ -4,13 +4,20 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Config(models.Model):
+    name = models.CharField(max_length=20, blank=True, null=True)
+    value = models.CharField(max_length=20, blank=True, null=True)
+
+
 class Address(models.Model):
-    #operator = models.ForeignKey(Operator, blank=True, null=True)
-    user = models.OneToOneField(User)
+    old_id = models.IntegerField(blank=True, null=True, default=None)
+    old_operator_id = models.IntegerField(blank=True, null=True, default=None)
+    old_client_id = models.IntegerField(blank=True, null=True, default=None)
+    old_branch_id = models.IntegerField(blank=True, null=True, default=None)
     sort = models.CharField(max_length=11, blank=True, null=True)
     company = models.CharField(max_length=50, blank=True, null=True)
-    salutation = models.CharField(max_length=30, blank=True, null=True)
-    salutation2 = models.CharField(max_length=20, blank=True, null=True)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
     first_name2 = models.CharField(max_length=50, blank=True, null=True)
     last_name2 = models.CharField(max_length=50, blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
@@ -23,6 +30,7 @@ class Address(models.Model):
     phone2 = models.CharField(max_length=50, blank=True, null=True)
     mobile = models.CharField(max_length=50, blank=True, null=True)
     mobile2 = models.CharField(max_length=50, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True, default="howard.coural.co.nz")
     fax = models.CharField(max_length=50, blank=True, null=True)
     bank_num = models.CharField(max_length=20, blank=True, null=True)
     gst_num = models.CharField(max_length=20, blank=True, null=True)
@@ -36,6 +44,7 @@ class Address(models.Model):
 
 
 class Operator(models.Model):
+    old_id = models.IntegerField(blank=True, null=True, default=None)
     address = models.ForeignKey(Address, blank=True, null=True)
     is_dist = models.CharField(max_length=1, blank=True, null=True)
     is_subdist = models.CharField(max_length=1, blank=True, null=True)
@@ -89,6 +98,7 @@ class Operator(models.Model):
 
 
 class Client(models.Model):
+    old_id = models.IntegerField(blank=True, null=True, default=None)
     address = models.ForeignKey(Address, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
@@ -104,7 +114,6 @@ class Client(models.Model):
     net_costs = models.CharField(max_length=20, blank=True, null=True)
     base_price = models.CharField(max_length=20, blank=True, null=True)
     linehaul = models.CharField(max_length=20, blank=True, null=True)
-    is_linehaul = models.IntegerField()
     u_nw_1 = models.TextField(blank=True, null=True)
     u_nw_2 = models.TextField(blank=True, null=True)
     u_nw_3 = models.TextField(blank=True, null=True)
@@ -112,7 +121,6 @@ class Client(models.Model):
     u_nw_5 = models.TextField(blank=True, null=True)
     u_nw_6 = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
-    is_operator = models.IntegerField(blank=True, null=True)
     discount = models.FloatField(blank=True, null=True)
 
 
@@ -142,11 +150,8 @@ class Area(models.Model):
         return self.name
     
 
-class RD(models.Model):
-    name = models.CharField(max_length=255)
-
-
 class Route(models.Model):
+    old_id = models.IntegerField(blank=True, null=True, default=None)
     island = models.ForeignKey(Island)
     area = models.ForeignKey(Area)
     region = models.ForeignKey(Region)

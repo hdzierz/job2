@@ -5,7 +5,7 @@
   <div class="page-header">
     <h1>LBM Job Booking</h1>
     <p class="intro">
-        Anon cursus a eros mus orci ut class vestibulum molestie ipsum parturient metus nisl curabitur a non cursus view all posuere parturient a eros mus orci ut augue volutpat.
+	{{ message }}
     </p>
   </div>
 </div>
@@ -13,6 +13,9 @@
 
 
 {% block data %}
+
+{% load bootstrap3 %}
+
 <!-- LBM job booking form -->
 <div class="row">
     
@@ -50,19 +53,20 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1">
                                 <div class="form-group">
+
                                     <label class="col-lg-2 col-md-3 col-sm-3 col-xs-3 control-label">Regular (Yes)</label>
-                                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
-                                        <input class="form-control" name="regular" type="checkbox" value="Y">
-                                    </div>
+				    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
+                                    	{{ form.is_regular }}
+			            </div>
                                     <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">Purchase #</label>
                                     <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
-                                        <input class="form-control" name="purchase_no" type="text">
+					{{ form.purchase_no }}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label">PMP job #</label>
                                     <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
-                                        <input class="form-control" name="lastname" type="text">
+					{{ form.pmp_job_no }}
                                     </div>
                                     <label class="col-lg-2 col-md-3 col-sm-3 col-xs-6 control-label" for="">Delivery date</label>
                                     <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">

@@ -47,3 +47,16 @@ class JobForm(forms.Form):
     job_no.widget.attrs['class'] = 'form-control select2'
     frm.widget.attrs['class'] = 'form-control'
     to.widget.attrs['class'] = 'form-control'
+
+
+class JobBookForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
+
+    class Meta:
+        model = LBMJob
+        fields = '__all__'

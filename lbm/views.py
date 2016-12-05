@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from .models import *
 from .tables import *
 from .forms import *
+
+from django.views.generic.edit import *
+
 import logging
 
 
@@ -15,14 +18,27 @@ def page_home(request):
     page_name = 'home'
     return render(request, 'index.html', {'page_name':page_name})
 
-def page_lbm_jobBooking(request):
-    page_name = 'jobBooking'
-    return render(request, 'page_lbm_jobBooking.html', {'page_name':page_name})
 
 # Reports ---------
 def page_reports_lbm_jobDetails(request):
     page_name = 'jobDetails'
     return render(request, 'page_reports_lbm_jobDetails.html', {'page_name':page_name})
+
+
+class LBMJobView(FormView):
+    form_class = JobBookForm 
+    template_name = 'page_lbm_jobBooking.html'
+    success_url = '/lbm/jobsCurrent/'
+
+    def form_valid(self, form):
+        return super(LBMJobView, self).form_valid(form)
+
+    def page_name(self):
+        return "LBM Job Booking"
+
+    def btn(self):
+        return "Update"
+
 
 # LBM ROUTES
 
