@@ -25,7 +25,7 @@ SECRET_KEY = '@23bx@9u7k(=3f*i17w!owi!_+lgm)l=2(661l411na_tkcpl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['103.18.58.13']
+ALLOWED_HOSTS = ['103.18.58.13', 'jobs.dzierzon.co.nz']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'lbm',
     'parcel',
+    'reports',
     'master_files',
     'coural_legacy',
 ]
@@ -82,7 +83,7 @@ WSGI_APPLICATION = 'job2.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'db_job2': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
         'USER': 'root',
@@ -90,6 +91,7 @@ DATABASES = {
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
+            "sql_mode": "STRICT_ALL_TABLES",
             "init_command": "SET storage_engine=MyISAM",
         }
     },   
@@ -101,17 +103,18 @@ DATABASES = {
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
+            "sql_mode": "STRICT_ALL_TABLES",
             "init_command": "SET storage_engine=MyISAM",
         }
     }, 
-    'default': {
+    'test': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
 
-DATABASE_ROUTERS = ['coural_legacy.db_router.CouralLegacyDBRouter', 'lbm.db_router.LBMDBRouter']
+DATABASE_ROUTERS = ['coural_legacy.db_router.CouralLegacyDBRouter', ]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

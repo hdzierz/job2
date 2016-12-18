@@ -10,17 +10,16 @@ from master_files.models import *
 class LBMJob(models.Model):
     old_id = models.IntegerField(blank=True, null=True, default=None)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
-    client = models.ForeignKey(Client, blank=True, null=True)
+    client = models.ForeignKey(Address, blank=True, null=True, related_name='client')
     publication = models.ForeignKey(Publication, blank=True, null=True)
-    client_pub_id = models.IntegerField(blank=True, null=True)
     job_no = models.IntegerField(blank=True, null=True)
     pmp_job_no = models.CharField(max_length=50, blank=True, null=True)
     lodge_date = models.DateField(blank=True, null=True)
-    job_no_add = models.CharField(max_length=7, blank=True, null=True)
     invoice_no = models.CharField(max_length=50, blank=True, null=True)
     foreign_job_no = models.CharField(max_length=30, blank=True, null=True)
     invoice_date = models.DateField(blank=True, null=True)
     delivery_date = models.DateField(blank=True, null=True)
+    contact_notes = models.TextField(default="")
     change_date = models.DateField(blank=True, null=True)
     weight = models.DecimalField(max_digits=10, decimal_places=4, blank=True, null=True)
     rate = models.DecimalField(max_digits=12, decimal_places=4, blank=True, null=True)
@@ -36,7 +35,7 @@ class LBMJob(models.Model):
     finished = models.CharField(max_length=1, blank=True, null=True)
     cancelled = models.CharField(max_length=1, blank=True, null=True)
     lbc_charge = models.DecimalField(max_digits=12, decimal_places=4, blank=True, null=True)
-    dest_type = models.CharField(max_length=30, blank=True, null=True)
+    dest_type = models.ForeignKey(CfgJobType, blank=True, null=True)
     invoice_qty = models.IntegerField(blank=True, null=True)
     is_regular = models.BooleanField(default=False)
     qty_bbc = models.DecimalField(max_digits=10, decimal_places=3, blank=True, null=True)
@@ -104,15 +103,28 @@ class LBMJob(models.Model):
     qty_per_bundle_si = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return unicode(self.job_no)
+        if(self.job_no):
+            return str(self.job_no)
+        else:
+            return "unkown"
 
 
 
 class LBMJobRoute(models.Model):
     old_id = models.IntegerField(blank=True, null=True, default=None)
+    old_dist_id = models.IntegerField(blank=True, null=True, default=None)
+    old_subdist_id = models.IntegerField(blank=True, null=True, default=None)
+    old_contractor_id = models.IntegerField(blank=True, null=True, default=None)
+    old_dropoff_id = models.IntegerField(blank=True, null=True, default=None)
+    old_alt_ropoff_id = models.IntegerField(blank=True, null=True, default=None)
+    old_doff_id = models.IntegerField(blank=True, null=True, default=None)
     job = models.ForeignKey(LBMJob, blank=True, null=True)
-    route = models.ForeignKey(Route,blank=True, null=True)
-    dest_type = models.CharField(max_length=20, blank=True, null=True)
+    route = models.ForeignKey(Route, blank=True, null=True)
+    dist = models.ForeignKey(Address, blank=True, null=True, related_name='dist')
+    subdist = models.ForeignKey(Address, blank=True, null=True, related_name='subdist')
+    contractor = models.ForeignKey(Address, blank=True, null=True, related_name='contractor')
+    dropoff = models.ForeignKey(Address, blank=True, null=True, related_name='dropoff')
+    dest_type = models.ForeignKey(CfgJobType, blank=True, null=True)
     amount = models.IntegerField(blank=True, null=True)
     external = models.CharField(max_length=5, blank=True, null=True)
     is_edited = models.BooleanField(default=False)
@@ -120,11 +132,6 @@ class LBMJobRoute(models.Model):
     bundle_price = models.DecimalField(max_digits=12, decimal_places=4, blank=True, null=True)
     orig_amt = models.IntegerField(blank=True, null=True)
     alt_dropoff_id = models.IntegerField(blank=True, null=True)
-    dropoff_id = models.IntegerField(blank=True, null=True)
-    doff = models.IntegerField(blank=True, null=True)
     comments = models.TextField(blank=True, null=True)
-    dist_id = models.IntegerField(blank=True, null=True)
-    subdist_id = models.IntegerField(blank=True, null=True)
-    contractor_id = models.IntegerField(blank=True, null=True)
     subdist_rate_red = models.FloatField(default=1)
 

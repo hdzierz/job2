@@ -2,6 +2,8 @@
 
 {% block data %}
 
+{% load kv  %}
+
 
 <a href='/master_files/{{model}}/create/'>New</a><br />
 
@@ -14,6 +16,17 @@
 		{% endfor  %}
             </tr>
         </thead>
+	    {% if data  %} {# syn to if not ajax  #}
+	    <tbody>
+		{% for d in data  %}
+		<tr>
+                    {% for col in cols %}
+                        <td>{{d | kv:col}}</td>
+		    {% endfor %}
+		</tr>
+		{% endfor %}
+	    </tbody>
+	    {% endif %}
 	<tfoot>
             <tr>
                 {% for col in cols  %}
@@ -35,6 +48,8 @@
 <script  type="text/javascript" language="javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
 <script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
 <script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+{% if ajax %}
 
 <script type="text/javascript" language="javascript" >
   
@@ -81,5 +96,16 @@
     } );
 </script>
 
+{% else  %}
+
+<script type="text/javascript" language="javascript" >
+	var dataTable = $('#employee-grid').DataTable( {
+            dom: 'lBfrtip',
+            buttons: [
+                'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print'
+            ]
+	})
+</script>
+{% endif  %}
 
 {% endblock %}

@@ -22,7 +22,11 @@
                 {% block table.tbody.row %}
                     <tr">
                         {% for column, cell in row.items %}
-                            <td>{{ cell }}</td>
+                            <td>
+			    	{% if cell %}
+			    	{{ cell }}
+				{% endif %}
+			   </td>
                         {% endfor %}
                     </tr>
                 {% endblock table.tbody.row %}

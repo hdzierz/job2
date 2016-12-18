@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.template import Context
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import *
 from .tables import *
 from .forms import *
@@ -10,8 +10,31 @@ from django.views.generic.edit import *
 
 import logging
 
-
 # Create your views here.
+
+def api_get_regions(request, tgt, search):
+    cls = eval(tgt)
+
+    if(search == "ALL"):
+        buff = cls.objects.all()
+    else:
+        search = search.split(',')
+        if(tgt == "Region"):
+            buff = cls.objects.filter(island__name__in=search)
+        elif(tgt == "Area"):
+            buff = cls.objects.filter(region__name__in=search)
+        elif(tgt == "Route"):
+            buff = cls.objects.filter(area__name__in=search)
+    
+    res = {}
+    for r in buff:
+        if tgt=="Route":
+            res[str(r.pk)] = r.code
+        else:
+            res[str(r.pk)] = r.name
+
+    return JsonResponse(res)
+
 
 # Home ---------
 def page_home(request):
@@ -48,13 +71,13 @@ def page_lbm_jobRoutes(request, job_id):
     if request.method == 'POST':
 
         form = LbmJobRouteForm(request.POST)
-        if form.is_valid():
-            pass
+        #if form.is_valid():
+        print(request.POST)
     else:
-        form = LbmJobRouteForm(request.POST)
+        form = LbmJobRouteForm()
 
-    routes = Route.objects.filter(job=job)
-    table = RouteTable(routes)
+    routes = LBMJobRoute.objects.filter(job=job)
+    table = JobRouteTable(routes)
 
     page_name = "lbm_routes"
     return render(request, 'page_lbm_job_routes.html', {'job':job, 

@@ -13,6 +13,46 @@ from django.contrib.auth.models import User, Group
 from django.db.models import Q
 
 
+class RouteAffCreate(CreateView):
+    model = RouteAff
+    fields = '__all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/config/'
+
+    def page_name(self):
+        return "Create Route Affiliation"
+
+    def btn(self):
+        return "Create"
+
+
+class RouteAffUpdate(UpdateView):
+    model = RouteAff
+    fields = '__all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/config/'
+
+    def page_name(self):
+        return "Update Route Affiliation"
+
+    def btn(self):
+        return "Update"
+
+
+class RouteAffDelete(DeleteView):
+    model = RouteAff
+    fields = '_all__'
+    template_name = 'master_files_route_form.html'
+    success_url = '/master_files/address/'
+
+    def page_name(self):
+        return "Delete Route Affiliation"
+
+    def btn(self):
+        return "Delete"
+
+
+
 class ConfigCreate(CreateView):
     model = Config
     fields = '__all__'
@@ -72,7 +112,7 @@ class UserUpdate(UpdateView):
 class AddressCreate(CreateView):
     model = Address
     fields = '__all__'
-    template_name = 'master_files_route_form.html'
+    template_name = 'master_files_address_form.html'
     success_url = '/master_files/address/'
 
     def page_name(self):
@@ -85,7 +125,7 @@ class AddressCreate(CreateView):
 class AddressUpdate(UpdateView):
     model = Address
     fields = '__all__'
-    template_name = 'master_files_route_form.html'
+    template_name = 'master_files_address_form.html'
     success_url = '/master_files/address/'
 
     def page_name(self):
@@ -98,7 +138,7 @@ class AddressUpdate(UpdateView):
 class AddressDelete(DeleteView):
     model = Address
     fields = '_all__'
-    template_name = 'master_files_route_form.html'
+    template_name = 'master_files_address_form.html'
     success_url = '/master_files/address/'
 
     def page_name(self):
@@ -327,10 +367,10 @@ def ajax_data_table(request, model):
         m = Area
         filt_cols = ["name"]
     elif(model == "address"):
-        cols = ["pk", "user", "company", ]
-        spec_order = {"user" : "user__last_name"}
+        cols = ["pk", "typ", "first_name", "last_name", ]
+        spec_order = {"typ": "typ__name", }
         m = Address
-        filt_cols = ["company"]
+        filt_cols = ["last_name"]
     elif(model == "user"):
         cols = ["pk", "username", "last_name", "groups", "email", ]
         spec_order = {"groups" : "groups__name"}
@@ -341,6 +381,11 @@ def ajax_data_table(request, model):
         m = Config
         spec_order = []
         filt_cols = ["name"]
+    elif(model == 'route_aff'):
+        cols = ["pk", "address", "route", "app_date", ]
+        m = RouteAff
+        spec_order = ["route__code", "address_company",]
+        filt_cols = ["address", "route"]
 
     return data_table(request, cls=m, cols=cols, filt_cols=filt_cols, spec_order=spec_order)
 
@@ -356,16 +401,20 @@ def page_list(request, model):
         cols = ["pk", "Name", ]
         sort_col = 1
     elif(model == "address"):
-        cols = ["pk", "User", "Company", ]
-        sort_col = 1
+        cols = ["pk", "typ", "first_name", "last_name", ]
+        sort_col = 3
     elif(model == "user"):
         cols = ["pk", "username", "last_name", "email", ]
         sort_col = 1
     elif(model == 'config'):
         cols = ["pk", "name", "value"]
         sort_col = 1
+    elif(model == 'route_aff'):
+        cols = ["pk", "address", "route", "app_date",]
+        sort_col = 1
+    
 
-    return render(request, 'data_table.html', {'sort_col': sort_col, 'cols': cols, "model": model})
+    return render(request, 'data_table.html', {'ajax':True, 'sort_col': sort_col, 'cols': cols, "model": model})
 
 
 
