@@ -131,6 +131,14 @@ class AddressUpdate(UpdateView):
     def page_name(self):
         return  'Update Address'
 
+    def daughters(self):
+        pk = self.kwargs['pk']
+        return Address.objects.filter(parent_id=pk)
+
+    def mums(self):
+        pk = self.kwargs['pk']
+        return Address.objects.filter(pk=parent_id)
+
     def btn(self):
         return "Update"
 
@@ -367,7 +375,7 @@ def ajax_data_table(request, model):
         m = Area
         filt_cols = ["name"]
     elif(model == "address"):
-        cols = ["pk", "typ", "first_name", "last_name", ]
+        cols = ["pk", "company", "first_name", "last_name", ]
         spec_order = {"typ": "typ__name", }
         m = Address
         filt_cols = ["last_name"]
@@ -401,7 +409,7 @@ def page_list(request, model):
         cols = ["pk", "Name", ]
         sort_col = 1
     elif(model == "address"):
-        cols = ["pk", "typ", "first_name", "last_name", ]
+        cols = ["pk", "company", "first_name", "last_name", ]
         sort_col = 3
     elif(model == "user"):
         cols = ["pk", "username", "last_name", "email", ]

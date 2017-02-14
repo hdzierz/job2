@@ -27,12 +27,13 @@ class CfgAddressType(models.Model):
 
 
 class Address(models.Model):
-    old_id = models.IntegerField(blank=True, null=True, default=None)
+    old_address_id = models.IntegerField(blank=True, null=True, default=None)
     old_operator_id = models.IntegerField(blank=True, null=True, default=None)
     old_client_id = models.IntegerField(blank=True, null=True, default=None)
     old_branch_id = models.IntegerField(blank=True, null=True, default=None)
     typ = models.ManyToManyField(CfgAddressType)
 
+    parent = models.ForeignKey("self", related_name='mother', blank=True, null=True, default=None)
     sort = models.CharField(max_length=11, blank=True, null=True)
     company = models.CharField(max_length=255, blank=True, null=True)
     print_name = models.CharField(max_length=255, blank=True, null=True)
@@ -124,6 +125,23 @@ class Address(models.Model):
         if(self.company and ret):
             ret += "/" + self.company
         return str(ret)
+
+
+class ClientPrice(models.Model):
+    client_price_id = models.IntegerField(default=0)
+    client = models.ForeignKey(Address)
+    pa_dist = models.FloatField(blank=True, null=True)
+    pa_sdist = models.FloatField(blank=True, null=True)
+    pa_cont = models.FloatField(blank=True, null=True)
+    pr_u_1 = models.FloatField(blank=True, null=True)
+    pr_u_2 = models.FloatField(blank=True, null=True)
+    pr_u_3 = models.FloatField(blank=True, null=True)
+    pr_u_4 = models.FloatField(blank=True, null=True)
+    pr_u_5 = models.FloatField(blank=True, null=True)
+    pr_u_6 = models.FloatField(blank=True, null=True)
+    from_weight = models.FloatField(blank=True, null=True)
+    to_weight = models.FloatField(blank=True, null=True)
+
 
 
 class Publication(models.Model):

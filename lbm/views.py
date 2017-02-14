@@ -47,7 +47,7 @@ def page_reports_lbm_jobDetails(request):
     page_name = 'jobDetails'
     return render(request, 'page_reports_lbm_jobDetails.html', {'page_name':page_name})
 
-
+# This is a view that shows a single job
 class LBMJobView(FormView):
     form_class = JobBookForm 
     template_name = 'page_lbm_jobBooking.html'
@@ -106,7 +106,7 @@ def page_lbm(request):
         #            jobs.filter()
         if(not filtered):
             jobs = jobs[:20]
-        table = JobTable(jobs)
+        table = JobTable(jobs.order_by("-last_name"))
 
         form = JobForm(request.POST)
         if form.is_valid():

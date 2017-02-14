@@ -34,26 +34,22 @@
 		        <div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Charge to</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <select class="form-control select2">
-                                    <option value="60">AC Pet Foods</option>
-                                    <option value="618">Ace City Couriers</option>
-                                    <option value="241">Adplus</option>
-                                </select>
+				{{ form.client  }}
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Publication</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="firstname" type="text">
-                            </div>
+                            	{{ form.publication }}
+			    </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label" for="">Delivery date</label>
                             <div class="col-lg-1 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input id="basic-datepicker-2" type="text" class="form-control basic-datepicker">
+				    {{ form.delivery_date }} 
                                 </div>  
                             </div>
 			    <label class="col-lg-1 col-md-9 col-sm-9 col-xs-6 control-label">Or IOA</label>
                             <div class="col-lg-1 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="ioa" type="checkbox" value="Y">
+				{{ form.is_ioa }} 
                             </div>
 			</div>
                         <div class="form-group">
@@ -67,30 +63,18 @@
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Job #</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="firstname" type="text">
+				{{ form.job_no }} 
                             </div>
                         </div>
 			<div class="form-group">
     			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Destination type</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <select class="form-control select2">
-                                    <option value="0" selected="">Please Select</option>
-                                    <option value="num_total">Total</option>
-                                    <option value="num_farmers">Farmers</option>
-                                    <option value="num_lifestyle">Lifestyle</option>
-                                    <option value="num_dairies">Dairy</option>
-                                    <option value="num_sheep">Sheep</option>
-                                    <option value="num_beef">Beef</option>
-                                    <option value="num_sheepbeef">Sheep/Beef</option>
-                                    <option value="num_dairybeef">Dairy/Beef</option>
-                                    <option value="num_hort">Hort</option>
-                                    <option value="rmt">Total #</option>
-                                </select>
+				{{ form.dest_type }} 
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Weight</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
-                                    <input class="form-control" name="weight" type="text">
+				    {{ form.weight }} 
                                     <span class="input-group-addon">grams</span>
                                 </div>
                             </div> 
@@ -100,55 +84,43 @@
                             </div>	
 			</div>
 			<div class="form-group">
-				<h2>Customer charges</h2>
+				<h4>Customer charges</h4>
 			</div>
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">NI linehaul</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <select class="form-control select2">
-                                    <option value="215">Client</option>
-                                    <option value="206">Coural Logistics Auckland</option>
-                                    <option value="162">Coural Logistics Christchurch</option>
-                                    <option value="208">Coural Office</option>
-                                    <option value="126">DairyNZ</option>
-                                </select>
+				{{ form.hauler_ni }}
                             </div>
 			    <label class="col-lg-1 col-md-6 col-sm-6 col-xs-6 control-label" for="">Lodgement date</label>
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input id="basic-datepicker" type="text" class="form-control basic-datepicker">
+				    {{ form.lodgement_date }} 
                                 </div>
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">NI drop total</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.ni_drop_total }} 
                             </div> 
 			</div>
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">SI linehaul</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <select class="form-control select2">
-                                    <option value="215">Client</option>
-                                    <option value="206">Coural Logistics Auckland</option>
-                                    <option value="162">Coural Logistics Christchurch</option>
-                                    <option value="208">Coural Office</option>
-                                    <option value="126">DairyNZ</option>
-                                </select>
+				{{ form.hauler_si }}
                             </div>
 			    <label class="col-lg-1 col-md-9 col-sm-9 col-xs-6 control-label">Total check</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.total_check }} 
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">SI drop total</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.si_drop_total }} 
                             </div> 
 			</div>
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Includes linehaul</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" checked name="regular" type="checkbox" value="Y">
+				{{ form.inc_linehaul }} 
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-3 control-label">Regular (Yes)</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -156,13 +128,13 @@
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Print advices</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" checked name="quote" type="checkbox" value="Y">
+				{{ form.print_advices }} 
                             </div> 
 			</div>
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-12 control-label" for="">Contact Notes</label>
 			    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.contact_notes }}
                             </div>
 
 			     <div class="col-lg-3 col-md-offset-3 col-sm-offset-3 col-lg-10 col-md-9 col-sm-9 col-xs-9">
@@ -173,7 +145,7 @@
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Rate (normal)</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="firstname" type="text">
+				{{ form.rate }} 
                             </div>
 			     <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Invoice value</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -194,13 +166,13 @@
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Rate (premium)</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="firstname" type="text">
+				{{ form.premium }}
                             </div>
 			    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6">
 			    </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Bundle sell</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+				{{ form.bundle_sell }} 
                             </div>
 			</div>
 			<div class="form-group">
@@ -218,28 +190,28 @@
                             </div>
 			</div>
 			<div class="form-group">
-				<h2>Network rates</h2>
+				<h4>Network rates</h4>
 			</div>
 
 			<div class="form-group">
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Distributors</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+				    {{ form.dist_rate }} 
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>
                             <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Sub-distributors</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+				    {{ form.subdist_rate }} 
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>
                             <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Contractors</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+				    {{ form.contr_rate }} 
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>
@@ -248,13 +220,13 @@
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Folding Fee</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="0.0000" name="firstname" type="text">
+				    {{ form.folding_fee }} 
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>
                             <label class="col-lg-1 col-md-9 col-sm-9 col-xs-6 control-label">Add to invoice</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="quote" type="checkbox" value="Y">
+				{{ form.add_folding_to_invoice }}
                             </div>
                             <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Premium</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -267,7 +239,7 @@
 			 <div class="form-group">
                             <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Invoice #</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.invoice_no }} 
                             </div>
                             <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Customer Link</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -275,18 +247,18 @@
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">Paper Source</label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <input class="form-control" name="lastname" type="text">
+				{{ form.paper_source }} 
                             </div>
 			</div>
                         <div class="form-group">
                             <label class="col-lg-1 col-md-2 col-sm-2 col-xs-12 control-label" for="">Comments</label>
                             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-8">
-                                <textarea class="form-control icon-textarea" rows="3"></textarea>
+				{{ form.comments }} 
                                 <i class="fa fa-comments textarea-icon s16"></i>
                             </div>
                             <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Show</label>
                             <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
-                                <input class="form-control" name="quote" type="checkbox" value="Y">
+				{{ form.show_comments }} 
                             </div>
                         </div>
                     	<ul class="pager">

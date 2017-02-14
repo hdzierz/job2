@@ -51,13 +51,32 @@ class JobForm(forms.Form):
     to.widget.attrs['class'] = 'form-control'
 
 
+from django.forms import Select
+
 class JobBookForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
+            att = "form-control "
+            if(isinstance(self.fields[field].widget, Select)):
+                att += "select2 "
+
+            if("date" in field):
+                att += "basic-datepicker " 
+
+            if("comment" in field):
+                att += "icon-textarea"
+
             self.fields[field].widget.attrs.update({
-                'class': 'form-control'
+                'class': att
             })
+
+            if("rate" in field or "fee" in field):
+                self.fields[field].widget.attrs.update({
+                    'placeholder': "0.0000"
+                })
+    
 
     class Meta:
         model = LBMJob
