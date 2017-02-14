@@ -1,18 +1,20 @@
 from django import forms
 from .models import *
 
-island_choices = [("NI","SI")]
-region_choices = [("","")]
-area_choices = [("","")]
-rd_choices = [("","")]
+island_choices = [("NI","NI"), ("SI","SI"), ("ALL","ALL")]
+region_choices = [("ALL","ALL")]
+area_choices = [("ALL","ALL")]
+rd_choices = [("ALL","ALL")]
 cont_choices = [("","")]
 
 class LbmJobRouteForm(forms.Form):
+    #reg = forms.ModelMultipleChoiceField(label="R", queryset=Island.objects.all())
     island = forms.ChoiceField(label="Island", choices=island_choices)
-    region = forms.ChoiceField(label="Region", choices=region_choices)
-    area = forms.ChoiceField(label="Area", choices=area_choices)
-    rd = forms.ChoiceField(label="RD", choices=rd_choices)
+    region = forms.MultipleChoiceField(label="Region", choices=region_choices)
+    area = forms.MultipleChoiceField(label="Area", choices=area_choices)
+    rd = forms.MultipleChoiceField(label="RD", choices=rd_choices)
     version = forms.IntegerField()
+    inc_zero = forms.BooleanField(required=False)
     bdl_contractors = forms.ChoiceField(label="Contractor", choices=cont_choices)
     bdl_qty = forms.IntegerField()
     bdl_price = forms.FloatField()
@@ -47,3 +49,35 @@ class JobForm(forms.Form):
     job_no.widget.attrs['class'] = 'form-control select2'
     frm.widget.attrs['class'] = 'form-control'
     to.widget.attrs['class'] = 'form-control'
+
+
+from django.forms import Select
+
+class JobBookForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            att = "form-control "
+            if(isinstance(self.fields[field].widget, Select)):
+                att += "select2 "
+
+            if("date" in field):
+                att += "basic-datepicker " 
+
+            if("comment" in field):
+                att += "icon-textarea"
+
+            self.fields[field].widget.attrs.update({
+                'class': att
+            })
+
+            if("rate" in field or "fee" in field):
+                self.fields[field].widget.attrs.update({
+                    'placeholder': "0.0000"
+                })
+    
+
+    class Meta:
+        model = LBMJob
+        fields = '__all__'

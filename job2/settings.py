@@ -25,7 +25,7 @@ SECRET_KEY = '@23bx@9u7k(=3f*i17w!owi!_+lgm)l=2(661l411na_tkcpl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['103.18.58.13', 'jobs.dzierzon.co.nz']
 
 
 # Application definition
@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'django_tables2',
+    'django_extensions',
     'lbm',
+    'parcel',
+    'reports',
+    'master_files',
+    'coural_legacy',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -66,7 +71,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
             ],
         },
     },
@@ -82,22 +86,24 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'django',
+        'USER': 'root',
         'PASSWORD': 'inkl67z',
-        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
+            "sql_mode": "STRICT_ALL_TABLES",
             "init_command": "SET storage_engine=MyISAM",
         }
     },   
-    'coural_legacy': {
+    'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'django',
+        'USER': 'root',
         'PASSWORD': 'inkl67z',
-        'HOST': '52.63.108.83',   # Or an IP Address that your DB is hosted on
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
+            "sql_mode": "STRICT_ALL_TABLES",
             "init_command": "SET storage_engine=MyISAM",
         }
     }, 
@@ -107,6 +113,8 @@ DATABASES = {
     }
 }
 
+
+DATABASE_ROUTERS = ['coural_legacy.db_router.CouralLegacyDBRouter', ]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

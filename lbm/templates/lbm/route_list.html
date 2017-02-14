@@ -1,0 +1,8 @@
+{% extends "page_base.html" %}
+
+{% block data %}
+    <h2>Routes</h2>
+    {% load django_tables2 %}
+    {% render_table table %}
+{% endblock %}
+

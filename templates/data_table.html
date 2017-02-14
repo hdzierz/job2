@@ -1,0 +1,111 @@
+{% extends "page_base.html" %}
+
+{% block data %}
+
+{% load kv  %}
+
+
+<a href='/master_files/{{model}}/create/'>New</a><br />
+
+
+<table id="employee-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+        <thead>
+            <tr>
+		{% for col in cols  %}
+		<th>{{col}}</th>
+		{% endfor  %}
+            </tr>
+        </thead>
+	    {% if data  %} {# syn to if not ajax  #}
+	    <tbody>
+		{% for d in data  %}
+		<tr>
+                    {% for col in cols %}
+                        <td>{{d | kv:col}}</td>
+		    {% endfor %}
+		</tr>
+		{% endfor %}
+	    </tbody>
+	    {% endif %}
+	<tfoot>
+            <tr>
+                {% for col in cols  %}
+                <th>{{col}}</th>
+                {% endfor  %}
+            </tr>
+        </tfoot>
+</table>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
+
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script  type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+{% if ajax %}
+
+<script type="text/javascript" language="javascript" >
+  
+    $(document).ready(function() {
+        var dataTable = $('#employee-grid').DataTable( {
+	    dom: 'lBfrtip',
+	    buttons: [
+		'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'printHtml5'
+	    ],
+            "processing": true,
+            "serverSide": true,
+	    "order": [[ {{sort_col}}, "asc" ]],
+	    "columnDefs": [{
+		"targets" : 0,
+		"render": function(data, type, row){
+			return "<a href='/master_files/{{model}}/update/"+ row[0]  +"'>Edit</a><br />" +  
+		       "<a href='/master_files/{{model}}/delete/"+ row[0]  +"'>Delete</a>"
+		},
+		"targets": 0		
+	    }],
+            "ajax":{
+		    url :"/ajax_data_table/{{model}}", // json datasource
+                type: "get",  // method  , by default get
+                error: function(){  // error handling
+                    $(".employee-grid-error").html("");
+                    $("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                    $("#employee-grid_processing").css("display","none");
+ 
+                }
+            }
+        } );
+	$('#employee-grid thead th').each(function (){
+		var title = $(this).text();
+		$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	});
+
+	// Apply the search
+    	dataTable.columns().eq(0).each( function (colIdx) {
+        	$( 'input', dataTable.column(colIdx).header() ).on( 'keyup change', function () {
+                	dataTable.column(colIdx)
+                    	.search( this.value ).draw()
+        	} );
+    	} );
+    } );
+</script>
+
+{% else  %}
+
+<script type="text/javascript" language="javascript" >
+	var dataTable = $('#employee-grid').DataTable( {
+            dom: 'lBfrtip',
+            buttons: [
+                'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'print'
+            ]
+	})
+</script>
+{% endif  %}
+
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "page_base.html" %}
 {% load render_table from django_tables2 %}
 
-{% block routeform %}
+{% block data %}
 <div class="panel panel-default toggle panelMove panelClose panelRefresh">
     <!-- Start .panel -->
     <div class="panel-heading">
@@ -11,21 +11,68 @@
         <form class="form-horizontal group-border stripped" method="post" >
             {% csrf_token %}
             {{form.island}} 
-{{form.region}} 
-{{form.area}} 
-{{form.rd}} 
-{{form.version}} 
-{{form.bdl_contractors}} 
-{{form.bdl_qty}} 
-{{form.bdl_price}}
-            <button type="submit" class="btn btn-default">Search</button> 
+	    <button type="button" id="btn_get_regions">>></button>	
+	    {{form.region}} 
+	    <button type="button" id="btn_get_areas">>></button>
+            {{form.area}} 
+	    <button type="button" id="btn_get_rds">>></button>
+            {{form.rd}} 
+            {{form.version}}
+	    {{form.inc_zero}} 
+            <button type="submit" class="btn btn-default">Add</button> 
         </form>
     </div>
 </div>        <!-- End .form-group  -->
 
-{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$("#btn_get_regions").click(function(){
+	$('#id_region').empty().append($('<option>', { value: "ALL", text: "ALL"}))
 
-{% block routes %}
+	$.getJSON( "/test/Region/" + $( "#id_island" ).val() + "/", function( data ) {
+	  $.each( data, function( key, val ) {
+		  $('#id_region').append($('<option>',{ value:key, text: val}));
+	  });
+	 
+	});
+});
+
+
+$("#btn_get_areas").click(function(){
+        var foo = []; 
+        $('#id_region :selected').each(function(i, selected){ 
+                foo[i] = $(selected).text(); 
+        });
+
+	$('#id_area').empty().append($('<option>', { value: "ALL", text: "ALL"}))
+
+        $.getJSON( "/test/Area/" + foo.toString()  + "/", function( data ) {
+          $.each( data, function( key, val ) {
+                  $('#id_area').append($('<option>',{ value:key, text: val}));
+          });
+         
+        });
+});
+
+$("#btn_get_rds").click(function(){
+	var foo = []; 
+        $('#id_area :selected').each(function(i, selected){ 
+                foo[i] = $(selected).text(); 
+        });
+
+	$('#id_rd').empty().append($('<option>', { value: "ALL", text: "ALL"}))
+
+        $.getJSON( "/test/Route/" + foo.toString() + "/", function( data ) {
+          $.each( data, function( key, val ) {
+                  $('#id_rd').append($('<option>',{ value:key, text: val}));
+          });
+         
+        });
+});
+
+</script>
+
+
 <!-- Coural data "Current Jobs" -->
 <!-- Start .panel -->
 <div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
@@ -38,5 +85,3 @@
 </div>
 <!-- End .panel -->
 {% endblock %}
-
-

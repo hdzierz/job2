@@ -1,5 +1,6 @@
 import django_tables2 as tables
-from .models import Job, Route
+from  django_tables2.utils import A
+from .models import LBMJob, LBMJobRoute, Route
 
 
 class RouteTable(tables.Table):
@@ -14,19 +15,40 @@ class RouteTable(tables.Table):
                 'dest_type',
                 )
  
+class JobRouteTable(tables.Table):
+   def render_region(self, value):
+        print(value)
+
+   edit = tables.LinkColumn('item_edit', args=[A('pk')], orderable=False)
+   #sel = tables.CheckBoxColumn('sel', orderable=False)
+
+
+   class Meta:
+        model=LBMJobRoute
+        template="django_tables2/bootstrap3.html"
+        fields = (
+                'route.island',
+                'route.region',
+                'route.area',
+                'route.code',
+                'dest_type',
+                'version',
+                'amount',
+                )
+
 
 class JobTable(tables.Table):
-    action = tables.Column(empty_values=())
+    action = tables.Column(accessor="pk", empty_values=())
     finished = tables.Column(empty_values=())
 
     def render_action(self, value):
         return """ 
            <a href="" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
-                                <a href="CO-lbm-jobs-edit.php" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                        <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
-                                                                                <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
-                                                                                                        <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
-    """
+           <a href="/lbm/jobBooking/{}" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+           <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
+           <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
+           <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
+    """.format(value)
 
     def render_yes_no(self, value):
         if value == 'Y':                                                                         
@@ -43,7 +65,7 @@ class JobTable(tables.Table):
         return self.render_yes_no(value)
 
     class Meta:
-        model=Job
+        model=LBMJob
         template="django_tables2/bootstrap3.html" 
         fields = (
                 'action',

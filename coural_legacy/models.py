@@ -2,17 +2,49 @@
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-#
-# Also note: You'll have to insert the output of 'django-admin sqlcustom [app_label]'
-# into your database.
 from __future__ import unicode_literals
 
 from django.db import models
 
 
-class Address(models.Model):
+class LCRoute(models.Model):
+    route_id = models.AutoField(primary_key=True)
+    island = models.TextField(blank=True, null=True)
+    area = models.TextField(blank=True, null=True)
+    region = models.TextField(blank=True, null=True)
+    code = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    pmp_areacode = models.IntegerField(blank=True, null=True)
+    pmp_runcode = models.IntegerField(blank=True, null=True)
+    num_lifestyle = models.IntegerField(blank=True, null=True)
+    num_farmers = models.IntegerField(blank=True, null=True)
+    num_dairies = models.IntegerField(blank=True, null=True)
+    num_sheep = models.IntegerField(blank=True, null=True)
+    num_beef = models.IntegerField(blank=True, null=True)
+    num_sheepbeef = models.IntegerField(blank=True, null=True)
+    num_dairybeef = models.IntegerField(blank=True, null=True)
+    num_hort = models.IntegerField(blank=True, null=True)
+    seq_region = models.IntegerField(blank=True, null=True)
+    seq_area = models.IntegerField(blank=True, null=True)
+    seq_code = models.IntegerField(blank=True, null=True)
+    is_hidden = models.CharField(max_length=2)
+    num_nzfw = models.IntegerField(blank=True, null=True)
+    rmt = models.IntegerField(blank=True, null=True)
+    rm_rr = models.IntegerField(blank=True, null=True)
+    rm_f = models.IntegerField(blank=True, null=True)
+    rm_d = models.IntegerField(blank=True, null=True)
+    #code_basei = models.CharField(max_length=255)
+    code_rd = models.CharField(max_length=255)
+    
+    class Meta:
+        managed = False
+        db_table = 'route'
+
+
+class LCAddress(models.Model):
     address_id = models.AutoField(primary_key=True)
     operator_id = models.IntegerField(blank=True, null=True)
     sort = models.CharField(max_length=11, blank=True, null=True)
@@ -51,7 +83,7 @@ class Address(models.Model):
         db_table = 'address'
 
 
-class AddressCopy(models.Model):
+class LCAddressCopy(models.Model):
     address_id = models.AutoField(primary_key=True)
     operator_id = models.IntegerField(blank=True, null=True)
     sort = models.CharField(max_length=11, blank=True, null=True)
@@ -88,7 +120,7 @@ class AddressCopy(models.Model):
         db_table = 'address_copy'
 
 
-class AuthGroup(models.Model):
+class LCAuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
     class Meta:
@@ -96,7 +128,17 @@ class AuthGroup(models.Model):
         db_table = 'auth_group'
 
 
-class AuthPermission(models.Model):
+class LCAuthGroupPermissions(models.Model):
+    group_id = models.IntegerField()
+    permission_id = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group_id', 'permission_id'),)
+
+
+class LCAuthPermission(models.Model):
     name = models.CharField(max_length=50)
     content_type_id = models.IntegerField()
     codename = models.CharField(max_length=100)
@@ -107,7 +149,7 @@ class AuthPermission(models.Model):
         unique_together = (('content_type_id', 'codename'),)
 
 
-class AuthUser(models.Model):
+class LCAuthUser(models.Model):
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField()
     is_superuser = models.IntegerField()
@@ -124,7 +166,7 @@ class AuthUser(models.Model):
         db_table = 'auth_user'
 
 
-class AuthUserGroups(models.Model):
+class LCAuthUserGroups(models.Model):
     user_id = models.IntegerField()
     group_id = models.IntegerField()
 
@@ -134,7 +176,7 @@ class AuthUserGroups(models.Model):
         unique_together = (('user_id', 'group_id'),)
 
 
-class AuthUserUserPermissions(models.Model):
+class LCAuthUserUserPermissions(models.Model):
     user_id = models.IntegerField()
     permission_id = models.IntegerField()
 
@@ -144,7 +186,7 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user_id', 'permission_id'),)
 
 
-class Branch(models.Model):
+class LCBranch(models.Model):
     branch_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, blank=True, null=True)
 
@@ -153,7 +195,7 @@ class Branch(models.Model):
         db_table = 'branch'
 
 
-class Client(models.Model):
+class LCClient(models.Model):
     client_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, blank=True, null=True)
     contact = models.CharField(max_length=50, blank=True, null=True)
@@ -186,7 +228,7 @@ class Client(models.Model):
         db_table = 'client'
 
 
-class ClientBranch(models.Model):
+class LCClientBranch(models.Model):
     client_branch_id = models.AutoField(primary_key=True)
     client_id = models.IntegerField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
@@ -197,7 +239,7 @@ class ClientBranch(models.Model):
         db_table = 'client_branch'
 
 
-class ClientPrice(models.Model):
+class LCClientPrice(models.Model):
     client_price_id = models.AutoField(primary_key=True)
     client_id = models.IntegerField(blank=True, null=True)
     weight = models.CharField(max_length=20, blank=True, null=True)
@@ -218,7 +260,7 @@ class ClientPrice(models.Model):
         db_table = 'client_price'
 
 
-class ClientPub(models.Model):
+class LCClientPub(models.Model):
     client_pub_id = models.AutoField(primary_key=True)
     client_id = models.IntegerField()
     client_pub_num = models.IntegerField(blank=True, null=True)
@@ -240,7 +282,7 @@ class ClientPub(models.Model):
         db_table = 'client_pub'
 
 
-class ClientPubs(models.Model):
+class LCClientPubs(models.Model):
     client_pub_id = models.AutoField(primary_key=True)
     client_id = models.IntegerField()
     publication = models.CharField(max_length=50, blank=True, null=True)
@@ -250,7 +292,7 @@ class ClientPubs(models.Model):
         db_table = 'client_pubs'
 
 
-class Config(models.Model):
+class LCConfig(models.Model):
     config_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, blank=True, null=True)
     value = models.CharField(max_length=20, blank=True, null=True)
@@ -260,7 +302,7 @@ class Config(models.Model):
         db_table = 'config'
 
 
-class ControlHistory(models.Model):
+class LCControlHistory(models.Model):
     control_history_id = models.AutoField(primary_key=True)
     page = models.TextField(blank=True, null=True)
     request = models.TextField(blank=True, null=True)
@@ -271,7 +313,7 @@ class ControlHistory(models.Model):
         db_table = 'control_history'
 
 
-class ControlLogin(models.Model):
+class LCControlLogin(models.Model):
     control_login_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=20, blank=True, null=True)
     passwd = models.CharField(max_length=50, blank=True, null=True)
@@ -281,7 +323,7 @@ class ControlLogin(models.Model):
         db_table = 'control_login'
 
 
-class CurrentJobScreen(models.Model):
+class LCCurrentJobScreen(models.Model):
     current_job_screen_id = models.AutoField(primary_key=True)
     publication = models.TextField(blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -293,7 +335,7 @@ class CurrentJobScreen(models.Model):
         db_table = 'current_job_screen'
 
 
-class DjangoAdminLog(models.Model):
+class LCDjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     user_id = models.IntegerField()
     content_type_id = models.IntegerField(blank=True, null=True)
@@ -307,7 +349,8 @@ class DjangoAdminLog(models.Model):
         db_table = 'django_admin_log'
 
 
-class DjangoContentType(models.Model):
+class LCDjangoContentType(models.Model):
+    name = models.CharField(max_length=100)
     app_label = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
 
@@ -317,7 +360,7 @@ class DjangoContentType(models.Model):
         unique_together = (('app_label', 'model'),)
 
 
-class DjangoMigrations(models.Model):
+class LCDjangoMigrations(models.Model):
     app = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     applied = models.DateTimeField()
@@ -327,7 +370,7 @@ class DjangoMigrations(models.Model):
         db_table = 'django_migrations'
 
 
-class DjangoSession(models.Model):
+class LCDjangoSession(models.Model):
     session_key = models.CharField(primary_key=True, max_length=40)
     session_data = models.TextField()
     expire_date = models.DateTimeField()
@@ -337,7 +380,7 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class EmailLog(models.Model):
+class LCEmailLog(models.Model):
     log_id = models.AutoField(primary_key=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     subject = models.CharField(max_length=255, blank=True, null=True)
@@ -350,7 +393,7 @@ class EmailLog(models.Model):
         db_table = 'email_log'
 
 
-class Howard(models.Model):
+class LCHoward(models.Model):
     job_id = models.IntegerField(blank=True, null=True)
     ticket_no = models.IntegerField(blank=True, null=True)
     is_redeemed_d = models.IntegerField(db_column='is_redeemed_D', blank=True, null=True)  # Field name made lowercase.
@@ -361,7 +404,7 @@ class Howard(models.Model):
         db_table = 'howard'
 
 
-class ImportC(models.Model):
+class LCImportC(models.Model):
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     cust_code = models.CharField(db_column='Cust_Code', max_length=255, blank=True, null=True)  # Field name made lowercase.
     name = models.CharField(db_column='Name', max_length=255, blank=True, null=True)  # Field name made lowercase.
@@ -382,7 +425,7 @@ class ImportC(models.Model):
         db_table = 'import_c'
 
 
-class Invoice(models.Model):
+class LCInvoice(models.Model):
     invoice_id = models.AutoField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
@@ -411,7 +454,7 @@ class Invoice(models.Model):
         db_table = 'invoice'
 
 
-class InvoiceArchive(models.Model):
+class LCInvoiceArchive(models.Model):
     invoice_id = models.IntegerField()
     job_id = models.IntegerField(blank=True, null=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
@@ -440,7 +483,7 @@ class InvoiceArchive(models.Model):
         db_table = 'invoice_archive'
 
 
-class Job(models.Model):
+class LCJob(models.Model):
     job_id = models.AutoField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -529,13 +572,15 @@ class Job(models.Model):
     ex_depot_date_si = models.DateField(blank=True, null=True)
     ex_depot_date_ni = models.DateField(blank=True, null=True)
     ex_depot_date = models.DateField(blank=True, null=True)
+    qty_per_bundle_ni = models.IntegerField(blank=True, null=True)
+    qty_per_bundle_si = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'job'
 
 
-class JobArchive(models.Model):
+class LCJobArchive(models.Model):
     job_id = models.IntegerField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -613,7 +658,7 @@ class JobArchive(models.Model):
         db_table = 'job_archive'
 
 
-class JobCopy(models.Model):
+class LCJobCopy(models.Model):
     job_id = models.AutoField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -648,7 +693,7 @@ class JobCopy(models.Model):
         db_table = 'job_copy'
 
 
-class JobHoward(models.Model):
+class LCJobHoward(models.Model):
     job_id = models.IntegerField()
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -733,7 +778,7 @@ class JobHoward(models.Model):
         db_table = 'job_howard'
 
 
-class JobRoute(models.Model):
+class LCJobRoute(models.Model):
     job_route_id = models.AutoField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     route_id = models.IntegerField(blank=True, null=True)
@@ -760,7 +805,7 @@ class JobRoute(models.Model):
         db_table = 'job_route'
 
 
-class JobRouteArchive(models.Model):
+class LCJobRouteArchive(models.Model):
     job_route_id = models.IntegerField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     route_id = models.IntegerField(blank=True, null=True)
@@ -786,7 +831,7 @@ class JobRouteArchive(models.Model):
         db_table = 'job_route_archive'
 
 
-class JobRouteNew(models.Model):
+class LCJobRouteNew(models.Model):
     job_route_id = models.AutoField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     route_id = models.IntegerField(blank=True, null=True)
@@ -811,7 +856,7 @@ class JobRouteNew(models.Model):
         db_table = 'job_route_new'
 
 
-class JobRouteTemp(models.Model):
+class LCJobRouteTemp(models.Model):
     job_route_id = models.AutoField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     route_id = models.IntegerField(blank=True, null=True)
@@ -836,7 +881,7 @@ class JobRouteTemp(models.Model):
         db_table = 'job_route_temp'
 
 
-class JobTemp(models.Model):
+class LCJobTemp(models.Model):
     job_id = models.AutoField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -878,7 +923,7 @@ class JobTemp(models.Model):
         db_table = 'job_temp'
 
 
-class LastPrintComment(models.Model):
+class LCLastPrintComment(models.Model):
     last_print_comment_id = models.AutoField(primary_key=True)
     comment1 = models.TextField(blank=True, null=True)
     comment2 = models.TextField(blank=True, null=True)
@@ -888,7 +933,40 @@ class LastPrintComment(models.Model):
         db_table = 'last_print_comment'
 
 
-class Message(models.Model):
+class LCLbmClient(models.Model):
+    client_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    contact = models.CharField(max_length=50, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    card_id = models.CharField(max_length=30, blank=True, null=True)
+    contact_details = models.TextField(blank=True, null=True)
+    is_parcel_courier = models.IntegerField(blank=True, null=True)
+    invoice_details = models.TextField(blank=True, null=True)
+    c_code = models.IntegerField(blank=True, null=True)
+    has_discount = models.IntegerField(blank=True, null=True)
+    delivery_details = models.TextField(blank=True, null=True)
+    email = models.CharField(max_length=255, blank=True, null=True)
+    is_hauler = models.IntegerField(blank=True, null=True)
+    net_costs = models.CharField(max_length=20, blank=True, null=True)
+    base_price = models.CharField(max_length=20, blank=True, null=True)
+    linehaul = models.CharField(max_length=20, blank=True, null=True)
+    is_linehaul = models.IntegerField()
+    u_nw_1 = models.TextField(blank=True, null=True)
+    u_nw_2 = models.TextField(blank=True, null=True)
+    u_nw_3 = models.TextField(blank=True, null=True)
+    u_nw_4 = models.TextField(blank=True, null=True)
+    u_nw_5 = models.TextField(blank=True, null=True)
+    u_nw_6 = models.TextField(blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
+    is_operator = models.IntegerField(blank=True, null=True)
+    discount = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'lbm_client'
+
+
+class LCMessage(models.Model):
     message_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField(blank=True, null=True)
@@ -898,7 +976,7 @@ class Message(models.Model):
         db_table = 'message'
 
 
-class MessageOp(models.Model):
+class LCMessageOp(models.Model):
     message_id = models.IntegerField()
     operator_id = models.IntegerField()
 
@@ -908,7 +986,7 @@ class MessageOp(models.Model):
         unique_together = (('operator_id', 'message_id'),)
 
 
-class Operator(models.Model):
+class LCOperator(models.Model):
     operator_id = models.AutoField(primary_key=True)
     company = models.CharField(max_length=50, blank=True, null=True)
     is_dist = models.CharField(max_length=1, blank=True, null=True)
@@ -946,8 +1024,9 @@ class Operator(models.Model):
     linehaul_b_bin = models.CharField(max_length=255, blank=True, null=True)
     linehaul_b_type = models.CharField(max_length=255, blank=True, null=True)
     linehaul_b = models.CharField(max_length=255, blank=True, null=True)
-    ph_desk = models.CharField(max_length=255, blank=True, null=True)
+    ph_desk = models.TextField(blank=True, null=True)
     rate_code = models.CharField(max_length=255, blank=True, null=True)
+    depot_rent = models.FloatField(blank=True, null=True)
     scanner_no1 = models.CharField(max_length=255, blank=True, null=True)
     scanner_no2 = models.CharField(max_length=255, blank=True, null=True)
     scanner_no3 = models.CharField(max_length=255, blank=True, null=True)
@@ -957,17 +1036,15 @@ class Operator(models.Model):
     scanner_phone_no3 = models.CharField(max_length=255, blank=True, null=True)
     scanner_phone_no4 = models.CharField(max_length=255, blank=True, null=True)
     scanner_email = models.CharField(max_length=255, blank=True, null=True)
-    scanner_charke = models.CharField(max_length=255, blank=True, null=True)
-    scanner_charge = models.CharField(max_length=255, blank=True, null=True)
-    scanner_mobile_pay = models.CharField(max_length=255, blank=True, null=True)
-    mobile_pay = models.CharField(max_length=255, blank=True, null=True)
+    scanner_charge = models.FloatField(blank=True, null=True)
+    mobile_pay = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'operator'
 
 
-class ParcelInvoice(models.Model):
+class LCParcelInvoice(models.Model):
     parcel_invoice = models.AutoField(primary_key=True)
     invoice_no = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
@@ -978,7 +1055,7 @@ class ParcelInvoice(models.Model):
         db_table = 'parcel_invoice'
 
 
-class ParcelJob(models.Model):
+class LCParcelJob(models.Model):
     job_id = models.AutoField(primary_key=True)
     purchase_no = models.CharField(max_length=50, blank=True, null=True)
     client_id = models.IntegerField(blank=True, null=True)
@@ -1011,7 +1088,7 @@ class ParcelJob(models.Model):
         db_table = 'parcel_job'
 
 
-class ParcelJobRate(models.Model):
+class LCParcelJobRate(models.Model):
     parcel_job_rate_id = models.AutoField(primary_key=True)
     type = models.CharField(max_length=3, blank=True, null=True)
     rate = models.FloatField(blank=True, null=True)
@@ -1028,7 +1105,7 @@ class ParcelJobRate(models.Model):
         db_table = 'parcel_job_rate'
 
 
-class ParcelJobRoute(models.Model):
+class LCParcelJobRoute(models.Model):
     ticket_id = models.AutoField(primary_key=True)
     job_id = models.IntegerField(blank=True, null=True)
     ticket_no = models.IntegerField(blank=True, null=True)
@@ -1054,13 +1131,28 @@ class ParcelJobRoute(models.Model):
     city = models.CharField(max_length=255, blank=True, null=True)
     postcode = models.CharField(max_length=5, blank=True, null=True)
     is_mobile = models.IntegerField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lon = models.FloatField(blank=True, null=True)
+    acc = models.FloatField(blank=True, null=True)
+    is_ofd = models.IntegerField(blank=True, null=True)
+    is_dmg = models.IntegerField(blank=True, null=True)
+    dev_opt = models.CharField(max_length=20, blank=True, null=True)
+    dev_drl = models.CharField(max_length=20, blank=True, null=True)
+    notes = models.CharField(max_length=100, blank=True, null=True)
+    org = models.IntegerField(blank=True, null=True)
+    dtt = models.DateTimeField(blank=True, null=True)
+    active = models.IntegerField(blank=True, null=True)
+    distr_payment_pickup_mobile = models.FloatField(blank=True, null=True)
+    distr_payment_deliv_mobile = models.FloatField(blank=True, null=True)
+    checked = models.IntegerField(blank=True, null=True)
+    ts = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'parcel_job_route'
 
 
-class ParcelJobRouteLog(models.Model):
+class LCParcelJobRouteLog(models.Model):
     id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
     ticket_id = models.IntegerField(blank=True, null=True)
     date = models.DateTimeField(blank=True, null=True)
@@ -1072,7 +1164,7 @@ class ParcelJobRouteLog(models.Model):
         db_table = 'parcel_job_route_log'
 
 
-class ParcelJobRoutePre(models.Model):
+class LCParcelJobRoutePre(models.Model):
     ticket_pre_id = models.AutoField(primary_key=True)
     parcel_run_pre_id = models.IntegerField(blank=True, null=True)
     ticket_no = models.CharField(max_length=20, blank=True, null=True)
@@ -1086,78 +1178,7 @@ class ParcelJobRoutePre(models.Model):
         db_table = 'parcel_job_route_pre'
 
 
-class ParcelJobTicket(models.Model):
-    parcel_job_ticket_id = models.AutoField(primary_key=True)
-    job_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=3, blank=True, null=True)
-    start = models.IntegerField(blank=True, null=True)
-    end = models.IntegerField(blank=True, null=True)
-    id = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_job_ticket'
-
-
-class ParcelOldRed(models.Model):
-    ticket_number = models.CharField(db_column='Ticket_Number', max_length=15, blank=True, null=True)  # Field name made lowercase.
-    date_sold = models.CharField(db_column='Date_Sold', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    customer = models.IntegerField(db_column='Customer', blank=True, null=True)  # Field name made lowercase.
-    pickup = models.CharField(db_column='Pickup', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    delivery = models.CharField(db_column='Delivery', max_length=255, blank=True, null=True)  # Field name made lowercase.
-    ticket_no = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=5, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_old_red'
-
-
-class ParcelOldUnred(models.Model):
-    ticket_number = models.CharField(db_column='Ticket_Number', max_length=15, blank=True, null=True)  # Field name made lowercase.
-    date_sold = models.CharField(db_column='Date_Sold', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    customer = models.IntegerField(db_column='Customer', blank=True, null=True)  # Field name made lowercase.
-    type = models.CharField(max_length=5, blank=True, null=True)
-    ticket_no = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_old_unred'
-
-
-class ParcelPrice(models.Model):
-    oid = models.AutoField(primary_key=True)
-    client_id = models.IntegerField(blank=True, null=True)
-    sell_rate = models.FloatField(blank=True, null=True)
-    qty_per_book = models.IntegerField(blank=True, null=True)
-    type_id = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_price'
-
-
-class ParcelRates(models.Model):
-    parcel_rate_id = models.AutoField(primary_key=True)
-    red_rate_pickup = models.FloatField(blank=True, null=True)
-    red_rate_deliv = models.FloatField(blank=True, null=True)
-    distr_payment_deliv = models.FloatField(blank=True, null=True)
-    distr_payment_pickup = models.FloatField(blank=True, null=True)
-    type = models.CharField(max_length=3, blank=True, null=True)
-    sell_rate_std = models.FloatField(blank=True, null=True)
-    sell_rate_disc = models.FloatField(blank=True, null=True)
-    start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
-    qty_per_book = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_rates'
-
-
-class ParcelRun(models.Model):
+class LCParcelRun(models.Model):
     parcel_run_id = models.AutoField(primary_key=True)
     date = models.DateField(blank=True, null=True)
     dist_id = models.IntegerField(blank=True, null=True)
@@ -1176,539 +1197,4 @@ class ParcelRun(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'parcel_run'
-
-
-class ParcelRunPre(models.Model):
-    parcel_run_pre_id = models.AutoField(primary_key=True)
-    dist_id = models.IntegerField(blank=True, null=True)
-    contractor_id = models.IntegerField(blank=True, null=True)
-    route_id = models.IntegerField(blank=True, null=True)
-    page = models.IntegerField(blank=True, null=True)
-    real_date = models.DateTimeField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    actual = models.IntegerField(blank=True, null=True)
-    is_processed = models.IntegerField(blank=True, null=True)
-    parcel_run_id = models.IntegerField(blank=True, null=True)
-    batch_no = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_run_pre'
-
-
-class ParcelThReceipt(models.Model):
-    parcel_th_receipt_id = models.AutoField(primary_key=True)
-    branch_id = models.IntegerField(blank=True, null=True)
-    supplier = models.TextField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_th_receipt'
-
-
-class ParcelTicketNote(models.Model):
-    parcel_ticket_note_id = models.AutoField(primary_key=True)
-    start = models.IntegerField(blank=True, null=True)
-    end = models.IntegerField(blank=True, null=True)
-    note = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_ticket_note'
-
-
-class ParcelTicketTh(models.Model):
-    parcel_ticket_th_id = models.AutoField(primary_key=True)
-    parcel_th_receipt_id = models.IntegerField(blank=True, null=True)
-    start = models.IntegerField(blank=True, null=True)
-    end = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=3, blank=True, null=True)
-    qty = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_ticket_th'
-
-
-class ParcelTicketTypes(models.Model):
-    oid = models.AutoField(primary_key=True)
-    type = models.CharField(max_length=10, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    colour = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_ticket_types'
-
-
-class ParcelTickets(models.Model):
-    oid = models.AutoField(primary_key=True)
-    job_id = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=10, blank=True, null=True)
-    ticket_no = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'parcel_tickets'
-
-
-class PayoutInvoiceNo(models.Model):
-    invoice_id = models.AutoField(primary_key=True)
-    max_id = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'payout_invoice_no'
-
-
-class Pod(models.Model):
-    date = models.DateField(blank=True, null=True)
-    pod_no = models.CharField(max_length=20, blank=True, null=True)
-    ticket_no = models.CharField(max_length=20, blank=True, null=True)
-    staff_id = models.IntegerField(blank=True, null=True)
-    staff_claim_id = models.IntegerField(blank=True, null=True)
-    staff_app_claim_id = models.IntegerField(blank=True, null=True)
-    is_claim = models.IntegerField()
-    courier_id = models.IntegerField(blank=True, null=True)
-    ticket_id = models.IntegerField(blank=True, null=True)
-    dist_id = models.IntegerField(blank=True, null=True)
-    contr_id = models.IntegerField(blank=True, null=True)
-    ticket_type = models.CharField(max_length=3, blank=True, null=True)
-    status_id = models.IntegerField(blank=True, null=True)
-    branch = models.CharField(max_length=100, blank=True, null=True)
-    sendfrom = models.CharField(max_length=100, blank=True, null=True)
-    contname = models.CharField(max_length=100, blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-    phone = models.CharField(max_length=100, blank=True, null=True)
-    fax = models.CharField(max_length=100, blank=True, null=True)
-    yourticket = models.CharField(max_length=100, blank=True, null=True)
-    parcelleft = models.CharField(max_length=255, blank=True, null=True)
-    parceldate = models.DateField(blank=True, null=True)
-    contc = models.CharField(max_length=5, blank=True, null=True)
-    cresponse = models.TextField(blank=True, null=True)
-    addresseename = models.CharField(max_length=100, blank=True, null=True)
-    parceladdr = models.CharField(max_length=100, blank=True, null=True)
-    naturecontents = models.CharField(max_length=100, blank=True, null=True)
-    whosent = models.CharField(max_length=100, blank=True, null=True)
-    initenquiry = models.CharField(max_length=100, blank=True, null=True)
-    problem = models.TextField(blank=True, null=True)
-    email2 = models.CharField(max_length=100, blank=True, null=True)
-    claim_status_id = models.IntegerField(blank=True, null=True)
-    ticket_d_id = models.IntegerField(blank=True, null=True)
-    ticket_p_id = models.IntegerField(blank=True, null=True)
-    ccompany = models.CharField(max_length=100, blank=True, null=True)
-    sentfrom = models.CharField(max_length=100, blank=True, null=True)
-    couralticket = models.CharField(max_length=100, blank=True, null=True)
-    addresseephone = models.CharField(max_length=100, blank=True, null=True)
-    sendcopytome = models.CharField(max_length=100, blank=True, null=True)
-    claim_courier_no = models.CharField(max_length=100, blank=True, null=True)
-    claim_courier_person = models.CharField(max_length=100, blank=True, null=True)
-    claim_reason = models.CharField(max_length=255, blank=True, null=True)
-    claim_amount = models.FloatField(blank=True, null=True)
-    claim_description = models.TextField(blank=True, null=True)
-    claim_decision_reason = models.CharField(max_length=255, blank=True, null=True)
-    claim_courier_advise = models.DateField(blank=True, null=True)
-    claim_courier_advise_how = models.CharField(max_length=255, blank=True, null=True)
-    claim_coural_staff_id = models.IntegerField(blank=True, null=True)
-    claim_coural_approval_id = models.IntegerField(blank=True, null=True)
-    claim_contr_invoice_date = models.DateField(blank=True, null=True)
-    claim_contr_invoice_amount = models.FloatField(blank=True, null=True)
-    claim_ticket_picture = models.CharField(max_length=255, blank=True, null=True)
-    claim_item_picture = models.CharField(max_length=255, blank=True, null=True)
-    do_id = models.IntegerField(blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
-    time_limit_pod = models.DateField(blank=True, null=True)
-    time_damage_claim = models.DateField(blank=True, null=True)
-    time_lossd_claim = models.DateField(blank=True, null=True)
-    claim_date = models.DateField(blank=True, null=True)
-    claim_type_id = models.IntegerField(blank=True, null=True)
-    image_url = models.CharField(max_length=255, blank=True, null=True)
-    pod_web_id = models.IntegerField(blank=True, null=True)
-    contr_name = models.CharField(max_length=100, blank=True, null=True)
-    pod_prev_req = models.IntegerField(blank=True, null=True)
-    pod_ref_no = models.CharField(max_length=100, blank=True, null=True)
-    pod_id = models.AutoField(primary_key=True)
-    claim_contr_liable = models.IntegerField(blank=True, null=True)
-    is_archived = models.IntegerField()
-    road = models.CharField(max_length=255, blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    rd = models.CharField(max_length=255, blank=True, null=True)
-    route_id = models.IntegerField(blank=True, null=True)
-    dropoff_id = models.IntegerField(blank=True, null=True)
-    ticket_no_search = models.TextField(blank=True, null=True)
-    is_flagged = models.IntegerField(blank=True, null=True)
-    initials = models.CharField(max_length=20, blank=True, null=True)
-    days_last_action = models.IntegerField(blank=True, null=True)
-    last_action_date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod'
-
-
-class PodAction(models.Model):
-    action_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_action'
-
-
-class PodActionLog(models.Model):
-    action_log_id = models.AutoField(primary_key=True)
-    staff_id = models.IntegerField(blank=True, null=True)
-    date = models.DateTimeField(blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
-    action_id = models.IntegerField(blank=True, null=True)
-    pod_id = models.IntegerField(blank=True, null=True)
-    subject = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_action_log'
-
-
-class PodActivity(models.Model):
-    activity_id = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_activity'
-
-
-class PodActivityLog(models.Model):
-    activity_id = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_activity_log'
-
-
-class PodClaimStatus(models.Model):
-    claim_status_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_claim_status'
-
-
-class PodClaimTyp(models.Model):
-    claim_type_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_claim_typ'
-
-
-class PodMaxNo(models.Model):
-    max_no_id = models.AutoField(primary_key=True)
-    value = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_max_no'
-
-
-class PodStaff(models.Model):
-    staff_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
-    email = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_staff'
-
-
-class PodStaffActionAss(models.Model):
-    id = models.AutoField(db_column='Id', primary_key=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'pod_staff_action_ass'
-
-
-class PodStatus(models.Model):
-    status_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_status'
-
-
-class PodTicket(models.Model):
-    oid = models.AutoField(primary_key=True)
-    ticket_id = models.IntegerField(blank=True, null=True)
-    pickup_date = models.DateField(blank=True, null=True)
-    delivery_date = models.DateField(blank=True, null=True)
-    redeemed_op = models.IntegerField(blank=True, null=True)
-    delivered_op = models.IntegerField(blank=True, null=True)
-    seq = models.IntegerField(blank=True, null=True)
-    pod_id = models.IntegerField(blank=True, null=True)
-    ticket_no = models.CharField(max_length=50, blank=True, null=True)
-    ticket_type = models.CharField(max_length=3, blank=True, null=True)
-    ticket_no_courier = models.CharField(max_length=50, blank=True, null=True)
-    is_primary = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_ticket'
-
-
-class PodTicketCourier(models.Model):
-    oid = models.AutoField(primary_key=True)
-    ticket_no = models.CharField(max_length=50, blank=True, null=True)
-    pod_id = models.IntegerField(blank=True, null=True)
-    seq = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pod_ticket_courier'
-
-
-class RegistrationRegistrationprofile(models.Model):
-    user_id = models.IntegerField(unique=True)
-    activation_key = models.CharField(max_length=40)
-
-    class Meta:
-        managed = False
-        db_table = 'registration_registrationprofile'
-
-
-class Route(models.Model):
-    route_id = models.AutoField(primary_key=True)
-    island = models.CharField(max_length=3, blank=True, null=True)
-    region = models.CharField(max_length=30, blank=True, null=True)
-    area = models.CharField(max_length=30, blank=True, null=True)
-    code = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    external = models.CharField(max_length=11, blank=True, null=True)
-    no_ticket_header = models.CharField(max_length=1)
-    pmp_areacode = models.IntegerField(blank=True, null=True)
-    pmp_runcode = models.IntegerField(blank=True, null=True)
-    num_lifestyle = models.IntegerField(blank=True, null=True)
-    num_farmers = models.IntegerField(blank=True, null=True)
-    num_dairies = models.IntegerField(blank=True, null=True)
-    num_sheep = models.IntegerField(blank=True, null=True)
-    num_beef = models.IntegerField(blank=True, null=True)
-    num_sheepbeef = models.IntegerField(blank=True, null=True)
-    num_dairybeef = models.IntegerField(blank=True, null=True)
-    num_hort = models.IntegerField(blank=True, null=True)
-    seq_region = models.IntegerField(blank=True, null=True)
-    seq_area = models.IntegerField(blank=True, null=True)
-    seq_code = models.IntegerField(blank=True, null=True)
-    is_hidden = models.CharField(max_length=1, blank=True, null=True)
-    num_nzfw = models.IntegerField(blank=True, null=True)
-    rmt = models.IntegerField(blank=True, null=True)
-    rm_rr = models.IntegerField(blank=True, null=True)
-    rm_f = models.IntegerField(blank=True, null=True)
-    rm_d = models.IntegerField(blank=True, null=True)
-    code_base = models.CharField(max_length=100, blank=True, null=True)
-    code_rd = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'route'
-
-
-class RouteAff(models.Model):
-    route_aff_id = models.AutoField(primary_key=True)
-    route_id = models.IntegerField()
-    dist_id = models.IntegerField(blank=True, null=True)
-    subdist_id = models.IntegerField(blank=True, null=True)
-    contractor_id = models.IntegerField(blank=True, null=True)
-    dropoff_id = models.IntegerField(blank=True, null=True)
-    app_date = models.DateField(blank=True, null=True)
-    stop_date = models.DateField(blank=True, null=True)
-    env_dist_id = models.IntegerField(blank=True, null=True)
-    env_contractor_id = models.IntegerField(blank=True, null=True)
-    pc_dist_id = models.IntegerField(blank=True, null=True)
-    env_subdist_id = models.IntegerField(blank=True, null=True)
-    pc_contractor_id = models.IntegerField(blank=True, null=True)
-    env_dropoff_id = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'route_aff'
-
-
-class RouteBu(models.Model):
-    route_id = models.IntegerField()
-    island = models.CharField(max_length=3, blank=True, null=True)
-    region = models.CharField(max_length=30, blank=True, null=True)
-    area = models.CharField(max_length=30, blank=True, null=True)
-    code = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    external = models.CharField(max_length=11, blank=True, null=True)
-    no_ticket_header = models.CharField(max_length=1)
-    pmp_areacode = models.IntegerField(blank=True, null=True)
-    pmp_runcode = models.IntegerField(blank=True, null=True)
-    num_lifestyle = models.IntegerField(blank=True, null=True)
-    num_farmers = models.IntegerField(blank=True, null=True)
-    num_dairies = models.IntegerField(blank=True, null=True)
-    num_sheep = models.IntegerField(blank=True, null=True)
-    num_beef = models.IntegerField(blank=True, null=True)
-    num_sheepbeef = models.IntegerField(blank=True, null=True)
-    num_dairybeef = models.IntegerField(blank=True, null=True)
-    num_hort = models.IntegerField(blank=True, null=True)
-    seq_region = models.IntegerField(blank=True, null=True)
-    seq_area = models.IntegerField(blank=True, null=True)
-    seq_code = models.IntegerField(blank=True, null=True)
-    is_hidden = models.CharField(max_length=1, blank=True, null=True)
-    num_nzfw = models.IntegerField(blank=True, null=True)
-    rmt = models.IntegerField(blank=True, null=True)
-    rm_rr = models.IntegerField(blank=True, null=True)
-    rm_f = models.IntegerField(blank=True, null=True)
-    rm_d = models.IntegerField(blank=True, null=True)
-    code_base = models.CharField(max_length=100, blank=True, null=True)
-    code_rd = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'route_bu'
-
-
-class RouteOldNum(models.Model):
-    route_old_num_id = models.AutoField(primary_key=True)
-    backup_date = models.DateField(blank=True, null=True)
-    operator_id = models.IntegerField(blank=True, null=True)
-    distributor = models.TextField(blank=True, null=True)
-    route_id = models.IntegerField()
-    dist_id = models.IntegerField(blank=True, null=True)
-    subdist_id = models.IntegerField(blank=True, null=True)
-    contractor_id = models.IntegerField(blank=True, null=True)
-    island = models.CharField(max_length=3, blank=True, null=True)
-    region = models.CharField(max_length=30, blank=True, null=True)
-    area = models.CharField(max_length=30, blank=True, null=True)
-    code = models.CharField(max_length=30, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    pmp_areacode = models.IntegerField(blank=True, null=True)
-    pmp_runcode = models.IntegerField(blank=True, null=True)
-    num_lifestyle = models.IntegerField(blank=True, null=True)
-    num_farmers = models.IntegerField(blank=True, null=True)
-    num_dairies = models.IntegerField(blank=True, null=True)
-    num_sheep = models.IntegerField(blank=True, null=True)
-    num_beef = models.IntegerField(blank=True, null=True)
-    num_sheepbeef = models.IntegerField(blank=True, null=True)
-    num_dairybeef = models.IntegerField(blank=True, null=True)
-    num_hort = models.IntegerField(blank=True, null=True)
-    external = models.CharField(max_length=11, blank=True, null=True)
-    seq_region = models.IntegerField(blank=True, null=True)
-    seq_area = models.IntegerField(blank=True, null=True)
-    seq_code = models.IntegerField(blank=True, null=True)
-    num_nzfw = models.IntegerField(blank=True, null=True)
-    num_spare = models.IntegerField(blank=True, null=True)
-    is_hidden = models.CharField(max_length=1, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'route_old_num'
-
-
-class ScheduleMailSendOut(models.Model):
-    config = models.TextField(blank=True, null=True)
-    exec_field = models.DateTimeField(db_column='exec', blank=True, null=True)  # Field renamed because it was a Python reserved word.
-    status = models.IntegerField(blank=True, null=True)
-    dtt = models.DateTimeField()
-    loch = models.IntegerField(blank=True, null=True)
-    oid = models.AutoField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'schedule_mail_send_out'
-
-
-class SendReport(models.Model):
-    send_report_id = models.AutoField(primary_key=True)
-    jobs = models.TextField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
-    dist_id = models.IntegerField(blank=True, null=True)
-    start_date = models.DateField(blank=True, null=True)
-    final_date = models.DateField(blank=True, null=True)
-    show_regular = models.CharField(max_length=1, blank=True, null=True)
-    show_casual = models.CharField(max_length=1, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    year = models.IntegerField(blank=True, null=True)
-    month = models.IntegerField(blank=True, null=True)
-    date = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'send_report'
-
-
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-    address_id = models.IntegerField(blank=True, null=True)
-    username = models.CharField(max_length=50, blank=True, null=True)
-    passwd = models.CharField(max_length=50, blank=True, null=True)
-    security_lev = models.IntegerField(blank=True, null=True)
-    page_main = models.CharField(max_length=1, blank=True, null=True)
-    page_procjob = models.CharField(max_length=1, blank=True, null=True)
-    page_useradmin = models.CharField(max_length=1, blank=True, null=True)
-    page_routeadmin = models.CharField(max_length=1, blank=True, null=True)
-    page_clientadmin = models.CharField(max_length=1, blank=True, null=True)
-    page_addradmin = models.CharField(max_length=1, blank=True, null=True)
-    page_opadmin = models.CharField(max_length=1, blank=True, null=True)
-    page_reports = models.CharField(max_length=1, blank=True, null=True)
-    page_rep_revenue = models.CharField(max_length=1, blank=True, null=True)
-    page_invoice = models.CharField(max_length=1, blank=True, null=True)
-    page_parcels = models.CharField(max_length=1, blank=True, null=True)
-    page_rep_parcels = models.CharField(max_length=1, blank=True, null=True)
-    gst = models.CharField(max_length=1, blank=True, null=True)
-    full_name = models.TextField(blank=True, null=True)
-    page_rep_old = models.CharField(max_length=1, blank=True, null=True)
-    haul_island = models.CharField(max_length=10, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user'
-
-
-class UserDefaults(models.Model):
-    user_default_id = models.AutoField(primary_key=True)
-    user_id = models.IntegerField(blank=True, null=True)
-    code = models.CharField(max_length=10, blank=True, null=True)
-    value_date = models.DateField(blank=True, null=True)
-    value_int = models.IntegerField(blank=True, null=True)
-    value_string = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_defaults'
-
-
-class WebParcelpickup(models.Model):
-    pickup_no = models.CharField(max_length=255)
-    status = models.CharField(max_length=10)
-    dtt = models.DateField()
-    rd = models.CharField(max_length=1024)
-    ccompany = models.CharField(max_length=255)
-    branch = models.CharField(max_length=255)
-    contname = models.CharField(max_length=255)
-    phone = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    sendername = models.CharField(max_length=255)
-    senderaddress = models.CharField(max_length=255)
-    parcelquantity = models.IntegerField()
-    parcelleft = models.CharField(max_length=255)
-    parceldescr = models.CharField(max_length=255)
-    yourticket = models.CharField(max_length=255)
-    receivername = models.CharField(max_length=255)
-    cticket = models.TextField()
-    hsh = models.CharField(max_length=255)
-    contractor_id = models.IntegerField()
-    route_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'web_parcelpickup'
+        db_table = 'parcel_run'        
