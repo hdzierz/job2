@@ -1,0 +1,396 @@
+{% extends "page_base.html" %}
+
+{% block data %}
+{% load bootstrap3 %}
+
+<h2>{{view.page_name}}</h2>
+
+{% if view.btn == 'Delete' %}
+
+<form action="" method="post">{% csrf_token %}
+       <p>Are you sure you want to delete "{{ object }}"?</p>
+	{% buttons %}
+        <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} {{view.btn}}
+        </button>
+        {% endbuttons %}		
+</form>
+
+{% else %}
+
+
+<div class="row">
+
+    <div class="col-lg-12 col-md-12">
+        <!-- col-lg-12 start here -->
+        <div class="panel panel-default toggle panelMove panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Address details</h4>
+            </div>
+            <div class="panel-body pt0 pb0">
+                <div id="wizard1" class="bwizard">
+                    <!-- Start .bwizard -->
+                    <ul class="bwizard-steps">
+                        <li class="active">
+                            <a href="#tab1" data-toggle="tab">
+                                <span class="step-number">1</span>
+                                <span class="step-text">General info</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tab2" data-toggle="tab">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Operator</span>
+                            </a>
+                        </li>
+			<li>
+                            <a href="#tab3" data-toggle="tab">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Client</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="wizard-progress">
+                        <div id="bar" class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+		    <form class="form-horizontal group-border stripped" role="form" action="" method="post">{% csrf_token %}
+			<div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+				<div class="form-group">
+			            <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Company</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.company }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Print Name</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.print_name }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Type</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.typ }}
+                                    </div>
+				</div>
+                                <div class="form-group">
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">First Name</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.first_name }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.last_name }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+				        {{ form.parent }}
+				    </div>
+				</div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">First Name 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.first_name2 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.last_name2 }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+				        {% for d in  view.daughters %} 
+					    {{ d.name }}
+					{% endfor %}
+				    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Address</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.address }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Address 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.address2 }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 1</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.email }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.email2 }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.email3 }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Phone 1</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.phone }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Phone2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.phone2 }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 1</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.mobile }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.mobile2 }}
+                                    </div>
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 3</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.mobile3 }}
+                                    </div>
+                                </div>
+
+				<div class="form-group">                                    
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">City</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">                                        
+					{{ form.city }}
+                                    </div>                                    
+				    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Postcode</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.postcode }}
+                                    </div>
+			            <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Country</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.country }}                                    
+				    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Bank No</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.bank_num }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">GST No</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.gst_num }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mail Type</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.mail_type }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Card ID</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.card_id }}
+                                    </div>
+                                </div>
+
+
+			    </div> <!-- tab1 -->
+			    <div class="tab-pane" id="tab2">
+			        <div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Shares</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.shares }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Shares EOY</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.shares_eoy }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Date Started</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.date_started }}
+                                    </div>                                                                                                                     <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Date Left</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.date_left }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Is NI Hauler</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.is_hauler_ni }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Is SI Hauler</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.is_hauler_si }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">DO Adress</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.do_address }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">DO City</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.do_city }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Delivery Notes</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.deliv_notes }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Is Current</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.is_current }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Is Shareholder</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.is_shareholder }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Shares Bought</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.share_bought }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Shares Sold</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.share_sold }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Share notes</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.share_notes }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner #1</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_no1 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Phone #1</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_phone_no1 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Email</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_email }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner #2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_no2 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Phone #2</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_phone_no2 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Charge</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_charge }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner #3</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_no3 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Phone #3</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_phone_no3 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile Pay</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.mobile_pay }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner #4</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_no4 }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Scanner Phone #4</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.scanner_phone_no4 }}
+                                    </div>
+                                </div>
+		            </div>
+		            <div class="tab-pane" id="tab3">
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Invoice Details</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.invoice_details }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Has Discount</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.has_discount }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Net Costs</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.net_costs }}
+                                    </div>
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Base Price</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.base_price }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Linehaul</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.linehaul }}
+                                    </div>
+				     <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Discount</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.discount }}
+                                    </div>
+
+                                </div>
+				<div class="form-group">
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Base Price</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.base_price }}
+                                    </div>
+                                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Linehaul</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.linehaul }}
+                                    </div>
+                                     <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Discount</label>
+                                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.discount }}
+                                    </div>
+
+                                </div>
+				<div class="form-group">
+				     <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Notes</label>
+                                     <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                                        {{ form.notes }}
+                                    </div>
+
+				</div>
+			    </div>
+                        </div> <!-- tab content -->
+				
+
+			{# bootstrap_form form #}
+			{% buttons %}
+				<button type="submit" class="btn btn-primary">
+					{% bootstrap_icon "star" %} {{view.btn}}
+				</button>
+			{% endbuttons %}
+		    </form>
+                    <ul class="pager">
+                        <li class="previous"><a href="#">&larr; Back</a>
+                        </li>
+                        <li class="next"><a href="#">Next &rarr;</a>
+                        </li>
+                        <li class="next finish" style="display:none;"><a href="#">Send</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End .bwizard -->
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- col-lg-12 end here -->
+</div>
+
+
+{% endif %}
+
+{% endblock %}
