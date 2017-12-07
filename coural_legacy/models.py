@@ -1197,4 +1197,26 @@ class LCParcelRun(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'parcel_run'        
+        db_table = 'parcel_run'      
+
+
+class LCCRouteAff(models.Model):
+    route_aff_id = models.AutoField(primary_key=True)
+    route_id = models.IntegerField()
+    dist_id = models.IntegerField(blank=True, null=True)
+    subdist_id = models.IntegerField(blank=True, null=True)
+    contractor_id = models.IntegerField(blank=True, null=True)
+    dropoff_id = models.IntegerField(blank=True, null=True)
+    app_date = models.DateField(blank=True, null=True)
+    stop_date = models.DateField(blank=True, null=True)
+    env_dist_id = models.IntegerField(blank=True, null=True)
+    env_contractor_id = models.IntegerField(blank=True, null=True)
+    pc_dist_id = models.IntegerField(blank=True, null=True)
+    env_subdist_id = models.IntegerField(blank=True, null=True)
+    pc_contractor_id = models.IntegerField(blank=True, null=True)
+    env_dropoff_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'route_aff'
+

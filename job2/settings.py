@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'django_tables2',
     'django_extensions',
+    'sslserver',
     'lbm',
     'parcel',
     'reports',

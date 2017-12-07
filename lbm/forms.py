@@ -58,6 +58,11 @@ class JobBookForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
+            #if self.fields[field].required:
+            #    self.fields[field].widget.attrs.update({'aria-required': 'true'})
+            #else:
+            self.fields[field].widget.attrs.update({'required': 'false'})
+
             att = "form-control "
             if(isinstance(self.fields[field].widget, Select)):
                 att += "select2 "

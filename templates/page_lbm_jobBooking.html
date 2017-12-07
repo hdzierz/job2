@@ -95,7 +95,7 @@
                             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-				    {{ form.lodgement_date }} 
+				    {{ form.lodge_date }} 
                                 </div>
                             </div>
 			    <label class="col-lg-1 col-md-3 col-sm-3 col-xs-6 control-label">NI drop total</label>
@@ -108,7 +108,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 				{{ form.hauler_si }}
                             </div>
-			    <label class="col-lg-1 col-md-9 col-sm-9 col-xs-6 control-label">Total check</label>
+			    <label class="col-lg-1 col-md-9 col-sm-9 col-xs-6 control-label"></label>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 				{{ form.total_check }} 
                             </div>
@@ -261,10 +261,12 @@
 				{{ form.show_comments }} 
                             </div>
                         </div>
-                    	<ul class="pager">
-                        	<li class="next finish" ><a href="#">Send</a>
-                        	</li>
-                    	</ul>
+			<div class="form-group">
+                	    <div class="col-lg-offset-2 col-lg-10 col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-default">Save</button><button type="submit" class="btn btn-default">Cancel</button>
+
+                            </div>
+                        </div>
 		    </form>
                 </div>
                 <!-- End .bwizard -->
