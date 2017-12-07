@@ -25,7 +25,7 @@ SECRET_KEY = '@23bx@9u7k(=3f*i17w!owi!_+lgm)l=2(661l411na_tkcpl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['103.18.58.13', 'jobs.dzierzon.co.nz']
+ALLOWED_HOSTS = ['localhost', '103.18.58.13', 'jobs.dzierzon.co.nz']
 
 
 # Application definition
@@ -87,9 +87,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'root',
-        'PASSWORD': 'inkl67z',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'thomas',
+        'PASSWORD': 'Th0Mas370',
+        'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
@@ -99,9 +99,9 @@ DATABASES = {
     'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'root',
-        'PASSWORD': 'inkl67z',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'thomas',
+        'PASSWORD': 'Th0Mas370',
+        'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
