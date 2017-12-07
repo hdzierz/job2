@@ -47,6 +47,7 @@ def page_reports_lbm_jobDetails(request):
     page_name = 'jobDetails'
     return render(request, 'page_reports_lbm_jobDetails.html', {'page_name':page_name})
 
+
 # This is a view that shows a single job
 class LBMJobView(FormView):
     form_class = JobBookForm 
@@ -63,6 +64,22 @@ class LBMJobView(FormView):
         return "Update"
 
 
+def page_lbm_jobBooking(request, job_id=None):
+    if(job_id):
+        job = LBMJob.objects.get(pk=job_id)
+    else:
+        job = LBMJob()   
+
+    if request.method=="POST":
+        form = JobBookForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+    else:
+        form = JobBookForm(instance=job)
+         
+    return render(request, 'page_lbm_jobBooking.html', {"job": job, "form": form})
+
+
 # LBM ROUTES
 
 def page_lbm_jobRoutes(request, job_id):
@@ -72,7 +89,20 @@ def page_lbm_jobRoutes(request, job_id):
 
         form = LbmJobRouteForm(request.POST)
         #if form.is_valid():
-        print(request.POST)
+        rds = request.POST.getlist('rd')
+        for rd in rds:
+            route = Route.objects.get(pk=int(rd))
+            ra = RouteAff.GetLBMContractor(route)
+            jr = LBMJobRoute()
+            jr.route = route
+            jr.job = job
+            jr.dest_type = job.dest_type
+            jr.dist = ra.lbm_dist
+            jr.subdist = ra.lbm_subdist
+            jr.contractor = ra.lbm_contractor
+            jr.dropoff = ra.lbm_dropoff
+            jr.save()
+    
     else:
         form = LbmJobRouteForm()
 

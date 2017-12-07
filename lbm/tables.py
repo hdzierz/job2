@@ -43,12 +43,12 @@ class JobTable(tables.Table):
 
     def render_action(self, value):
         return """ 
-           <a href="" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
+           <a href="/lbm/jobRoutes/{}" class="tipB" title="" data-original-title="View"><i class="glyphicon glyphicon-eye-open"></i></a>
            <a href="/lbm/jobBooking/{}" class="tipB" title="" data-original-title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
            <a href="" class="tipB active" title="" data-original-title="Reopen"><i class="glyphicon glyphicon-ban-circle"></i></a>
            <a href="" class="tipB active" title="" data-original-title="Start again"><i class="glyphicon glyphicon-ok"></i></a>
            <a href="" class="tipB" title="" data-original-title="Delete"><i class="glyphicon glyphicon-trash"></i></a>
-    """.format(value)
+    """.format(value,value)
 
     def render_yes_no(self, value):
         if value == 'Y':                                                                         

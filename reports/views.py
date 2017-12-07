@@ -74,8 +74,6 @@ class ReportView(View):
         if(regex != 'false'):
             query_method="iregex"
 
-        print(request.POST.dict())
-
         q_and = Q(pk__gt=0)
 
         if(search != ''):
@@ -100,7 +98,6 @@ class ReportView(View):
                     q_and = q_and & Q(**kwargs)
                     has_col_search = True
             i += 1
-        print(q_and)
 
         if(search!='' or has_col_search):
             routes = cls.objects.filter(q_and).order_by(o_col)
@@ -145,7 +142,7 @@ class MonthlyJobReport(ReportView):
         year = '2016'
         dtt = datetime.date(2012,2,14)
 
-        sel = ["job__job_no", "job__delivery_date",]
+        sel = ["job__job_no", "job__delivery_date", ]
         jobs = LBMJobRoute.objects.filter(job__delivery_date=dtt).values(*sel).annotate(Sum('amount'))
 
         #res = []
@@ -157,4 +154,56 @@ class MonthlyJobReport(ReportView):
 
 
 
+class WeeklyReport(ReportView):
+    form_class = MonthlyJobForm
+    cols = ["job__job_no", 
+            "job__is_regular", 
+            "job__dest_type", 
+            "job__publication", 
+            "job__delivery_date",
+            "dropoff__company",
+            "route__code", 
+            "amount__sum",]
+    
+    def result(self, request):
+        month = request.GET.get('month')
+        year = request.GET.get('year')
+
+        dtt_str = str(year) + '-' + str(month)
+   
+        dtt = datetime.date(2012,2,14)
+
+        sel = self.cols[:]
+        del sel[-1]
+
+        jobs = LBMJobRoute.objects.filter(job__delivery_date=dtt).values(*sel).annotate(Sum('amount'))
+
+        #res = []
+
+        #for job in jobs:
+           #res.append(model_to_dict(job, fields=self.cols))
+
+        return jobs
+  
+ 
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+ 
+  
+  
+ 
+  
+ 
+  
+  
+ 
+  
+ 
 

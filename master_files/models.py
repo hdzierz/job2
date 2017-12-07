@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+import datetime
+
 # Create your models here.
 
 
@@ -195,7 +197,8 @@ class Route(models.Model):
     island = models.ForeignKey(Island)
     area = models.ForeignKey(Area)
     region = models.ForeignKey(Region)
-    code = models.CharField(max_length=255,blank=True, null=True) 
+    code = models.CharField(max_length=255,blank=True, null=True)
+    post_code =  models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     pmp_areacode = models.IntegerField(blank=True, null=True)
     pmp_runcode = models.IntegerField(blank=True, null=True)
@@ -234,6 +237,17 @@ class RouteAff(models.Model):
     pcl_dropoff = models.ForeignKey(Address, related_name='pcl_dropoff')
 
     app_date = models.DateField()
+
+    @staticmethod
+    def GetLBMContractor(route, dtt = datetime.datetime.now()):
+        res = RouteAff.objects.filter(
+            route = route,
+            app_date__gt = dtt
+        ).order_by('-app_date')
+
+        if res.count() == 0:
+            raise Exception("ERROR IN Route Aff: " + str(route) + " not found (" + str(dtt) + ")")
+        return res[0]
 
     @staticmethod
     def GetLBMRoute(op, dtt, tgt):
