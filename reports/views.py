@@ -186,38 +186,59 @@ class WeeklyReport(ReportView):
         return jobs
 
 
-from django.forms.models import model_to_dict
 
+from django.forms.models import model_to_dict
 from master_files.models import Route, RouteAff, Region
 
 
 class RegionBible(ReportView):
     form_class = RegionBibleForm
     template_name = 'page_reports_archived_regionBible.html'
-    cols = ['route__code', 'pcl_dropoff__first_name', 'pcl_dropoff__last_name', 'pcl_dropoff__phone',
-            'pcl_dropoff__address', 'route__description']
+    cols = ['route__code','pcl_dropoff__first_name','pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
 
     def result(self, request):
         region = request.GET.get('region')
-        date = request.GET.get('date')
-        homephone = request.GET.get('homeno')
+        date   = request.GET.get('date')
+        homephone   = request.GET.get('homeno')
         mobilephone = request.GET.get('mobileno')
 
-        # checked data comes as on
+        #checked data comes as on
 
 
-        sel = ['route__code', 'pcl_dropoff__first_name', 'pcl_dropoff__last_name', 'pcl_dropoff__phone',
-               'pcl_dropoff__address', 'route__description']
+        sel = ['route__code','pcl_dropoff__first_name' ,'pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
 
         routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
 
         return routes
+
   
- 
-  
-  
-  
-  
+
+
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
+
+
+class PmpUpdated(ReportView):
+    form_class = PmpUpdatedForm
+    template_name = 'page_reports_archived_pmpupdated.html'
+    cols = ['route__code','pcl_dropoff__first_name','pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
+
+    def result(self, request):
+        pmp = request.GET.get('pmp')
+        type   = request.GET.get('type')
+        region = request.GET.get('region')
+        rmni   = request.GET.get('rmni')
+        rmsi = request.GET.get('rmsi')
+
+        #checked data comes as on
+
+
+        sel = ['route__code','pcl_dropoff__first_name' ,'pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
+
+        routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
+
+        return routes
+
   
  
   

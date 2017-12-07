@@ -22,3 +22,21 @@ class RegionBibleForm(forms.Form):
     homeno   = forms.BooleanField(label=("Home No"), required=False)
 
     mobileno   = forms.BooleanField(label=("Mobile No"),  required=False)
+
+
+
+
+from  master_files.models import Region
+
+
+class PmpUpdatedForm(forms.Form):
+
+    pmp   = forms.ModelChoiceField(label=("Select..."), queryset=Region.objects.all() )
+
+    type = forms.ModelChoiceField(label=("Select Type"), queryset=Region.objects.all())
+
+    region = forms.ModelChoiceField(label=("Select Region"), queryset=Region.objects.all())
+
+    rmni    = forms.BooleanField(label=("Show RM NI "), required=False)
+
+    rmsi = forms.BooleanField(label=("Show RM SI "), required=False)
