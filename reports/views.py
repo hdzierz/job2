@@ -184,10 +184,34 @@ class WeeklyReport(ReportView):
            #res.append(model_to_dict(job, fields=self.cols))
 
         return jobs
-  
- 
-  
-  
+
+
+from django.forms.models import model_to_dict
+
+from master_files.models import Route, RouteAff, Region
+
+
+class RegionBible(ReportView):
+    form_class = RegionBibleForm
+    template_name = 'page_reports_archived_regionBible.html'
+    cols = ['route__code', 'pcl_dropoff__first_name', 'pcl_dropoff__last_name', 'pcl_dropoff__phone',
+            'pcl_dropoff__address', 'route__description']
+
+    def result(self, request):
+        region = request.GET.get('region')
+        date = request.GET.get('date')
+        homephone = request.GET.get('homeno')
+        mobilephone = request.GET.get('mobileno')
+
+        # checked data comes as on
+
+
+        sel = ['route__code', 'pcl_dropoff__first_name', 'pcl_dropoff__last_name', 'pcl_dropoff__phone',
+               'pcl_dropoff__address', 'route__description']
+
+        routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
+
+        return routes
   
  
   
