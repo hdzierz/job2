@@ -32,7 +32,29 @@
 
 <h2>{{ region }}</h2>
 
-{% include "report_table.html" %}
+<table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Topic</th>
+        <th>Starter</th>
+        <th>Replies</th>
+        <th>Views</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pmpup in pmpupd %}
+        <tr>
+          <td>{{ code }}</td>
+          <td>{{ pmp_runcode }}</td>
+          <td>0</td>
+          <td>0</td>
+          <td>{{ pmp_areacode }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 
 </div>
 <!-- End .panel -->

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f31923b1-d64c-4ef9-a4e5-c9bb926ad7c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reports/forms.py" afterPath="$PROJECT_DIR$/reports/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reports/views.py" afterPath="$PROJECT_DIR$/reports/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html" afterPath="$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +38,8 @@
       <file leaf-file-name="page_reports_archived_pmpupdated.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="13" />
+            <state relative-caret-position="244">
+              <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -50,8 +48,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reports/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="238" column="69" lean-forward="false" selection-start-line="238" selection-start-column="69" selection-end-line="238" selection-end-column="69" />
+            <state relative-caret-position="200">
+              <caret line="236" column="67" lean-forward="false" selection-start-line="236" selection-start-column="52" selection-end-line="236" selection-end-column="67" />
               <folding>
                 <element signature="e#0#58#0" expanded="true" />
               </folding>
@@ -106,8 +104,8 @@
         <option value="$PROJECT_DIR$/templates/page_reports_archived_pmpuddated.html" />
         <option value="$PROJECT_DIR$/job2/urls.py" />
         <option value="$PROJECT_DIR$/reports/forms.py" />
-        <option value="$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html" />
         <option value="$PROJECT_DIR$/reports/views.py" />
+        <option value="$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html" />
       </list>
     </option>
   </component>
@@ -117,7 +115,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="24" />
     <option name="width" value="1360" />
     <option name="height" value="688" />
@@ -235,7 +233,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25379938" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -410,14 +408,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/page_reports_archived_regionBible.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -426,10 +416,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/page_reports_archived_pmpupdated.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reports/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="238" column="69" lean-forward="false" selection-start-line="238" selection-start-column="69" selection-end-line="238" selection-end-column="69" />
+        <state relative-caret-position="200">
+          <caret line="236" column="67" lean-forward="false" selection-start-line="236" selection-start-column="52" selection-end-line="236" selection-end-column="67" />
           <folding>
             <element signature="e#0#58#0" expanded="true" />
           </folding>
