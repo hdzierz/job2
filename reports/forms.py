@@ -25,15 +25,24 @@ class RegionBibleForm(forms.Form):
 
 
 
+from django import forms
+from  master_files.models import Region, Route
 
-from  master_files.models import Region
+
+pmps  = [("1","with PMP"),("2","without PMP"),("3","Descriptions without PMP"),("4","Area Totals")]
+types = [("total","Total"),("farmers","Farmers"),("lifestyle","L/style"),("diary","Diary"),("sheep","Sheep"),("beef","Beef"),
+         ("sb","S/B"),("db","D/B"),("hort","Hort"),("fat90","Fat@90%"),("rmt","RMT"),("rmrr","RM RR"),("rmf","RM F"),("rmd","RM D")]
+
+
 
 
 class PmpUpdatedForm(forms.Form):
 
-    pmp   = forms.ModelChoiceField(label=("Select..."), queryset=Region.objects.all() )
+    pmp   = forms.ChoiceField(label="PMP", choices=pmps)
 
-    type = forms.ModelChoiceField(label=("Select Type"), queryset=Region.objects.all())
+    type = forms.ChoiceField(label="Type", choices=types)
+
+    # type = forms.ModelChoiceField(label="Type", queryset=Route.objects.all())
 
     region = forms.ModelChoiceField(label=("Select Region"), queryset=Region.objects.all())
 

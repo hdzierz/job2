@@ -209,6 +209,7 @@ class RegionBible(ReportView):
 
         routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
 
+
         return routes
 
   
@@ -221,7 +222,7 @@ from master_files.models import Route, RouteAff, Region
 class PmpUpdated(ReportView):
     form_class = PmpUpdatedForm
     template_name = 'page_reports_archived_pmpupdated.html'
-    cols = ['route__code','pcl_dropoff__first_name','pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
+    sel = ['code', 'pmp_areacode', 'pmp_runcode','area_id__name']
 
     def result(self, request):
         pmp = request.GET.get('pmp')
@@ -231,14 +232,14 @@ class PmpUpdated(ReportView):
         rmsi = request.GET.get('rmsi')
 
         #checked data comes as on
+        print(pmp,type,region,rmni,rmsi)
 
+        sel = ['code','pmp_areacode' ,'pmp_runcode','area_id__name']
 
-        sel = ['route__code','pcl_dropoff__first_name' ,'pcl_dropoff__last_name','pcl_dropoff__phone','pcl_dropoff__address','route__description']
+        pmpupd = Route.objects.filter(region__id=region).values(*sel)
 
-        routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
-
-        return routes
-
+        print(pmpupd)
+        return pmpupd
   
  
   
