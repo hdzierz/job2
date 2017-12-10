@@ -184,26 +184,155 @@ class WeeklyReport(ReportView):
            #res.append(model_to_dict(job, fields=self.cols))
 
         return jobs
-  
- 
-  
-  
-  
- 
-  
-  
-  
-  
-  
- 
-  
-  
- 
-  
- 
-  
-  
- 
-  
- 
+
+
+
+
+
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
+import time
+
+
+class PmpUpdated(ReportView):
+    form_class = PmpUpdatedForm
+    template_name = 'page_reports_archived_pmpupdated.html'
+
+    cols = ['route__code','route__pmp_areacode' ,'route__pmp_runcode','route__area_id__name']
+
+    def result(self, request):
+        pmp = request.GET.get('pmp')
+        type   = request.GET.get('type')
+        region = request.GET.get('region')
+
+        date = time.strftime("%Y-%m-%d")
+
+        sel = ['route__code','route__pmp_areacode' ,'route__pmp_runcode','route__area_id__name']
+
+
+        pmpupds = RouteAff.objects.filter(route__region__id=region).values(*sel)
+
+        #pmpupd = Route.objects.raw('SELECT id, code, pmp_areacode, pmp_runcode, %s FROM master_files_route WHERE region_id=%s',[type,region])
+
+        return pmpupds
+
+
+
+
+
+
+
+from master_files.models import Route, RouteAff, Region, Address
+
+class AddressDetails(ReportView):
+    form_class = AddressDetails
+    template_name = 'page_reports_archived_addressDetails.html'
+    cols = ['first_name','last_name','address']
+
+    def result(self, request):
+        dist = request.GET.get('dist')
+        date = request.GET.get('date')
+
+
+        print(dist)
+
+        sel = ['first_name','last_name','address']
+
+        addres = Address.objects.filter(typ__name=dist).values(*sel)
+
+        return addres
+
+
+
+
+
+
+
+
+
+from master_files.models import Route, RouteAff, Region
+
+
+class DistBible(ReportView):
+    form_class = DistBibleForm
+    template_name = 'page_reports_archived_distBible.html'
+    cols = ['first_name','last_name','address']
+
+    def result(self, request):
+        dist = request.GET.get('dist')
+        date = request.GET.get('date')
+        homeno = request.GET.get('homeno')
+        mobileno = request.GET.get('mobileno')
+        emailno = request.GET.get('email')
+
+
+
+        sel = ['first_name','last_name','address']
+
+
+        dists = Address.objects.filter(typ__name=dist).values(*sel)
+
+
+        return dists
+
+
+
+
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
+
+
+class RegionBible(ReportView):
+    form_class = RegionBibleForm
+    template_name = 'page_reports_archived_regionBible.html'
+    cols = ['route__code', 'pcl_dropoff__first_name', 'lbm_dropoff__last_name', 'lbm_dropoff__phone',
+            'lbm_dropoff__address', 'route__description']
+
+
+    def result(self, request):
+        region = request.GET.get('region')
+        date = request.GET.get('date')
+        homephone = request.GET.get('homeno')
+        mobilephone = request.GET.get('mobileno')
+
+
+        sel = ['route__code', 'pcl_dropoff__first_name', 'lbm_dropoff__last_name', 'lbm_dropoff__phone',
+               'lbm_dropoff__address', 'route__description']
+
+
+        routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
+
+
+        return routes
+
+
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
+import time
+
+
+class DistPmpUpdated(ReportView):
+    form_class = DistPmpUpdatedForm
+    template_name = 'page_reports_archived_Distpmpupdatedby.html'
+
+    cols = ['route__code', 'route__pmp_areacode', 'route__pmp_runcode', 'route__area_id__name']
+
+    def result(self, request):
+        dbutor = request.GET.get('dbutor')
+        pmp = request.GET.get('pmp')
+        type = request.GET.get('type')
+        region = request.GET.get('region')
+
+        date = time.strftime("%Y-%m-%d")
+
+        sel = ['route__code', 'route__pmp_areacode', 'route__pmp_runcode', 'route__area_id__name']
+
+        pmpupds = RouteAff.objects.filter(route__region__id=region).values(*sel)
+
+        # pmpupd = Route.objects.raw('SELECT id, code, pmp_areacode, pmp_runcode, %s FROM master_files_route WHERE region_id=%s',[type,region])
+
+        return pmpupds
+
+
+
 
