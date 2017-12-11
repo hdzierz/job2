@@ -1,0 +1,41 @@
+{% extends "page_base.html" %}
+
+{% load bootstrap3 %}
+
+{% block info %}
+<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+  <div class="page-header">
+    <h1>PMP Updated by Distributor</h1>
+    <p class="intro">
+
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block data %}
+<!-- Start .panel -->
+<div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
+    <div class="panel-heading">
+        <h4 class="panel-title">PMP Updated by Distributor</h4>
+    </div>
+    <div class="panel-body">
+
+        <form action="" method="GET">
+            {% csrf_token %}
+
+             {% bootstrap_form form %}
+
+            <input type="submit" value="Run" class="btn btn-primary">
+        </form>
+    </div>
+
+
+<br/>
+{% include "report_table.html" %}
+
+
+</div>
+<!-- End .panel -->
+{% endblock %}
+

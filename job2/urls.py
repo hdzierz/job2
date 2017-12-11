@@ -18,7 +18,7 @@ from django.contrib import admin
 import lbm.views as views 
 import master_files.views as mviews
 import reports.views as rviews
-import sweetspot.views as gssviews
+
 from django.contrib.auth.decorators import login_required
 
 
@@ -31,6 +31,15 @@ urlpatterns = [
     url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
     #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
+
+    url(r'^reports/archived/pmpupdated', rviews.PmpUpdated.as_view(), name='page_reports_archived_pmpupdated'),
+    url(r'^reports/archived/Distpmpupdatedby', rviews.DistPmpUpdated.as_view(), name='page_reports_archived_Distpmpupdatedby'),
+    url(r'^reports/archived/addressDetails', rviews.AddressDetails.as_view(), name='page_reports_archived_addressDetails'),
+    url(r'^reports/archived/distBible', rviews.DistBible.as_view(), name='page_reports_archived_distBible'),
+    url(r'^reports/archived/regionBible', rviews.RegionBible.as_view(), name='page_reports_archived_regionBible'),
+
+
+
     url(r'^master_files/(?P<model>[a-zA-Z0-9_]*)/$', mviews.page_list,
         name='master_files_routes'),
     url(r'^master_files/route/create/$', mviews.RouteCreate.as_view()),
@@ -75,5 +84,5 @@ urlpatterns = [
     
     url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
     url(r'^test/(?P<tgt>[a-zA-Z]*)/(?P<search>.*)/$', views.api_get_regions),
-    url(r'^sweet/(?P<do_id>[0-9]+)/(?P<job_id>[0-9]+)/$', gssviews.api_get_gss_image),
+    # url(r'^sweet/(?P<do_id>[0-9]+)/(?P<job_id>[0-9]+)/$', gssviews.api_get_gss_image),
 ]
