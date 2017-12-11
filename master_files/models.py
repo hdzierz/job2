@@ -16,8 +16,7 @@ class CfgJobType(models.Model):
     description = models.TextField(default="")
 
     def __str__(self):
-        name = self.name.replace("num_","")
-        return  name[0].upper() + name[1:]
+        return  name
 
 
 class CfgAddressType(models.Model):

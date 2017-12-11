@@ -71,6 +71,7 @@ urlpatterns = [
 
     url(r'^reports/monthly_job_report/$', rviews.MonthlyJobReport.as_view()),
     url(r'^reports/weekly_job_report/$', rviews.WeeklyReport.as_view()),
+    url(r'^reports/summary_delivery/$', rviews.SummaryDeliveryInstructions.as_view()),
     
     url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
     url(r'^test/(?P<tgt>[a-zA-Z]*)/(?P<search>.*)/$', views.api_get_regions),

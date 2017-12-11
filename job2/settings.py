@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'reports',
     'master_files',
     'coural_legacy',
+    'sweetspot',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -87,9 +88,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'thomas',
-        'PASSWORD': 'Th0Mas370',
-        'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
+        'USER': 'coural',
+        'PASSWORD': 'coural69',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
