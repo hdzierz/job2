@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'wkhtmltopdf',
     'django_tables2',
     'django_extensions',
     'sslserver',
@@ -112,8 +113,8 @@ DATABASES = {
     'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'root',
-        'PASSWORD': 'Admin@123',
+        'USER': 'coural',
+        'PASSWORD': 'coural69',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
@@ -171,6 +172,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+STATIC_ROOT = '/home/hdzierz/'
 
 #logging.basicConfig(filename='tmp/job2.log',level=logging.DEBUG)
 
