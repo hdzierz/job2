@@ -5,7 +5,7 @@
         <thead>
             <tr>
 		{% for col in cols  %}
-		<th>{{col}}</th>
+		<th>{{col | coln}}</th>
 		{% endfor  %}
             </tr>
         </thead>
@@ -23,7 +23,7 @@
 	<tfoot>
             <tr>
                 {% for col in cols  %}
-                <th>{{col}}</th>
+		<th>{{col | coln}}</th>
                 {% endfor  %}
             </tr>
         </tfoot>

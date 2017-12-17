@@ -2,18 +2,40 @@
 
 {% load bootstrap3 %}
 
+{% block info %}
+<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+  <div class="page-header">
+	  <h1>{{report}}</h1>
+    <p class="intro">
+
+    </p>
+  </div>
+</div>
+{% endblock %}
+
 {% block data %}
+<!-- Start .panel -->
+<div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
+    <div class="panel-heading">
+	    <h4 class="panel-title">{{report}}</h4>
+    </div>
+    <div class="panel-body">
 
+        <form action="" method="GET">
+            {% csrf_token %}
 
-<h2>{{page_name}}</h2>
+             {% bootstrap_form form %}
 
+            <input type="submit" value="Run" class="btn btn-primary">
+        </form>
+    </div>
 
-{{ form }}
-<br />
-
-
+    <h4>{{header}}</h4>
+<br/>
 {% include "report_table.html" %}
 
 
+</div>
+<!-- End .panel -->
 {% endblock %}
 
