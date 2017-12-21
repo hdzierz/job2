@@ -1,11 +1,9 @@
-from django.http import HttpResponseRedirect, JsonResponse
-
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import View
 
 from .forms import *
-
-################# MAINTENANCE ######################
 
 
 class ReportView(View):
@@ -22,6 +20,8 @@ class ReportView(View):
     data = None
     form = None
     ajax = False
+    report = "unknown"
+    header = "none"
 
 
     def get(self, request):
@@ -40,6 +40,8 @@ class ReportView(View):
 
         return render(request, self.template_name, 
                 {
+                    'report': self.report,
+                    'header': self.header,
                     'msg': msg, 
                     'form': self.form,
                     'model': self.model,
@@ -53,72 +55,72 @@ class ReportView(View):
         return []
 
     def post(self, request):
-        draw = request.POST.get('draw')
-        start = int(request.POST.get('start'))
-        length = int(request.POST.get('length'))
-        search = request.POST.get('search[value]')
-        regex = request.POST.get('search[regex]')
-        order_col = request.POST.get('order[0][column]')
-        order_dir = request.POST.get('order[0][dir]')
+        res = []
+        if self.ajax:
+            draw = request.POST.get('draw')
+            start = int(request.POST.get('start'))
+            length = int(request.POST.get('length'))
+            search = request.POST.get('search[value]')
+            regex = request.POST.get('search[regex]')
+            order_col = request.POST.get('order[0][column]')
+            order_dir = request.POST.get('order[0][dir]')
 
-        o_col = self.cols[int(order_col)]
+            o_col = self.cols[int(order_col)]
 
-        if(order_dir == "desc"):
-            o_col = '-' + o_col.lower()
+            if(order_dir == "desc"):
+                o_col = '-' + o_col.lower()
 
-        o_col = o_col.lower()
+            o_col = o_col.lower()
     
-        query_method = self.search_field_conf['query_method']
-        filt_cols = self.search_field_conf['targets']
+            query_method = self.search_field_conf['query_method']
+            filt_cols = self.search_field_conf['targets']
 
-        if(regex != 'false'):
-            query_method="iregex"
+            if(regex != 'false'):
+                query_method="iregex"
 
-        q_and = Q(pk__gt=0)
+            q_and = Q(pk__gt=0)
 
-        if(search != ''):
-            search_apl = search.split(';')
-            for s in search_apl:
-                q = Q(pk=-1)
-                for f in filt_cols:
-                    kwargs = {'{0}__{1}'.format(f, query_method): s}
-                    q = q | Q(**kwargs)
-                q_and = q_and & q
+            if(search != ''):
+                search_apl = search.split(';')
+                for s in search_apl:
+                    q = Q(pk=-1)
+                    for f in filt_cols:
+                        kwargs = {'{0}__{1}'.format(f, query_method): s}
+                        q = q | Q(**kwargs)
+                    q_and = q_and & q
 
-        i = 0
-        has_col_search = False
-        for c in self.cols:
-            col_str = 'columns[' + str(i)  + '][search][value]'
-            print(col_str)
-            if col_str in request.POST:
-                val = request.POST.get(col_str)
-                print("h:" + val)
-                if val != '':
-                    kwargs = {'{0}__{1}'.format(col, query_method): val}
-                    q_and = q_and & Q(**kwargs)
-                    has_col_search = True
-            i += 1
+            i = 0
+            has_col_search = False
+            for c in self.cols:
+                col_str = 'columns[' + str(i)  + '][search][value]'
+                if col_str in request.POST:
+                    val = request.POST.get(col_str)
+                    if val != '':
+                        kwargs = {'{0}__{1}'.format(col, query_method): val}
+                        q_and = q_and & Q(**kwargs)
+                        has_col_search = True
+                i += 1
 
-        if(search!='' or has_col_search):
-            routes = cls.objects.filter(q_and).order_by(o_col)
-            ct_filtered = routes.count()
-            routes = routes[start:(start+length)]
-        else:
-            routes = cls.objects.all().order_by(o_col)[start:(start+length)]
-            ct_filtered = cls.objects.all().count()
+            if(search!='' or has_col_search):
+                routes = cls.objects.filter(q_and).order_by(o_col)
+                ct_filtered = routes.count()
+                routes = routes[start:(start+length)]
+            else:
+                routes = cls.objects.all().order_by(o_col)[start:(start+length)]
+                ct_filtered = cls.objects.all().count()
 
-        data = []
-        for r in routes:
-            d = []
-            for c in cols:
-                d.append(str(getattr(r,c.lower())))
-            data.append(d)
+            data = []
+            for r in routes:
+                d = []
+                for c in cols:
+                    d.append(str(getattr(r,c.lower())))
+                data.append(d)
 
-        res = {}
-        res['draw'] = draw
-        res['data'] = data
-        res['recordsTotal'] = int(cls.objects.all().count())
-        res['recordsFiltered'] = ct_filtered
+            res = {}
+            res['draw'] = draw
+            res['data'] = data
+            res['recordsTotal'] = int(cls.objects.all().count())
+            res['recordsFiltered'] = ct_filtered
 
         return JsonResponse(res)
 
@@ -178,51 +180,67 @@ class WeeklyReport(ReportView):
 
         jobs = LBMJobRoute.objects.filter(job__delivery_date=dtt).values(*sel).annotate(Sum('amount'))
 
-        #res = []
+        return jobs
+  
 
-        #for job in jobs:
-           #res.append(model_to_dict(job, fields=self.cols))
+class SummaryDeliveryInstructions(ReportView):
+    form_class = SummaryDeliveryInstructionsForm
+    cols = ["job__job_no", 
+            "job__is_regular", 
+            "job__dest_type__name", 
+            "job__publication__name", 
+            "job__delivery_date",
+            "dropoff__last_name",
+            "amount",
+    ]
+	
+    def result(self, request):
+        frm = request.GET.get('from')
+        to = request.GET.get('to')
+        dist = request.GET.get('dist')
+
+        sel = self.cols[:]
+        del sel[-1]
+        self.cols.append("amount__sum")
+
+        if dist:
+            crit1 = Q(job__delivery_date__gt=frm)
+            crit2 = Q(job__delivery_date__lt=to)
+            crit3 = Q(dist__id=dist)
+            jobs = LBMJobRoute.objects.filter(
+                crit1 & crit2 & crit3,
+                ).values(*sel).annotate(Sum('amount'))
+        else:
+            jobs = LBMJobRoute.objects.filter(job__job_no__gt=80000).values(*sel).annotate(Sum('amount'))
 
         return jobs
 
 
-
-
-
 from django.forms.models import model_to_dict
-from master_files.models import Route, RouteAff, Region
 import time
-
 
 class PmpUpdated(ReportView):
     form_class = PmpUpdatedForm
-    template_name = 'page_reports_archived_pmpupdated.html'
+    template_name = 'page_reports.html'
 
-    cols = ['route__code','route__pmp_areacode' ,'route__pmp_runcode','route__area_id__name']
+    report = "PMP Updated"
+    header = "RURAL DELIVERY NUMBERS " + str(datetime.date.today()) 
+    cols = ['route__rd','route__pmp_areacode' ,'route__pmp_runcode','route__region__name', 'route__total',]
 
     def result(self, request):
         pmp = request.GET.get('pmp')
-        type   = request.GET.get('type')
+        typ = request.GET.get('type')
         region = request.GET.get('region')
 
-        date = time.strftime("%Y-%m-%d")
+        if typ != None:
+            buff = CfgJobType.objects.get(id=typ)
+            self.cols[-1] = 'route__' + buff.name.lower()
+      
+        return RouteAff.objects.filter(
+                route__region__id=region,
+                app_date__lt=datetime.datetime.now()
+                ).order_by('-app_date')[:1].values(*self.cols)
 
-        sel = ['route__code','route__pmp_areacode' ,'route__pmp_runcode','route__area_id__name']
-
-
-        pmpupds = RouteAff.objects.filter(route__region__id=region).values(*sel)
-
-        #pmpupd = Route.objects.raw('SELECT id, code, pmp_areacode, pmp_runcode, %s FROM master_files_route WHERE region_id=%s',[type,region])
-
-        return pmpupds
-
-
-
-
-
-
-
-from master_files.models import Route, RouteAff, Region, Address
 
 class AddressDetails(ReportView):
     form_class = AddressDetails
@@ -234,23 +252,14 @@ class AddressDetails(ReportView):
         distrib = request.GET.get('distrib')
         date = request.GET.get('date')
 
-
         sel = ['company', 'first_name', 'last_name', 'first_name2', 'last_name2', 'address', 'address2', 'postal_addr', 'city', 'postcode', 'country', 'phone', 'phone2', 'mobile', 'mobile2', 'email', 'mobile3', 'bank_num', 'gst_num', 'mail_type']
+
+#         sel = ['first_name','last_name','address']
 
 
         addres = Address.objects.filter(typ__name=distrib).values(*sel)
 
         return addres
-
-
-
-
-
-
-
-
-
-from master_files.models import Route, RouteAff, Region
 
 
 class DistBible(ReportView):
@@ -265,22 +274,15 @@ class DistBible(ReportView):
         mobileno = request.GET.get('mobileno')
         emailno = request.GET.get('email')
 
-
-
         sel = ['first_name','last_name','address']
 
 
         dists = Address.objects.filter(typ__name=dist).values(*sel)
 
-
         return dists
 
 
-
-
 from django.forms.models import model_to_dict
-from master_files.models import Route, RouteAff, Region
-
 
 class RegionBible(ReportView):
     form_class = RegionBibleForm
@@ -299,43 +301,83 @@ class RegionBible(ReportView):
         sel = ['route__code', 'pcl_dropoff__first_name', 'lbm_dropoff__last_name', 'lbm_dropoff__phone',
                'lbm_dropoff__address', 'route__description']
 
-
         routes = RouteAff.objects.filter(route__region__id=region).values(*sel)
 
         return routes
-
-
-
-
 
 
 from django.forms.models import model_to_dict
 from master_files.models import Route, RouteAff, Region
 import time
 
-
 class DistPmpUpdated(ReportView):
     form_class = DistPmpUpdatedForm
-    template_name = 'page_reports_archived_Distpmpupdatedby.html'
+    template_name = 'page_reports.html'
 
-    cols = ['route__code', 'route__pmp_areacode', 'route__pmp_runcode', 'route__area_id__name']
+    report = "PMP Updated by Distributor"
+    header = "RURAL DELIVERY NUMBERS " + str(datetime.date.today())
+    cols = ['route__rd', 'route__pmp_areacode', 'route__pmp_runcode', 'route__region__name', 'lbm_dist__company', 'route_total']
 
     def result(self, request):
         dbutor = request.GET.get('dbutor')
         pmp = request.GET.get('pmp')
-        type = request.GET.get('type')
-        region = request.GET.get('region')
+        typ = request.GET.get('type')
 
-        date = time.strftime("%Y-%m-%d")
+        if typ != None:
+            buff = CfgJobType.objects.get(id=typ)
+            self.cols[-1] = 'route__' + buff.name.lower()
 
-        sel = ['route__code', 'route__pmp_areacode', 'route__pmp_runcode', 'route__area_id__name']
+        return RouteAff.objects.filter(
+                lbm_dist__id=dbutor,
+                app_date__lt=datetime.datetime.now()
+                ).order_by('-app_date')[:1].values(*self.cols)
 
-        pmpupds = RouteAff.objects.filter(route__region__id=region).values(*sel)
 
-        # pmpupd = Route.objects.raw('SELECT id, code, pmp_areacode, pmp_runcode, %s FROM master_files_route WHERE region_id=%s',[type,region])
+dist_cols = ["job__job_no","job__is_regular","job__publication__name", "job__client__company", "job__dest_type__name", "job__delivery_date", "dropoff__company", "amount__sum", ]
 
-        return pmpupds
+from django.template import Context, Template
+from django.template.loader import get_template
+from wkhtmltopdf.views import PDFTemplateView, PDFTemplateResponse
+import pdfkit
 
+def bible_send(request):
+    dist_t = get_template("pdf_deliv_dist.html")
+
+    dists = Address.objects.filter(typ__name="lbm_dist")
+    for dist in dists:
+        print("Processing " + dist.company)
+        sel = dist_cols[:]
+        del sel[-1]
+        vals = LBMJobRoute.objects.filter(dist=dist).values(*sel).annotate(Sum('amount')).order_by("job__publication__name")
+        c = {"cols":dist_cols, "data":vals, "dist": dist.company}
+        html = dist_t.render(c)
+        pdfkit.from_string(html, "delivery/" + dist.company + '.pdf')
+
+    return HttpResponse("test")
+
+#        return PDFTemplateResponse(request=request,
+#			template=dist_t,
+#                        filename="hello.pdf",
+#                        context= c,
+#                        show_content_in_browser=False,
+#                        cmd_options={'margin-top': 50,},
+#                         )
+
+
+from wkhtmltopdf.views import PDFTemplateView, PDFResponse
+
+
+class MyPDF(PDFTemplateView):
+    filename = 'my_pdf.pdf'
+    template_name = 'page_reports.html'
+    cmd_options = {
+        'margin-top': 3,
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tt'] = 'test'
+        return context
 
 
 

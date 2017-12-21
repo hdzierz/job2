@@ -80,8 +80,9 @@ urlpatterns = [
 
     url(r'^reports/monthly_job_report/$', rviews.MonthlyJobReport.as_view()),
     url(r'^reports/weekly_job_report/$', rviews.WeeklyReport.as_view()),
+    url(r'^reports/summary_delivery/$', rviews.SummaryDeliveryInstructions.as_view()),
     
     url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
-    url(r'^test/(?P<tgt>[a-zA-Z]*)/(?P<search>.*)/$', views.api_get_regions),
+    url(r'^test/$', rviews.bible_send),
     # url(r'^sweet/(?P<do_id>[0-9]+)/(?P<job_id>[0-9]+)/$', gssviews.api_get_gss_image),
 ]

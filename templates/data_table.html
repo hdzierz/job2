@@ -12,10 +12,10 @@
         <thead>
             <tr>
 		{% for col in cols  %}
-		<th>{{col}}</th>
+		<th>{{col | coln:col}}</th>
 		{% endfor  %}
             </tr>
-        </thead>
+        </thead>| 
 	    {% if data  %} {# syn to if not ajax  #}
 	    <tbody>
 		{% for d in data  %}
