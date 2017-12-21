@@ -245,15 +245,19 @@ class PmpUpdated(ReportView):
 class AddressDetails(ReportView):
     form_class = AddressDetails
     template_name = 'page_reports_archived_addressDetails.html'
-    cols = ['first_name','last_name','address']
+    cols = ['company', 'first_name', 'last_name', 'first_name2', 'last_name2', 'address', 'address2', 'postal_addr', 'city', 'postcode', 'country', 'phone', 'phone2', 'mobile', 'mobile2', 'email', 'mobile3', 'bank_num', 'gst_num', 'mail_type']
+
 
     def result(self, request):
-        dist = request.GET.get('dist')
+        distrib = request.GET.get('distrib')
         date = request.GET.get('date')
 
-        sel = ['first_name','last_name','address']
+        sel = ['company', 'first_name', 'last_name', 'first_name2', 'last_name2', 'address', 'address2', 'postal_addr', 'city', 'postcode', 'country', 'phone', 'phone2', 'mobile', 'mobile2', 'email', 'mobile3', 'bank_num', 'gst_num', 'mail_type']
 
-        addres = Address.objects.filter(typ__name=dist).values(*sel)
+#         sel = ['first_name','last_name','address']
+
+
+        addres = Address.objects.filter(typ__name=distrib).values(*sel)
 
         return addres
 
@@ -302,6 +306,8 @@ class RegionBible(ReportView):
         return routes
 
 
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
 import time
 
 class DistPmpUpdated(ReportView):
@@ -375,3 +381,28 @@ class MyPDF(PDFTemplateView):
 
 
 
+from django.forms.models import model_to_dict
+from master_files.models import Route, RouteAff, Region
+import time
+
+
+class SumDeliveryIns(ReportView):
+    form_class = SumDeliveryInsForm
+    template_name = 'page_summary_delivery_instructions.html'
+    cols = ['job','job__delivery_date','route__name']
+
+
+    def result(self, request):
+        stdate  = request.GET.get('stdate')
+        enddate = request.GET.get('enddate')
+        dbutor  = request.GET.get('dbutor')
+        showrj  = request.GET.get('showrj')
+        showcj  = request.GET.get('showcj')
+        showrdrj    = request.GET.get('showrdrj')
+        dicomment   = request.GET.get('dicomment')
+
+        sel = ['job','job__delivery_date','route__name']
+
+        sdins = LBMJobRoute.objects.filter(dist=dbutor).values(*sel)
+
+        return sdins

@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^reports/archived/addressDetails', rviews.AddressDetails.as_view(), name='page_reports_archived_addressDetails'),
     url(r'^reports/archived/distBible', rviews.DistBible.as_view(), name='page_reports_archived_distBible'),
     url(r'^reports/archived/regionBible', rviews.RegionBible.as_view(), name='page_reports_archived_regionBible'),
-
+    url(r'^reports/archived/sumdeliveryins', rviews.SumDeliveryIns.as_view(), name='page_summary_delivery_instructions'),
 
 
     url(r'^master_files/(?P<model>[a-zA-Z0-9_]*)/$', mviews.page_list,
