@@ -185,6 +185,7 @@ class WeeklyReport(ReportView):
 
 class SummaryDeliveryInstructions(ReportView):
     form_class = SummaryDeliveryInstructionsForm
+    template_name = 'page_summary_delivery_instructions.html'
     cols = ["job__job_no", 
             "job__is_regular", 
             "job__dest_type__name", 
@@ -381,28 +382,4 @@ class MyPDF(PDFTemplateView):
 
 
 
-from django.forms.models import model_to_dict
-from master_files.models import Route, RouteAff, Region
-import time
 
-
-class SumDeliveryIns(ReportView):
-    form_class = SumDeliveryInsForm
-    template_name = 'page_summary_delivery_instructions.html'
-    cols = ['job','job__delivery_date','route__name']
-
-
-    def result(self, request):
-        stdate  = request.GET.get('stdate')
-        enddate = request.GET.get('enddate')
-        dbutor  = request.GET.get('dbutor')
-        showrj  = request.GET.get('showrj')
-        showcj  = request.GET.get('showcj')
-        showrdrj    = request.GET.get('showrdrj')
-        dicomment   = request.GET.get('dicomment')
-
-        sel = ['job','job__delivery_date','route__name']
-
-        sdins = LBMJobRoute.objects.filter(dist=dbutor).values(*sel)
-
-        return sdins

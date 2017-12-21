@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'reports',
     'master_files',
     'coural_legacy',
-    'sweetspot',
+    # 'sweetspot',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,8 +101,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'coural',
-        'PASSWORD': 'coural69',
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
@@ -113,8 +113,8 @@ DATABASES = {
     'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'coural',
-        'PASSWORD': 'coural69',
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
