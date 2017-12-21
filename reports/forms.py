@@ -6,13 +6,16 @@ class MonthlyJobForm(forms.Form):
     year = forms.CharField(label='Your name', max_length=100) 
 
 
+from bootstrap_datepicker.widgets import DatePicker
+
 class SummaryDeliveryInstructionsForm(forms.Form):
-    frm = forms.DateField(label='Start Date')
-    to = forms.DateField(label="Final Date")
+    frm = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False, label='Start Date')
+    to = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False, label="Final Date")
     dist = forms.ModelChoiceField(\
             queryset=Address.objects.filter(typ__name="lbm_dist")
             )
     comment = forms.CharField(min_length=255, label="Comment")
+
 
 
 pmps  = [("1","with PMP"),("2","without PMP"),("3","Descriptions without PMP"),("4","Area Totals")]
@@ -63,26 +66,3 @@ class DistPmpUpdatedForm(forms.Form):
     type = forms.ModelChoiceField(label="Type", queryset=CfgJobType.objects.all().order_by('name'))
     dbutor = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_dist").order_by('company'))
 
-
-from django import forms
-from  master_files.models import Region, Route, Address
-from bootstrap_datepicker.widgets import DatePicker
-
-class SumDeliveryInsForm(forms.Form):
-
-    stdate  = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False)
-
-    enddate = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False)
-
-    dbutor = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
-
-    showrj = forms.BooleanField(label=("Show regular Jobs"), required=False)
-
-    showcj = forms.BooleanField(label=("Show casual Jobs"), required=False)
-
-    showrdrj = forms.BooleanField(label=("Show RDs for regular Jobs"), required=False)
-
-    dicomment = forms.CharField(
-        widget=forms.Textarea(
-            attrs={'rows': 5, 'placeholder': 'Please return confirmations, nothing any shortages, to Fax: 0800 893 866. Email : coural@coural.co.nz. All jobs have a 3day delivery window. The date on the job is the start date.  '}
-        ))
