@@ -185,11 +185,12 @@ class WeeklyReport(ReportView):
 
 class SummaryDeliveryInstructions(ReportView):
     form_class = SummaryDeliveryInstructionsForm
-    cols = ["job__job_no",
+    template_name = 'page_summary_delivery_instructions.html'
+    cols = ["job__job_no", 
+            "job__is_regular", 
+            "job__dest_type__name", 
             "job__publication__name", 
             "job__delivery_date",
-            "job__is_regular",
-            "job__dest_type__name",
             "dropoff__last_name",
             "amount",
     ]
@@ -214,6 +215,7 @@ class SummaryDeliveryInstructions(ReportView):
             jobs = LBMJobRoute.objects.filter(job__job_no__gt=80000).values(*sel).annotate(Sum('amount'))
 
         return jobs
+
 
 
 class SummaryDeliveryInstructionsJob(ReportView):
@@ -244,6 +246,7 @@ class SummaryDeliveryInstructionsJob(ReportView):
             ).values(*sel)
 
         return jobs
+
 
 
 from django.forms.models import model_to_dict
@@ -408,8 +411,6 @@ class MyPDF(PDFTemplateView):
         context = super().get_context_data(**kwargs)
         context['tt'] = 'test'
         return context
-
-
 
 
 

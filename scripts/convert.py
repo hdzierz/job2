@@ -173,3 +173,92 @@ def run():
                 nc.dest_type = CfgJobType.objects.get(name=r.dest_type)
  
                 nr.save()
+
+class ConvertRouteAff():
+    @staticmethod
+    def convert():
+        for ra in LCCRouteAff.objects.all():
+            RouteAff.objects.all().delete()
+
+            try:
+                dist = Address.objects.get(old_operator_id=ra.dist_id)
+            except:
+                dist = Address()
+                dist.name = "unknown"
+                dist.save()
+            
+            try:
+                subdist = Address.objects.get(old_operator_id=ra.subdist_id)
+            except:
+                subdist = Address()
+                subdist.name = "unknown"
+                subdist.save()
+
+            try:
+                cont = Address.objects.get(old_operator_id=ra.contractor_id)
+            except:
+                cont = Address()
+                cont.name = "unknown"
+                cont.save()
+
+            try:
+                doff = Address.objects.get(old_operator_id=ra.doff_id)
+            except:
+                doff = Address()
+                doff.name = "unknown"
+                doff.save()
+
+            try:
+                pdist = Address.objects.get(old_operator_id=ra.env_dist_id)
+            except:
+                pdist = Address()
+                pdist.name = "unknown"
+                pdist.save()
+            
+            try:
+                psubdist = Address.objects.get(old_operator_id=ra.env_subdist_id)
+            except:
+                psubdist = Address()
+                psubdist.name = "unknown"
+                psubdist.save()
+
+
+            try:
+                pcont = Address.objects.get(old_operator_id=ra.env_contractor_id)
+            except:
+                pcont = Address()
+                pcont.name = "unknown"
+                pcont.save()
+
+            try:
+                pdoff = Address.objects.get(old_operator_id=ra.env_doff_id)
+            except:
+                pdoff = Address()
+                pdoff.name = "unknown"
+                pdoff.save()
+           
+            try: 
+                route = Route.objects.get(old_id=ra.route_id)
+            except:
+                route = Route()
+                route.code = "unknown"
+                route.island_id = 1
+                route.area_id = 1
+                route.region_id = 1
+                route.save()
+
+            nra = RouteAff()
+            nra.lbm_dist = dist
+            nra.lbm_subdist = subdist
+            nra.lbm_contractor = cont
+            nra.lbm_dropoff = doff
+            
+            nra.pcl_dist = dist
+            nra.pcl_subdist = subdist
+            nra.pcl_contractor = cont
+            nra.pcl_dropoff = doff
+            
+            nra.app_date = ra.app_date
+            nra.route = route
+            nra.save()
+

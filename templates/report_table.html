@@ -5,7 +5,7 @@
         <thead>
             <tr>
 		{% for col in cols  %}
-		<th>{{col}}</th>
+		<th>{{col | coln}}</th>
 		{% endfor  %}
             </tr>
         </thead>
@@ -23,7 +23,7 @@
 	<tfoot>
             <tr>
                 {% for col in cols  %}
-                <th>{{col}}</th>
+		<th>{{col | coln}}</th>
                 {% endfor  %}
             </tr>
         </tfoot>
@@ -55,6 +55,7 @@
             "processing": true,
             "serverSide": true,
 	    "order": [[ {{sort_col}}, "asc" ]],
+        "scrollX": true,
 	    "columnDefs": [{
 		"targets" : 0,
 		"render": function(data, type, row){

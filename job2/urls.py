@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^reports/lbm/SummaryDeliveryInstructions', rviews.SummaryDeliveryInstructions.as_view(), name='page_summary_delivery_instructions'),
     url(r'^reports/lbm/SummaryDeliveryInstructionsJob', rviews.SummaryDeliveryInstructionsJob.as_view(), name='page_summary_delivery_instructions_job'),
 
+
     url(r'^reports/archived/pmpupdated', rviews.PmpUpdated.as_view(), name='page_reports_archived_pmpupdated'),
     url(r'^reports/archived/Distpmpupdatedby', rviews.DistPmpUpdated.as_view(), name='page_reports_archived_Distpmpupdatedby'),
     url(r'^reports/archived/addressDetails', rviews.AddressDetails.as_view(), name='page_reports_archived_addressDetails'),

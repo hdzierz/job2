@@ -7,6 +7,7 @@ class MonthlyJobForm(forms.Form):
     year = forms.CharField(label='Your name', max_length=100) 
 
 
+
 class SummaryDeliveryInstructionsForm(forms.Form):
     frm = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label='Start Date')
     to = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label="Final Date")
@@ -23,14 +24,13 @@ class SummaryDeliveryInstructionsJobForm(forms.Form):
 
 
 
+
 pmps  = [("1","with PMP"),("2","without PMP"),("3","Descriptions without PMP"),("4","Area Totals")]
 
 class PmpUpdatedForm(forms.Form):
     pmp   = forms.ChoiceField(label="PMP", choices=pmps)
     type = forms.ModelChoiceField(label="Type", queryset=CfgJobType.objects.exclude(name="bundles").order_by('name'))
     region = forms.ModelChoiceField(label=("Select Region"), queryset=Region.objects.all())
-
-
 
 
 class DistBibleForm(forms.Form):
@@ -50,8 +50,8 @@ class RegionBibleForm(forms.Form):
 
 class AddressDetails(forms.Form):
 
-    distrib = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
 
+    distrib = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
     date = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False)
     isc  = forms.BooleanField(label=("Is Current"), required=False)
     distb = forms.BooleanField(label=("Distributor"), required=False)
@@ -66,5 +66,7 @@ pmps  = [("1","with PMP"),("2","without PMP"),("3","Descriptions without PMP"),(
 class DistPmpUpdatedForm(forms.Form):
     pmp   = forms.ChoiceField(label="PMP", choices=pmps)
     type = forms.ModelChoiceField(label="Type", queryset=CfgJobType.objects.all().order_by('name'))
+
     dbutor = forms.ModelChoiceField(label=("Distributor"),  queryset=Address.objects.filter(typ__name="lbm_contractor"))
+
 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+import datetime
+
 # Create your models here.
 
 
@@ -12,10 +14,9 @@ class Config(models.Model):
 class CfgJobType(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(default="")
-
+    
     def __str__(self):
-        name = self.name.replace("num_","")
-        return  name[0].upper() + name[1:]
+        return  self.name
 
 
 class CfgAddressType(models.Model):
@@ -122,8 +123,8 @@ class Address(models.Model):
 
     def __str__(self):
         ret = self.last_name
-        if(self.company and ret):
-            ret += "/" + self.company
+        if(self.company):
+            ret = self.company
         return str(ret)
 
 
@@ -195,18 +196,20 @@ class Route(models.Model):
     island = models.ForeignKey(Island)
     area = models.ForeignKey(Area)
     region = models.ForeignKey(Region)
-    code = models.CharField(max_length=255,blank=True, null=True) 
+    rd = models.CharField(max_length=255,blank=True, null=True)
+    post_code =  models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     pmp_areacode = models.IntegerField(blank=True, null=True)
     pmp_runcode = models.IntegerField(blank=True, null=True)
-    num_lifestyle = models.IntegerField(blank=True, null=True)
-    num_farmers = models.IntegerField(blank=True, null=True)
-    num_dairies = models.IntegerField(blank=True, null=True)
-    num_sheep = models.IntegerField(blank=True, null=True)
-    num_beef = models.IntegerField(blank=True, null=True)
-    num_sheepbeef = models.IntegerField(blank=True, null=True)
-    num_dairybeef = models.IntegerField(blank=True, null=True)
-    num_hort = models.IntegerField(blank=True, null=True)
+    lifestyle = models.IntegerField(blank=True, null=True)
+    farmers = models.IntegerField(blank=True, null=True)
+    dairies = models.IntegerField(blank=True, null=True)
+    sheep = models.IntegerField(blank=True, null=True)
+    beef = models.IntegerField(blank=True, null=True)
+    sheepbeef = models.IntegerField(blank=True, null=True)
+    dairybeef = models.IntegerField(blank=True, null=True)
+    hort = models.IntegerField(blank=True, null=True)
+    total = models.IntegerField(blank=True, null=True)
     seq_region = models.IntegerField(blank=True, null=True)
     seq_area = models.IntegerField(blank=True, null=True)
     seq_code = models.IntegerField(blank=True, null=True)
@@ -236,6 +239,17 @@ class RouteAff(models.Model):
     app_date = models.DateField()
 
     @staticmethod
+    def GetLBMContractor(route, dtt = datetime.datetime.now()):
+        res = RouteAff.objects.filter(
+            route = route,
+            app_date__gt = dtt
+        ).order_by('-app_date')
+
+        if res.count() == 0:
+            raise Exception("ERROR IN Route Aff: " + str(route) + " not found (" + str(dtt) + ")")
+        return res[0]
+
+    @staticmethod
     def GetLBMRoute(op, dtt, tgt):
         if isinstance(tgt, str):
             ras = RouteAff.objects.filter(
@@ -255,4 +269,7 @@ class RouteAff(models.Model):
         return ras[0].route
 
 
-
+#from django.db.models.signals import pre_save
+#from django.dispatch import receiver
+#@receiver(pre_save, sender=Route)
+#def my_handler(sender, **kwargs):

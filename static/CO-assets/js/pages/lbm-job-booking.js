@@ -18,9 +18,6 @@ $(document).ready(function() {
         },
         errorClass: 'help-block',
         rules: {
-            purchase_no: {
-                required: true
-            },
             email: {
                 required: true,
                 email: true
@@ -40,7 +37,7 @@ $(document).ready(function() {
         },
         messages: {
             purchase_no: {
-                required: "Please put in the purchase #."
+                required: "Please put dwoih  in the purchase #."
             },
             email: {
                 required: "Please put in your email."

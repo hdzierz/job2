@@ -25,7 +25,7 @@ SECRET_KEY = '@23bx@9u7k(=3f*i17w!owi!_+lgm)l=2(661l411na_tkcpl='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '103.18.58.13', 'jobs.dzierzon.co.nz']
+ALLOWED_HOSTS = ['localhost', '103.18.58.13', 'jobs.dzierzon.co.nz','127.0.0.1']
 
 
 # Application definition
@@ -38,13 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'wkhtmltopdf',
     'django_tables2',
     'django_extensions',
+    'sslserver',
     'lbm',
     'parcel',
     'reports',
     'master_files',
     'coural_legacy',
+    # 'sweetspot',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -83,24 +86,36 @@ WSGI_APPLICATION = 'job2.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'job2',
+    #     'USER': 'thomas',
+    #     'PASSWORD': 'Th0Mas370',
+    #     'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    #     'OPTIONS': {
+    #         "sql_mode": "STRICT_ALL_TABLES",
+    #         "init_command": "SET storage_engine=MyISAM",
+    #     }
+    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'job2',
-        'USER': 'thomas',
-        'PASSWORD': 'Th0Mas370',
-        'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
             "init_command": "SET storage_engine=MyISAM",
         }
-    },   
+    },
     'db_coural_legacy': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coural_legacy',
-        'USER': 'thomas',
-        'PASSWORD': 'Th0Mas370',
-        'HOST': 'jobs.dzierzon.co.nz',   # Or an IP Address that your DB is hosted on
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
@@ -158,5 +173,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-logging.basicConfig(filename='/tmp/job2.log',level=logging.DEBUG)
+STATIC_ROOT = '/home/hdzierz/'
+
+#logging.basicConfig(filename='tmp/job2.log',level=logging.DEBUG)
 
