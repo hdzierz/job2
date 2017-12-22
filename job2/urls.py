@@ -18,6 +18,7 @@ from django.contrib import admin
 import lbm.views as views 
 import master_files.views as mviews
 import reports.views as rviews
+
 from django.contrib.auth.decorators import login_required
 
 
@@ -25,11 +26,22 @@ urlpatterns = [
     url(r'^$', views.page_home, name='page_home'),    
     url(r'^admin/', admin.site.urls),
     url(r'^lbm/jobsCurrent', views.page_lbm, name='page_lbm'),
-    url(r'^lbm/jobBooking/$', views.LBMJobView.as_view(), name='page_lbm_jobBooking'),
-    url(r'^lbm/jobBooking/(?P<pk>[0-9]*)/$', views.LBMJobView.as_view(), name='page_lbm_jobBooking'),
+    url(r'^lbm/jobBooking/$', views.page_lbm_jobBooking, name='page_lbm_jobBooking'),
+    url(r'^lbm/jobBooking/(?P<job_id>[0-9]*)/$', views.page_lbm_jobBooking, name='page_lbm_jobBooking'),
     url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
     #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
+    url(r'^reports/lbm/SummaryDeliveryInstructions', rviews.SummaryDeliveryInstructions.as_view(), name='page_summary_delivery_instructions'),
+    url(r'^reports/lbm/SummaryDeliveryInstructionsJob', rviews.SummaryDeliveryInstructionsJob.as_view(), name='page_summary_delivery_instructions_job'),
+
+    url(r'^reports/archived/pmpupdated', rviews.PmpUpdated.as_view(), name='page_reports_archived_pmpupdated'),
+    url(r'^reports/archived/Distpmpupdatedby', rviews.DistPmpUpdated.as_view(), name='page_reports_archived_Distpmpupdatedby'),
+    url(r'^reports/archived/addressDetails', rviews.AddressDetails.as_view(), name='page_reports_archived_addressDetails'),
+    url(r'^reports/archived/distBible', rviews.DistBible.as_view(), name='page_reports_archived_distBible'),
+    url(r'^reports/archived/regionBible', rviews.RegionBible.as_view(), name='page_reports_archived_regionBible'),
+
+
+
     url(r'^master_files/(?P<model>[a-zA-Z0-9_]*)/$', mviews.page_list,
         name='master_files_routes'),
     url(r'^master_files/route/create/$', mviews.RouteCreate.as_view()),
@@ -69,7 +81,10 @@ urlpatterns = [
 
 
     url(r'^reports/monthly_job_report/$', rviews.MonthlyJobReport.as_view()),
-
+    url(r'^reports/weekly_job_report/$', rviews.WeeklyReport.as_view()),
+    url(r'^reports/summary_delivery/$', rviews.SummaryDeliveryInstructions.as_view()),
+    
     url(r'^ajax_data_table/(?P<model>[a-zA-Z0-9]*)$', mviews.ajax_data_table),
-    url(r'^test/(?P<tgt>[a-zA-Z]*)/(?P<search>.*)/$', views.api_get_regions),
+    url(r'^test/$', rviews.bible_send),
+    # url(r'^sweet/(?P<do_id>[0-9]+)/(?P<job_id>[0-9]+)/$', gssviews.api_get_gss_image),
 ]
