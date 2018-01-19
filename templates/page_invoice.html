@@ -1,0 +1,31 @@
+{% extends "page_base.html" %}
+
+{% load bootstrap3 %}
+
+{% block info %}
+<!-- Start .panel -->
+<div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+  <div class="page-header">
+    <h1>Invoices</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% load render_table from django_tables2 %}
+{% block data %}
+{% load staticfiles %}
+<script src="{% static "assets/js/invoice_table.js" %}"></script>
+<!-- Coural data "Current Jobs" -->
+<!-- Start .panel -->
+<div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
+    <div class="panel-heading">
+        <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
+    </div>
+    <div class="panel-body">
+        {% render_table table %}
+    </div>
+</div>
+<!-- End .panel -->
+{% endblock %}
+</div>
+

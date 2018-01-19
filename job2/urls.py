@@ -18,6 +18,7 @@ from django.contrib import admin
 import lbm.views as views 
 import master_files.views as mviews
 import reports.views as rviews
+import invoice.views as iviews
 
 from django.contrib.auth.decorators import login_required
 
@@ -41,7 +42,7 @@ urlpatterns = [
     url(r'^reports/archived/distBible', rviews.DistBible.as_view(), name='page_reports_archived_distBible'),
     url(r'^reports/archived/regionBible', rviews.RegionBible.as_view(), name='page_reports_archived_regionBible'),
 
-
+	url(r'^invoice', iviews.page_invoice, name='page_invoice'),
 
     url(r'^master_files/(?P<model>[a-zA-Z0-9_]*)/$', mviews.page_list,
         name='master_files_routes'),

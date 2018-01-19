@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'lbm',
     'parcel',
     'reports',
+	'invoice',
     'master_files',
     'coural_legacy',
     # 'sweetspot',
@@ -107,7 +108,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
-            "init_command": "SET storage_engine=MyISAM",
+            "init_command": "SET default_storage_engine=MyISAM",
         }
     },
     'db_coural_legacy': {
@@ -119,7 +120,7 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {
             "sql_mode": "STRICT_ALL_TABLES",
-            "init_command": "SET storage_engine=MyISAM",
+            "init_command": "SET default_storage_engine=MyISAM",
         }
     }, 
     'test': {

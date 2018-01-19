@@ -1,3 +1,8 @@
 /* -----------------------------------------
    Custom.css - put your own changes here 
 ----------------------------------------- */
+table[table-name="invoice_table"] > thead:first-child > tr:first-child > th:first-child::before
+{
+	content: '';
+	margin: 0;
+}
