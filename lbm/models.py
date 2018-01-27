@@ -91,7 +91,7 @@ class LBMJob(models.Model):
     label_printed = models.BooleanField(default=False, blank=True)
     ex_depot_date_si = models.DateField(blank=True, null=True)
     ex_depot_date_ni = models.DateField(blank=True, null=True)
-    print_advices = models.BooleanField(default=False, blank=True)
+    print_advices = models.CharField(max_length=1, blank=True, null=True)
     l_h_option = models.CharField(max_length=1, blank=True, null=True)
     label_printed = models.IntegerField(blank=True, null=True)
     manifest_created = models.IntegerField(blank=True, null=True)

@@ -67,9 +67,29 @@
     <div class="panel-heading">
         <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
     </div>
-    <div class="panel-body">
-        {% render_table table %}
-    </div>
+    
+	<div class="panel-body pt0 pb0">
+		<form class="form-vertical group-border stripped" method="post" >
+			{% csrf_token %}
+			<!-- End .form-group  -->
+			
+			{% render_table table %}
+			<div class="form-group">
+				<label class="col-lg-2 col-md-3 control-label" for="">Invoice date</label>
+				<div class="col-lg-10 col-md-9">
+				<div class="input-daterange input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						{{ invoice_creation_form.invoice_date }}
+					</div>
+				</div>
+				<button type="submit" name="create_invoices" class="btn btn-default">Create invoices</button>
+			</div>
+            
+			<div class="form-group">
+				<button type="submit" name="close_jobs" class="btn btn-default">Close jobs</button>
+			</div>
+		</form>
+	</div>
 </div>
 <!-- End .panel -->
 {% endblock %}

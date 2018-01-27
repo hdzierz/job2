@@ -11,3 +11,7 @@ class InvoiceForm(forms.Form):
     start_number.widget.attrs['class'] = 'form-control'
     frm.widget.attrs['class'] = 'form-control'
     to.widget.attrs['class'] = 'form-control'
+
+class InvoiceCreationForm(forms.Form):
+    invoice_date = forms.DateField(label="Invoice date", input_formats=['%m/%d/%Y'], initial=(datetime.now().strftime("%m/%d/%Y")))
+    invoice_date.widget.attrs['class'] = 'form-control'
