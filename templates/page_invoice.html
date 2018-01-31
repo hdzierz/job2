@@ -1,0 +1,97 @@
+{% extends "page_base.html" %}
+
+{% load bootstrap3 %}
+
+{% block info %}
+<!-- Start .panel -->
+<div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+  <div class="page-header">
+    <h1>Invoices</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block searchform %}
+<div class="panel panel-default toggle panelMove panelClose panelRefresh">
+    <!-- Start .panel -->
+    <div class="panel-heading">
+        <h4 class="panel-title">Search for invoices</h4>
+    </div>
+    <div class="panel-body pt0 pb0">
+        <form class="form-horizontal group-border stripped" method="post" >
+            {% csrf_token %}
+            <!-- End .form-group  -->
+            <div class="form-group">
+                <label class="col-lg-2 col-md-3 control-label" for="">Invoice start number</label>
+                <div class="col-lg-10 col-md-9">
+                    <div class="row">
+                        <!-- Start .row -->
+                        <div class="col-md-4">
+                            {{ form.start_number }}
+                        </div>
+                    </div>
+                    <!-- End .row -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 col-md-3 control-label" for="">Date range</label>
+                <div class="col-lg-10 col-md-9">
+                    <div class="input-daterange input-group">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        {{ form.frm }}
+                        <span class="input-group-addon">to</span>
+                        {{ form.to }}
+                    </div>
+                </div>
+            </div>
+            <!-- End .form-group  -->
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10 col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-default">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>        <!-- End .form-group  -->
+
+{% endblock %}
+
+{% load render_table from django_tables2 %}
+{% block data %}
+{% load staticfiles %}
+<script src="{% static "assets/js/invoice_table.js" %}"></script>
+<!-- Coural data "Current Jobs" -->
+<!-- Start .panel -->
+<div class="panel panel-default plain toggle panelMove panelClose panelRefresh">
+    <div class="panel-heading">
+        <h4 class="panel-title">Jobs (5th March 2016 to today)</h4>
+    </div>
+    
+	<div class="panel-body pt0 pb0">
+		<form class="form-vertical group-border stripped" method="post" >
+			{% csrf_token %}
+			<!-- End .form-group  -->
+			
+			{% render_table table %}
+			<div class="form-group">
+				<label class="col-lg-2 col-md-3 control-label" for="">Invoice date</label>
+				<div class="col-lg-10 col-md-9">
+				<div class="input-daterange input-group">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						{{ invoice_creation_form.invoice_date }}
+					</div>
+				</div>
+				<button type="submit" name="create_invoices" class="btn btn-default">Create invoices</button>
+			</div>
+            
+			<div class="form-group">
+				<button type="submit" name="close_jobs" class="btn btn-default">Close jobs</button>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- End .panel -->
+{% endblock %}
+</div>
+
