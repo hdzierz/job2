@@ -34,7 +34,7 @@ class Address(models.Model):
     old_branch_id = models.IntegerField(blank=True, null=True, default=None)
     typ = models.ManyToManyField(CfgAddressType)
 
-    parent = models.ForeignKey("self", related_name='mother', blank=True, null=True, default=None)
+    parent = models.ForeignKey("self", related_name='mother', on_delete=models.PROTECT, blank=True, null=True, default=None)
     sort = models.CharField(max_length=11, blank=True, null=True)
     company = models.CharField(max_length=255, blank=True, null=True)
     print_name = models.CharField(max_length=255, blank=True, null=True)
@@ -65,6 +65,9 @@ class Address(models.Model):
     alt_fax = models.CharField(max_length=50, blank=True, null=True)
     netpass = models.CharField(max_length=255, blank=True, null=True)
 
+
+class Client(Address):
+
     ########### Client additions #########################
 
     invoice_details = models.TextField(blank=True, null=True)
@@ -83,6 +86,9 @@ class Address(models.Model):
     notes = models.TextField(blank=True, null=True)
     discount = models.FloatField(blank=True, null=True)
 
+
+
+class Operator(Address):
     ################ Operator section ##################
 
     circ_drop = models.IntegerField(blank=True, null=True)
@@ -130,7 +136,7 @@ class Address(models.Model):
 
 class ClientPrice(models.Model):
     client_price_id = models.IntegerField(default=0)
-    client = models.ForeignKey(Address)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT)
     pa_dist = models.FloatField(blank=True, null=True)
     pa_sdist = models.FloatField(blank=True, null=True)
     pa_cont = models.FloatField(blank=True, null=True)
@@ -147,7 +153,7 @@ class ClientPrice(models.Model):
 
 class Publication(models.Model):
     name = models.CharField(max_length=255)
-    client = models.ForeignKey(Address, blank=True, null=True)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT, blank=True, null=True)
 
     def __str__(self):
         return str(self.name)
@@ -159,8 +165,8 @@ class CfgAdressSuppType(models.Model):
 
 
 class AdressSupp(models.Model):
-    address = models.ForeignKey(Address)
-    typ = models.ForeignKey(CfgAdressSuppType)    
+    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    typ = models.ForeignKey(CfgAdressSuppType, on_delete=models.PROTECT)    
 
     street = models.CharField(max_length=255)
     po_box = models.CharField(max_length=255)
@@ -177,7 +183,7 @@ class Island(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=255)
-    island = models.ForeignKey(Island)
+    island = models.ForeignKey(Island, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -185,7 +191,7 @@ class Region(models.Model):
 
 class Area(models.Model):
     name = models.CharField(max_length=255)
-    region = models.ForeignKey(Region)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -193,9 +199,9 @@ class Area(models.Model):
 
 class Route(models.Model):
     old_id = models.IntegerField(blank=True, null=True, default=None)
-    island = models.ForeignKey(Island)
-    area = models.ForeignKey(Area)
-    region = models.ForeignKey(Region)
+    island = models.ForeignKey(Island, on_delete=models.PROTECT)
+    area = models.ForeignKey(Area, on_delete=models.PROTECT)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT)
     rd = models.CharField(max_length=255,blank=True, null=True)
     post_code =  models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -225,16 +231,16 @@ class Route(models.Model):
 
 
 class RouteAff(models.Model):
-    route = models.ForeignKey(Route)
-    lbm_dist = models.ForeignKey(Address, related_name='lbm_dist')
-    lbm_subdist = models.ForeignKey(Address, related_name='lbm_subdist')
-    lbm_contractor = models.ForeignKey(Address, related_name='lbm_conractor')
-    lbm_dropoff = models.ForeignKey(Address, related_name='lbm_dropoff')
+    route = models.ForeignKey(Route, on_delete=models.PROTECT)
+    lbm_dist = models.ForeignKey(Operator, related_name='lbm_dist', on_delete=models.PROTECT)
+    lbm_subdist = models.ForeignKey(Operator, related_name='lbm_subdist', on_delete=models.PROTECT)
+    lbm_contractor = models.ForeignKey(Operator, related_name='lbm_contractor', on_delete=models.PROTECT)
+    lbm_dropoff = models.ForeignKey(Operator, related_name='lbm_dropoff', on_delete=models.PROTECT)
 
-    pcl_dist = models.ForeignKey(Address, related_name='pcl_dist')
-    pcl_subdist = models.ForeignKey(Address, related_name='pcl_subdist')
-    pcl_contractor = models.ForeignKey(Address, related_name='pcl_contractor')
-    pcl_dropoff = models.ForeignKey(Address, related_name='pcl_dropoff')
+    pcl_dist = models.ForeignKey(Operator, related_name='pcl_dist', on_delete=models.PROTECT)
+    pcl_subdist = models.ForeignKey(Operator, related_name='pcl_subdist', on_delete=models.PROTECT)
+    pcl_contractor = models.ForeignKey(Operator, related_name='pcl_contractor', on_delete=models.PROTECT)
+    pcl_dropoff = models.ForeignKey(Operator, related_name='pcl_dropoff', on_delete=models.PROTECT)
 
     app_date = models.DateField()
 
