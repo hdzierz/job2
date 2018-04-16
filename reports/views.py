@@ -196,7 +196,7 @@ class SummaryDeliveryInstructions(ReportView):
     ]
 	
     def result(self, request):
-        frm = request.GET.get('from')
+        frm = request.GET.get('frm')
         to = request.GET.get('to')
         dist = request.GET.get('dist')
 
@@ -215,6 +215,38 @@ class SummaryDeliveryInstructions(ReportView):
             jobs = LBMJobRoute.objects.filter(job__job_no__gt=80000).values(*sel).annotate(Sum('amount'))
 
         return jobs
+
+
+
+class SummaryDeliveryInstructionsJob(ReportView):
+    form_class = SummaryDeliveryInstructionsJobForm
+    template_name = 'page_reports.html'
+    cols = ["job__job_no",
+            "job__is_regular",
+            "job__dest_type__name",
+            "job__publication__name",
+            "job__is_deliv_sent",
+            "job__is_pay_sent",
+            ]
+
+    def result(self, request):
+        frmj = request.GET.get('frmj')
+        toj = request.GET.get('toj')
+
+
+        sel = self.cols[:]
+        del sel[-1]
+        self.cols.append("Select")
+
+        crit1 = Q(job__delivery_date__gt=frm)
+        crit2 = Q(job__delivery_date__lt=to)
+
+        jobs = LBMJobRoute.objects.filter(
+            crit1 & crit2,
+            ).values(*sel)
+
+        return jobs
+
 
 
 from django.forms.models import model_to_dict
@@ -379,7 +411,6 @@ class MyPDF(PDFTemplateView):
         context = super().get_context_data(**kwargs)
         context['tt'] = 'test'
         return context
-
 
 
 

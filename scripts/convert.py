@@ -49,8 +49,47 @@ def update(c, nc, ignore):
 c_master = True 
 c_lbm = True
 
+def cfgjobtype():
+    CfgJobType.objects.all().delete()
+
+    CfgJobType(name='num_total').save()
+    CfgJobType(name='num_dairies').save()
+    CfgJobType(name='num_farmers').save()
+    CfgJobType(name='num_sheepbeef').save()
+    CfgJobType(name='rmt').save()
+    CfgJobType(name='num_lifestyle').save()
+    CfgJobType(name='bundles').save()
+    CfgJobType(name='num_dairybeef').save()
+    CfgJobType(name='num_sheep').save()
+    CfgJobType(name='num_hort').save()
+    CfgJobType(name='num_beef').save()
+
+
+def cfgaddresstyp():
+    CfgAddressType.objects.all().delete()
+    CfgAddressType(name='lbm_dist').save()
+    CfgAddressType(name='lbm_subdist').save()
+    CfgAddressType(name='lbm_contractor').save()
+    CfgAddressType(name='lbm_hauler').save()
+    CfgAddressType(name='lbm_client').save()
+    CfgAddressType(name='pcl_dist').save()
+    CfgAddressType(name='pcl_subdist').save()
+    CfgAddressType(name='pcl_contractor').save()
+    CfgAddressType(name='pcl_courier').save()
+    CfgAddressType(name='hauler').save()
+    CfgAddressType(name='dropoff').save()
+    CfgAddressType(name='lbm_dropoff').save()
+    CfgAddressType(name='pcl_dropoff').save()
+    CfgAddressType(name='lbm_alt_dropoff').save()
+    CfgAddressType(name='pcl_alt_dropoff').save()
+
+
 def run():
     if c_master:
+        Publication.objects.all().delete()
+        cfgaddresstyp()
+        cfgjobtype()
+
         Route.objects.all().delete()
         for c in LCRoute.objects.all():
             print("Route: " + c.code)
@@ -66,12 +105,12 @@ def run():
             nc.old_id = c.route_id
             nc.save()
 
-        Address.objects.all().delete()
+        Operator.objects.all().delete()
         for a in LCAddress.objects.all():
             print("OP: " + a.name)
             op = LCOperator.objects.get(pk=a.operator_id)    
 
-            na = Address()
+            na = Operator()
             na.old_id = a.address_id
             na.old_operator_id = a.operator_id
             na.old_client_id = a.client_id
@@ -96,10 +135,10 @@ def run():
             if(op.is_alt_dropoff == 'Y'):
                 na.typ.add(CfgAddressType.objects.get(name="lbm_alt_dropoff"))
 
-        
+        Client.objects.all().delete()
         for client in LCClient.objects.all():
             print("Client: " + client.name)
-            na = Address()
+            na = Client()
             na.old_client_id = client.client_id
             na.company = client.name
             
@@ -126,9 +165,9 @@ def run():
             update(c, nc, j_ignore)
 
             try:
-                client = Address.objects.get(old_client_id=c.client_id)
+                client = Client.objects.get(old_client_id=c.client_id)
             except:
-                client = Address()
+                client = Client()
                 client.name = "ERRORED for job " + str(c.job_no)
                 client.save()
 
@@ -149,8 +188,13 @@ def run():
                 nr = LBMJobRoute()
                 nr.old_id = r.job_route_id
                 update(r, nr, jr_ignore)
-                
-                job = LBMJob.objects.get(old_id=r.job_id)
+               
+                try:
+                    job = LBMJob.objects.get(old_id=r.job_id)
+                except:
+                    job = LBMJob(job_no=1000000)
+                    job.save()
+
                 route = Route.objects.get(old_id=r.route_id)
                 try:
                     dist = Address.objects.get(old_operator_id=r.dist_id)
@@ -181,59 +225,59 @@ class ConvertRouteAff():
             RouteAff.objects.all().delete()
 
             try:
-                dist = Address.objects.get(old_operator_id=ra.dist_id)
+                dist = Operator.objects.get(old_operator_id=ra.dist_id)
             except:
-                dist = Address()
+                dist = Operator()
                 dist.name = "unknown"
                 dist.save()
             
             try:
-                subdist = Address.objects.get(old_operator_id=ra.subdist_id)
+                subdist = Operator.objects.get(old_operator_id=ra.subdist_id)
             except:
-                subdist = Address()
+                subdist = Operator()
                 subdist.name = "unknown"
                 subdist.save()
 
             try:
-                cont = Address.objects.get(old_operator_id=ra.contractor_id)
+                cont = Operator.objects.get(old_operator_id=ra.contractor_id)
             except:
-                cont = Address()
+                cont = Operator()
                 cont.name = "unknown"
                 cont.save()
 
             try:
-                doff = Address.objects.get(old_operator_id=ra.doff_id)
+                doff = Operator.objects.get(old_operator_id=ra.doff_id)
             except:
-                doff = Address()
+                doff = Operator()
                 doff.name = "unknown"
                 doff.save()
 
             try:
-                pdist = Address.objects.get(old_operator_id=ra.env_dist_id)
+                pdist = Operator.objects.get(old_operator_id=ra.env_dist_id)
             except:
-                pdist = Address()
+                pdist = Operator()
                 pdist.name = "unknown"
                 pdist.save()
             
             try:
-                psubdist = Address.objects.get(old_operator_id=ra.env_subdist_id)
+                psubdist = Operator.objects.get(old_operator_id=ra.env_subdist_id)
             except:
-                psubdist = Address()
+                psubdist = Operator()
                 psubdist.name = "unknown"
                 psubdist.save()
 
 
             try:
-                pcont = Address.objects.get(old_operator_id=ra.env_contractor_id)
+                pcont = Operator.objects.get(old_operator_id=ra.env_contractor_id)
             except:
-                pcont = Address()
+                pcont = Operator()
                 pcont.name = "unknown"
                 pcont.save()
 
             try:
-                pdoff = Address.objects.get(old_operator_id=ra.env_doff_id)
+                pdoff = Operator.objects.get(old_operator_id=ra.env_doff_id)
             except:
-                pdoff = Address()
+                pdoff = Operator()
                 pdoff.name = "unknown"
                 pdoff.save()
            
