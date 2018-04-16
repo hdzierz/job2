@@ -1,5 +1,16 @@
 {% extends "page_base.html" %}
 
+{% load bootstrap3 %}
+
+{% block info %}
+<!-- Start .panel -->
+<div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+  <div class="page-header">
+    <h1>{{page_header}}</h1>
+  </div>
+</div>
+{% endblock %}
+
 {% block data %}
 
 {% load kv  %}
@@ -8,14 +19,14 @@
 <a href='/master_files/{{model}}/create/'>New</a><br />
 
 
-<table id="employee-grid"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+<table id="employee-grid"  cellpadding="0" cellspacing="0" border="0" class="display">
         <thead>
-            <tr>
+            <tr><td/>
 		{% for col in cols  %}
-		<th>{{col | coln:col}}</th>
+		<th>{{col | coln}}</th>
 		{% endfor  %}
             </tr>
-        </thead>| 
+        </thead>
 	    {% if data  %} {# syn to if not ajax  #}
 	    <tbody>
 		{% for d in data  %}
@@ -29,8 +40,9 @@
 	    {% endif %}
 	<tfoot>
             <tr>
+            <th/>
                 {% for col in cols  %}
-                <th>{{col}}</th>
+                <th>{{col | coln}}</th>
                 {% endfor  %}
             </tr>
         </tfoot>
@@ -54,43 +66,43 @@
 <script type="text/javascript" language="javascript" >
   
     $(document).ready(function() {
-        var dataTable = $('#employee-grid').DataTable( {
-	    dom: 'lBfrtip',
-	    buttons: [
-		'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'printHtml5'
-	    ],
+        var dataTable = $('#employee-grid').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+                'copyHtml5', 'csvHtml5', 'excelHtml5', 'pdfHtml5', 'printHtml5'
+            ],
             "processing": true,
             "serverSide": true,
-	    "order": [[ {{sort_col}}, "asc" ]],
-	    "columnDefs": [{
-		"targets" : 0,
-		"render": function(data, type, row){
-			return "<a href='/master_files/{{model}}/update/"+ row[0]  +"'>Edit</a><br />" +  
-		       "<a href='/master_files/{{model}}/delete/"+ row[0]  +"'>Delete</a>"
-		},
-		"targets": 0		
-	    }],
+            "order": [[ {{sort_col}}, "asc" ]],
+            "autoWidth": false,
+            "columnDefs": [{
+                "targets" : 0,
+                "orderable": false,
+                "render": function(data, type, row){
+                    return "<a href='/master_files/{{model}}/update/"+ row[0]  +"'>Edit</a><br />" +  
+                            "<a href='/master_files/{{model}}/delete/"+ row[0]  +"'>Delete</a>"
+                    }
+            }],
             "ajax":{
-		    url :"/ajax_data_table/{{model}}", // json datasource
+                url :"/ajax_data_table/{{model}}", // json datasource
                 type: "get",  // method  , by default get
                 error: function(){  // error handling
                     $(".employee-grid-error").html("");
                     $("#employee-grid").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                    $("#employee-grid_processing").css("display","none");
- 
+                    $("#employee-grid_processing").css("display","none"); 
                 }
             }
-        } );
-	$('#employee-grid thead th').each(function (){
-		var title = $(this).text();
-		$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-	});
+        });
+        
+        $('#employee-grid thead th').each(function (){
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        });
 
-	// Apply the search
+        // Apply the search
     	dataTable.columns().eq(0).each( function (colIdx) {
         	$( 'input', dataTable.column(colIdx).header() ).on( 'keyup change', function () {
-                	dataTable.column(colIdx)
-                    	.search( this.value ).draw()
+                dataTable.column(colIdx).search( this.value ).draw();
         	} );
     	} );
     } );

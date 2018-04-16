@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 	'invoice',
     'master_files',
     'coural_legacy',
+    'widget_tweaks',
     # 'sweetspot',
 ]
 
@@ -111,18 +112,6 @@ DATABASES = {
             "init_command": "SET default_storage_engine=MyISAM",
         }
     },
-    'db_coural_legacy': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'coural_legacy',
-        'USER': 'coural',
-        'PASSWORD': 'inkl67z',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-        'OPTIONS': {
-            "sql_mode": "STRICT_ALL_TABLES",
-            "init_command": "SET default_storage_engine=MyISAM",
-        }
-    }, 
     'test': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),

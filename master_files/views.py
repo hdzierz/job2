@@ -107,7 +107,17 @@ class UserUpdate(UpdateView):
     def btn(self):
         return "Update"
 
+class ClientCreate(CreateView):
+    model = Client
+    fields = '__all__'
+    template_name = 'master_files_client_form.html'
+    success_url = '/master_files/client/'
 
+    def page_name(self):
+        return  'Create Client'
+
+    def btn(self):
+        return "Create"
 
 class AddressCreate(CreateView):
     model = Address
@@ -380,7 +390,7 @@ def ajax_data_table(request, model):
         m = Address
         filt_cols = ["last_name"]
     elif(model == "user"):
-        cols = ["pk", "username", "last_name", "groups", "email", ]
+        cols = ["pk", "username", "last_name", "email"]
         spec_order = {"groups" : "groups__name"}
         m = User 
         filt_cols = ["username"]
@@ -394,6 +404,11 @@ def ajax_data_table(request, model):
         m = RouteAff
         spec_order = ["route__code", "address_company",]
         filt_cols = ["address", "route"]
+    elif(model == 'client'):
+        cols = ["pk", "company"]
+        m = Client
+        spec_order = ["client_id"]
+        filt_cols = ["card_id"]
 
     return data_table(request, cls=m, cols=cols, filt_cols=filt_cols, spec_order=spec_order)
 
@@ -402,27 +417,38 @@ def page_list(request, model):
     if(model == "route"):
         cols = ["pk", "Island", "Region", "Area", "Code", "Description", ]
         sort_col = 3
+        page_header = "Routes"
     elif(model == "region"):
         cols = ["pk", "Name", ]
         sort_col = 1
+        page_header = "Regions"
     elif(model == "area"):
         cols = ["pk", "Name", ]
         sort_col = 1
+        page_header = "Areas"
     elif(model == "address"):
-        cols = ["pk", "company", "first_name", "last_name", ]
-        sort_col = 3
-    elif(model == "user"):
-        cols = ["pk", "username", "last_name", "email", ]
+        cols = ["company", "first_name", "last_name"]
         sort_col = 1
+        page_header = "Addresses"
+    elif(model == "user"):
+        cols = ["username", "last_name", "email"]
+        sort_col = 1
+        page_header = "Users"
     elif(model == 'config'):
         cols = ["pk", "name", "value"]
         sort_col = 1
+        page_header = "Config"
     elif(model == 'route_aff'):
         cols = ["pk", "address", "route", "app_date",]
         sort_col = 1
+        page_header = "Route Affiliations"
+    elif(model == 'client'):
+        cols = ["company"]
+        sort_col = 1
+        page_header = "Clients"
     
 
-    return render(request, 'data_table.html', {'ajax':True, 'sort_col': sort_col, 'cols': cols, "model": model})
+    return render(request, 'data_table.html', {'ajax':True, 'sort_col': sort_col, 'cols': cols, "model": model, 'page_header': page_header})
 
 
 

@@ -17,6 +17,7 @@ def kv(d, key):
 def coln(col):
     col = col.replace("__name", "")
     col = col.replace("__company", "")
+    col = col.replace("_", " ")
 
     buff = col.split('__')
     if len(buff) > 1:
