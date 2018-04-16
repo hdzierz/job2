@@ -70,6 +70,9 @@ urlpatterns = [
                 mviews.AddressDelete.as_view()), 
                 
     url(r'^master_files/client/create/$', mviews.ClientCreate.as_view()),
+    url(r'^master_files/client/update/(?P<pk>[0-9]*)$', mviews.ClientUpdate.as_view()),
+    url(r'^master_files/client/delete/(?P<pk>[0-9]*)$',
+        mviews.ClientDelete.as_view()),
 
     url(r'^master_files/user/create/$', mviews.UserCreate.as_view()),
     url(r'^master_files/user/update/(?P<pk>[0-9]*)$',

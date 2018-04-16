@@ -119,6 +119,30 @@ class ClientCreate(CreateView):
     def btn(self):
         return "Create"
 
+class ClientUpdate(UpdateView):
+    model = Client
+    fields = '__all__'
+    template_name = 'master_files_client_form.html'
+    success_url = '/master_files/client/'
+
+    def page_name(self):
+        return  'Update Client'
+
+    def btn(self):
+        return "Update"
+
+class ClientDelete(DeleteView):
+    model = Client
+    fields = '__all__'
+    template_name = 'master_files_client_form.html'
+    success_url = '/master_files/client/'
+
+    def page_name(self):
+        return  'Delete Client'
+
+    def btn(self):
+        return "Delete"
+
 class AddressCreate(CreateView):
     model = Address
     fields = '__all__'
