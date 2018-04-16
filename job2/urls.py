@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^lbm/jobRoutes/(?P<job_id>[0-9]*)/$', views.page_lbm_jobRoutes, name='page_lbm_jobRoutes'),
     #url(r'^lbm/test', views.page_test, name='page_test'),
     url(r'^reports/lbm/jobDetails', views.page_reports_lbm_jobDetails, name='page_reports_lbm_jobDetails'),
-    url(r'^reports/lbm/sumdeliveryins', rviews.SummaryDeliveryInstructions.as_view(),
-        name='page_summary_delivery_instructions'),
+    url(r'^reports/lbm/SummaryDeliveryInstructions', rviews.SummaryDeliveryInstructions.as_view(), name='page_summary_delivery_instructions'),
+    url(r'^reports/lbm/SummaryDeliveryInstructionsJob', rviews.SummaryDeliveryInstructionsJob.as_view(), name='page_summary_delivery_instructions_job'),
 
 
     url(r'^reports/archived/pmpupdated', rviews.PmpUpdated.as_view(), name='page_reports_archived_pmpupdated'),

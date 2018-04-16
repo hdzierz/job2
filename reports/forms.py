@@ -1,20 +1,27 @@
 from master_files.models import *
 from django import forms
+from bootstrap_datepicker.widgets import DatePicker
 
 class MonthlyJobForm(forms.Form):
     month = forms.CharField(label='Your name', max_length=100)
     year = forms.CharField(label='Your name', max_length=100) 
 
 
-from bootstrap_datepicker.widgets import DatePicker
 
 class SummaryDeliveryInstructionsForm(forms.Form):
-    frm = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False, label='Start Date')
-    to = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False, label="Final Date")
+    frm = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label='Start Date')
+    to = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label="Final Date")
     dist = forms.ModelChoiceField(\
             queryset=Address.objects.filter(typ__name="lbm_dist")
             )
-    comment = forms.CharField(min_length=255, label="Comment")
+    comment = forms.CharField(label="Comment")
+
+
+class SummaryDeliveryInstructionsJobForm(forms.Form):
+    frmj = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label='Start Date')
+    toj = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), label="Final Date")
+    commentj = forms.CharField(label="Comment")
+
 
 
 
@@ -25,8 +32,6 @@ class PmpUpdatedForm(forms.Form):
     type = forms.ModelChoiceField(label="Type", queryset=CfgJobType.objects.exclude(name="bundles").order_by('name'))
     region = forms.ModelChoiceField(label=("Select Region"), queryset=Region.objects.all())
 
-
-from bootstrap_datepicker.widgets import DatePicker
 
 class DistBibleForm(forms.Form):
     dist   = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
@@ -45,11 +50,8 @@ class RegionBibleForm(forms.Form):
 
 class AddressDetails(forms.Form):
 
-    distrib = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="pcl_dist").order_by('-pcl_dist'))
 
-
-#     distrib = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
-
+    distrib = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_contractor"))
     date = forms.DateField(widget=DatePicker(options={"format": "mm/dd/yyyy", "autoclose": True}), required=False)
     isc  = forms.BooleanField(label=("Is Current"), required=False)
     distb = forms.BooleanField(label=("Distributor"), required=False)
@@ -64,5 +66,7 @@ pmps  = [("1","with PMP"),("2","without PMP"),("3","Descriptions without PMP"),(
 class DistPmpUpdatedForm(forms.Form):
     pmp   = forms.ChoiceField(label="PMP", choices=pmps)
     type = forms.ModelChoiceField(label="Type", queryset=CfgJobType.objects.all().order_by('name'))
-    dbutor = forms.ModelChoiceField(label=("Distributor"), queryset=Address.objects.filter(typ__name="lbm_dist").order_by('company'))
+
+    dbutor = forms.ModelChoiceField(label=("Distributor"),  queryset=Address.objects.filter(typ__name="lbm_contractor"))
+
 
