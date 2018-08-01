@@ -1,0 +1,204 @@
+{% extends "page_base.html" %}
+{% block data %}
+{% load bootstrap3 %}
+{% load widget_tweaks %}
+<h2>{{view.page_name}}</h2>
+{% if view.btn == 'Delete' %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+    {% bootstrap_icon "star" %} {{view.btn}}
+    </button>
+    {% endbuttons %}		
+</form>
+{% else %}
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <!-- col-lg-12 start here -->
+        <div class="panel panel-default toggle panelMove panelClose panelRefresh">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Client details</h4>
+            </div>
+            <form class="form-horizontal group-border stripped" role="form" action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Company</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.company }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Print Name</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.print_name }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Type</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.typ }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">First Name</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.first_name }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.last_name }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.parent }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">First Name 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.first_name2 }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.last_name2 }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {% for d in  view.daughters %} 
+                        {{ d.name }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Address</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.address }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Address 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.address2 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 1</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.email }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.email2 }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Email 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.email3 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Phone 1</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.phone }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Phone2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.phone2 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 1</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.mobile }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 2</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.mobile2 }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mobile 3</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.mobile3 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">City</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">                                        
+                        {{ form.city }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Postcode</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.postcode }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Country</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.country }}                                    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Bank No</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.bank_num }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">GST No</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.gst_num }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Mail Type</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.mail_type }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Invoice Details</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {% render_field form.invoice_details rows="10" cols="24"  %}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Delivery Details</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {% render_field form.delivery_details rows="10" cols="24"  %}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Notes</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {% render_field form.notes rows="10" cols="24"  %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Card ID</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.c_code }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Has Discount</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.has_discount }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Discount</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.discount }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Base Price</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.base_price }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Linehaul</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.linehaul }}
+                    </div>
+                    <label class="col-lg-1 col-md-2 col-sm-2 col-xs-2 control-label">Net Costs</label>
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2">
+                        {{ form.net_costs }}
+                    </div>
+                </div>
+                {# bootstrap_form form #}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "star" %} {{view.btn}}
+                </button>
+                {% endbuttons %}
+            </form>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- col-lg-12 end here -->
+</div>
+{% endif %}
+{% endblock %}

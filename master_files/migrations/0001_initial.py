@@ -245,6 +245,83 @@ class Migration(migrations.Migration):
             ],
             bases=('master_files.address',),
         ),
+        migrations.CreateModel(
+            name='Client',
+            fields=[
+                ('address_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='master_files.Address')),
+                ('invoice_details', models.TextField(blank=True, null=True)),
+                ('c_code', models.IntegerField(blank=True, null=True)),
+                ('has_discount', models.BooleanField(default=False)),
+                ('delivery_details', models.TextField(blank=True, null=True)),
+                ('net_costs', models.CharField(blank=True, max_length=20, null=True)),
+                ('base_price', models.CharField(blank=True, max_length=20, null=True)),
+                ('linehaul', models.CharField(blank=True, max_length=20, null=True)),
+                ('u_nw_1', models.TextField(blank=True, null=True)),
+                ('u_nw_2', models.TextField(blank=True, null=True)),
+                ('u_nw_3', models.TextField(blank=True, null=True)),
+                ('u_nw_4', models.TextField(blank=True, null=True)),
+                ('u_nw_5', models.TextField(blank=True, null=True)),
+                ('u_nw_6', models.TextField(blank=True, null=True)),
+                ('notes', models.TextField(blank=True, null=True)),
+                ('discount', models.FloatField(blank=True, null=True)),
+            ],
+            bases=('master_files.address',),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='lbm_contractor',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='lbm_conractor', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='lbm_dist',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='lbm_dist', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='lbm_dropoff',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='lbm_dropoff', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='lbm_subdist',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='lbm_subdist', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='pcl_contractor',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='pcl_contractor', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='pcl_dist',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='pcl_dist', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='pcl_dropoff',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='pcl_dropoff', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='pcl_subdist',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='pcl_subdist', to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='routeaff',
+            name='route',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='master_files.Route'),
+        ),
+        migrations.AddField(
+            model_name='publication',
+            name='client',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='master_files.Address'),
+        ),
+        migrations.AddField(
+            model_name='clientprice',
+            name='client',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='master_files.Address'),
+        ),
         migrations.AddField(
             model_name='area',
             name='region',
@@ -264,6 +341,7 @@ class Migration(migrations.Migration):
             model_name='address',
             name='parent',
             field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='mother', to='master_files.Address'),
+
         ),
         migrations.AddField(
             model_name='address',

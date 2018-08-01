@@ -53,9 +53,9 @@ class Address(models.Model):
     mobile = models.CharField(max_length=50, blank=True, null=True)
     mobile2 = models.CharField(max_length=50, blank=True, null=True)
     mobile3 = models.CharField(max_length=50, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True, default="howard.coural.co.nz")
-    email2 = models.EmailField(blank=True, null=True, default="howard.coural.co.nz")
-    email3 = models.EmailField(blank=True, null=True, default="howard.coural.co.nz") 
+    email = models.EmailField(blank=True, null=True)
+    email2 = models.EmailField(blank=True, null=True)
+    email3 = models.EmailField(blank=True, null=True) 
     bank_num = models.CharField(max_length=20, blank=True, null=True)
     gst_num = models.CharField(max_length=20, blank=True, null=True)
     mail_type = models.CharField(max_length=1, blank=True, null=True)
@@ -64,15 +64,20 @@ class Address(models.Model):
     alt_email = models.CharField(max_length=50, blank=True, null=True)
     alt_fax = models.CharField(max_length=50, blank=True, null=True)
     netpass = models.CharField(max_length=255, blank=True, null=True)
+    parent_id = models.ForeignKey("self", related_name='mother', blank=True, null=True, default=None, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        ret = self.last_name
+        if(self.company):
+            ret = self.company
+        return str(ret)
+    ########### Client additions #########################
 
 
 class Client(Address):
-
-    ########### Client additions #########################
-
     invoice_details = models.TextField(blank=True, null=True)
     c_code = models.IntegerField(blank=True, null=True)
-    has_discount = models.BooleanField(default=False)
+    has_discount = models.BooleanField(blank=True, default=False)
     delivery_details = models.TextField(blank=True, null=True)
     net_costs = models.CharField(max_length=20, blank=True, null=True)
     base_price = models.CharField(max_length=20, blank=True, null=True)
@@ -85,54 +90,6 @@ class Client(Address):
     u_nw_6 = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     discount = models.FloatField(blank=True, null=True)
-
-
-
-class Operator(Address):
-    ################ Operator section ##################
-
-    circ_drop = models.IntegerField(blank=True, null=True)
-    shares = models.IntegerField(blank=True, null=True)
-    shares_eoy = models.IntegerField(blank=True, null=True)
-    alias = models.CharField(max_length=255, blank=True, null=True)
-    date_started = models.DateField(blank=True, null=True)
-    date_left = models.DateField(blank=True, null=True)
-    deliv_notes = models.TextField(blank=True, null=True)
-    env_deliv_notes = models.TextField(blank=True, null=True)
-    do_address = models.CharField(max_length=100, blank=True, null=True)
-    do_city = models.CharField(max_length=50, blank=True, null=True)
-    is_current = models.BooleanField(default=False)
-    is_shareholder = models.BooleanField(default=False)
-    share_bought = models.DateField(blank=True, null=True)
-    share_sold = models.DateField(blank=True, null=True)
-    share_notes = models.TextField(blank=True, null=True)
-    subdist_seq = models.IntegerField(blank=True, null=True)
-    is_hauler_ni = models.BooleanField(default=False)
-    is_hauler_si = models.BooleanField(default=False)
-    rate_red_fact = models.FloatField(default=1.0)
-    parcel_send_di = models.CharField(max_length=2, blank=True, null=True)
-    send_contr_sheet = models.CharField(max_length=2, blank=True, null=True)
-    ph_desk = models.TextField(blank=True, null=True)
-    rate_code = models.CharField(max_length=255, blank=True, null=True)
-    depot_rent = models.FloatField(blank=True, null=True)
-    scanner_no1 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_no2 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_no3 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_no4 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_phone_no1 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_phone_no2 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_phone_no3 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_phone_no4 = models.CharField(max_length=255, blank=True, null=True)
-    scanner_email = models.CharField(max_length=255, blank=True, null=True)
-    scanner_charge = models.FloatField(blank=True, null=True)
-    mobile_pay = models.FloatField(blank=True, null=True)
-
-    def __str__(self):
-        ret = self.last_name
-        if(self.company):
-            ret = self.company
-        return str(ret)
-
 
 class ClientPrice(models.Model):
     client_price_id = models.IntegerField(default=0)
@@ -166,7 +123,7 @@ class CfgAdressSuppType(models.Model):
 
 class AdressSupp(models.Model):
     address = models.ForeignKey(Address, on_delete=models.PROTECT)
-    typ = models.ForeignKey(CfgAdressSuppType, on_delete=models.PROTECT)    
+    typ = models.ForeignKey(CfgAdressSuppType, on_delete=models.PROTECT) 
 
     street = models.CharField(max_length=255)
     po_box = models.CharField(max_length=255)

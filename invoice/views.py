@@ -10,6 +10,10 @@ def page_invoice(request):
     jobs = LBMJob.objects.filter(Q(finished='N') & (Q(cancelled='N') | Q(cancelled='')))
 	
     invoice_nos = [int(job.invoice_no[1:]) for job in jobs if job.invoice_no != '']
+    
+    if not invoice_nos:
+        invoice_nos = [0]
+        
     start_invoice_number = max(invoice_nos) + 1
     
     if request.method == 'POST':
